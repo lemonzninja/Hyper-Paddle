@@ -29,6 +29,9 @@ void ScreenManagerUpdate(void) {
             break;
         case SCREEN_MENU:
             UpdateMenuScreen();
+            // Read the menu's desired next screen (set by button callbacks)
+            nextScreen = FinishMenuScreen();
+            break;
         default: break;
     }
 

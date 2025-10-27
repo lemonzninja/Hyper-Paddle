@@ -5,8 +5,17 @@
 ****************************************************************/
 
 #include "screens.h"
+#include "../../include/UI/Buttons/buttons.h"
 
+// Start button values
 static GameScreen nextScreen;
+
+// Callback: start the game when the button is clicked
+static void OnStart(void* userData)
+{
+    (void)userData; // unused
+    nextScreen = SCREEN_MAIN_GAME;
+}
 
 void InitMenuScreen(void)
 {
@@ -20,14 +29,20 @@ void UpdateMenuScreen(void)
 
 void DrawMenuScreen(void)
 {
-    DrawText("Menu Screen", GetScreenWidth() / 2, GetScreenHeight() / 2, 10, DARKGRAY);
+    // Title
+    const char* title = "Hyper Paddle";
+    int titleFont = 40;
+    int titleWidth = MeasureText(title, titleFont);
+    DrawText(title, (GetScreenWidth() - titleWidth)/2, (int)((GetScreenHeight()/2.0f) - 120), titleFont, DARKGRAY);
+
 }
 
 void UnloadMenuScreen(void)
 {
-
+    // Nothing to unload yet
 }
 
-GameScreen FinishMenuScreen(void){
+GameScreen FinishMenuScreen(void)
+{
     return nextScreen;
 }

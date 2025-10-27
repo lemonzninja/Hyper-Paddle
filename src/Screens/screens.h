@@ -14,7 +14,7 @@
 typedef enum GameScreen {
     SCREEN_LOGO = 0,
     SCREEN_MENU,
-    SCREEN_GAME,
+    SCREEN_MAIN_GAME,
     SCREEN_GAME_OVER
 } GameScreen;
 
