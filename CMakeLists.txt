@@ -28,7 +28,10 @@ add_executable(${PROJECT_NAME} src/main.c
         src/Screens/screens.h
         src/Screens/screen_logo.c
         src/Screens/screen_manager.c
-        src/Screens/screen_menu.c)
+        src/Screens/screen_menu.c
+        include/UI/UIButton/button.h
+        src/UI/UIButton/button.c
+)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 

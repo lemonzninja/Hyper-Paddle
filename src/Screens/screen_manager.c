@@ -1,5 +1,5 @@
 /****************************************************************
-*               -The Screen Manager-
+*               -Screen Manager-
 *   This will handle the switching between screens
 *   Created by Squid on 10/26/2025.
 ****************************************************************/
@@ -29,6 +29,9 @@ void ScreenManagerUpdate(void) {
             break;
         case SCREEN_MENU:
             UpdateMenuScreen();
+            // Read the menu's desired next screen (set by button callbacks)
+            nextScreen = FinishMenuScreen();
+            break;
         default: break;
     }
 
