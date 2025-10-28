@@ -1,4 +1,5 @@
 #include <strsafe.h>
+#include <stdbool.h>
 #include "raylib.h"
 #include "Screens/screens.h"
 
@@ -8,6 +9,7 @@
 #define Hyp_Paddle_Version "0.0.1"
 char gameTitle[64];
 int frames = 0;
+bool gameShouldClose = false;
 
 void UpdateDrawFrame(void);   // Update and Draw one frame
 void InitGame(void);
@@ -29,7 +31,7 @@ int main(void)
     SetTargetFPS(frames);   // Set our game to run at 60 frames-per-second
 
     // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    while (!WindowShouldClose() && !gameShouldClose)   // Detect window close button or ESC key
     {
         UpdateDrawFrame();
     }
