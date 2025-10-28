@@ -7,19 +7,25 @@
 #include "screens.h"
 #include "../../include/UI/Buttons/buttons.h"
 
-// Start button values
+
 static GameScreen nextScreen;
 
-// Callback: start the game when the button is clicked
-static void OnStart(void* userData)
-{
-    (void)userData; // unused
-    nextScreen = SCREEN_MAIN_GAME;
-}
+UIButton startButton;
+int strButtonX;
+int strButtonY;
+int strButtonWidth;
+int strButtonHeight;
 
-void InitMenuScreen(void)
-{
+
+void InitMenuScreen(void) {
+
+    strButtonWidth = 150;
+    strButtonHeight = 60;
+    strButtonX = (GetScreenWidth() - strButtonWidth) / 2;
+    strButtonY =   300;
+
     nextScreen = SCREEN_MENU;
+    InitUiButtons(&startButton, strButtonX, strButtonY,strButtonWidth, strButtonHeight, BLUE);
 }
 
 void UpdateMenuScreen(void)
@@ -34,6 +40,8 @@ void DrawMenuScreen(void)
     int titleFont = 40;
     int titleWidth = MeasureText(title, titleFont);
     DrawText(title, (GetScreenWidth() - titleWidth)/2, (int)((GetScreenHeight()/2.0f) - 120), titleFont, DARKGRAY);
+
+    DrawUiButtons(&startButton,"BOB", 20);
 
 }
 

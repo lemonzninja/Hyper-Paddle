@@ -9,5 +9,12 @@
 #ifndef HYPER_PADDLE_BUTTONS_H
 #define HYPER_PADDLE_BUTTONS_H
 
+typedef struct UIButton {
+    Rectangle rectangle;
+    Color color;
+}UIButton;
+
+void InitUiButtons(UIButton* uiButton, int x, int y, int width, int height, Color color);
+void DrawUiButtons(UIButton* uiButton, char* text, int fontSize);
 
 #endif //HYPER_PADDLE_BUTTONS_H
