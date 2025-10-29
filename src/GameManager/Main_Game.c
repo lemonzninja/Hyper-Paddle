@@ -4,7 +4,7 @@
 ****************************************************************/
 
 #include "Game_Manager.h"
-#include "../../../../include/GameObjects/Paddle/Paddle.h"
+#include "GameObjects/Paddle/Paddle.h"
 
 float deltaTime = 0;
 

@@ -3,7 +3,7 @@
 *  Created by Squid on 10/28/2025.
 ****************************************************************/
 
-#include "../../../include/GameObjects/Paddle/Paddle.h"
+#include "GameObjects/Paddle/Paddle.h"
 
 
 
