@@ -38,4 +38,11 @@ void DrawMenuScreen(void);
 void UnloadMenuScreen(void);
 GameScreen FinishMenuScreen(void);
 
+// -- Game Screen functions --
+void InitGameScreen(void);
+void UpdateGameScreen(void);
+void DrawGameScreen(void);
+void UnloadGameScreen(void);
+GameScreen FinisGameScreen(void);
+
 #endif //HYPER_PADDLE_SCREENS_H

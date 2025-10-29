@@ -35,7 +35,6 @@ int main(void)
     {
         UpdateDrawFrame();
     }
-
     // De-Initialization
     Unload();  // Unload Assets.
     CloseWindow(); // Close the window and OpenGL context
@@ -44,11 +43,10 @@ int main(void)
 }
 
 void UpdateDrawFrame(void)
-{
+{   // Updating the game
     UpdateGame();
-
+    // Drawing the Game.
     BeginDrawing();
-        ClearBackground(RAYWHITE);
         DrawGame();
     EndDrawing();
 }

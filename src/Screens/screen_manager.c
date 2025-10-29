@@ -13,11 +13,11 @@ static void UnloadCurrent(void);
 static void NextScreenToInit(void);
 
 void ScreenManagerInit(void) {
-    // We set the current screen to the logo screen.
-    currentScreen = SCREEN_LOGO;
-    nextScreen = SCREEN_LOGO; // Initialize the next screen to the logo screen.
-    // Now we load the logo screen.
-    InitLogoScreen();
+    // We set the current screen to the main game screen.
+    currentScreen = SCREEN_MAIN_GAME;
+    nextScreen = SCREEN_MAIN_GAME; // Initialize the next screen to the main game screen.
+    // Now we load the main game screen.
+    InitGameScreen();
 }
 
 void ScreenManagerUpdate(void) {
@@ -32,10 +32,11 @@ void ScreenManagerUpdate(void) {
             // Read the menu's desired next screen (set by button callbacks)
             nextScreen = FinishMenuScreen();
             break;
+        case SCREEN_MAIN_GAME:
+            UpdateGameScreen();
         default: break;
     }
 
-    // Transition if screen changed
     if (nextScreen != currentScreen)
     {
         UnloadCurrent();
@@ -52,6 +53,8 @@ void ScreenManagerDraw(void) {
         case SCREEN_MENU:
             DrawMenuScreen();
             break;
+        case SCREEN_MAIN_GAME:
+            DrawGameScreen();
         default:
             break;
     }
@@ -69,6 +72,8 @@ void UnloadCurrent(void) {
         case SCREEN_MENU:
            UnloadMenuScreen();
             break;
+            case SCREEN_MAIN_GAME:
+            UnloadGameScreen();
         default:
             break;
     }
@@ -79,7 +84,11 @@ void NextScreenToInit(void) {
         case SCREEN_LOGO:
             InitLogoScreen();
             break;
-        case SCREEN_MENU: InitMenuScreen();
+        case SCREEN_MENU:
+            InitMenuScreen();
+            break;
+        case SCREEN_MAIN_GAME:
+            InitGameScreen();
         default:
             break;
     }
