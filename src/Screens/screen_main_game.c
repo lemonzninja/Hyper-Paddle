@@ -4,7 +4,7 @@
 ****************************************************************/
 
 #include "screens.h"
-#include "../../Src/GameManager/Game_Manager.h"
+#include "../GameManager/Game_Manager.h"
 
 static GameScreen nextScreen;
 
