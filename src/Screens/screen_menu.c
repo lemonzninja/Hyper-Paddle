@@ -55,8 +55,6 @@ void InitMenuScreen(void) {
 }
 
 void UpdateMenuScreen(void) {
-    ClearBackground(BLACK);
-
     UpdateUiButton(&startButton);
     UpdateUiButton(&quitButton);
 
@@ -71,6 +69,8 @@ void UpdateMenuScreen(void) {
 }
 
 void DrawMenuScreen(void) {
+    ClearBackground(BLACK);
+
     // Title
     //********************************************************
     const char *title = "Hyper Paddle";

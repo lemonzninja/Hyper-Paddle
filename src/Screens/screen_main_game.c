@@ -12,6 +12,8 @@ void UpdateGameScreen(void) {
 }
 
 void DrawGameScreen(void) {
+    ClearBackground(BLACK);
+
     const char *text = "In The game screen!";
     int fontSize = 40;
     int textWidth = MeasureText(text, fontSize);
@@ -23,7 +25,6 @@ void DrawGameScreen(void) {
 }
 
 void UnloadGameScreen(void) {
-    ClearBackground(BLACK);
 }
 
 GameScreen FinisGameScreen(void) {
