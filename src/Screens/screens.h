@@ -1,5 +1,5 @@
 /****************************************************************
- *              -Houses The Screens-
+ *              - Houses The Screens -
  *  hold the screens for the game
  *  Created by Squid on 10/26/2025.
 ****************************************************************/

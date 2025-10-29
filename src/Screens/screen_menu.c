@@ -1,5 +1,5 @@
 /****************************************************************
- *             -The Mane Menu Screen-
+ *             - The Mane Menu Screen -
  *  All the logic for a Mane Menu of are game.
  *  Created by Squid on 10/27/2025.
 ****************************************************************/

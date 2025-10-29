@@ -1,5 +1,5 @@
 /****************************************************************
-*               -Screen Manager-
+*               - Screen Manager -
 *   This will handle the switching between screens
 *   Created by Squid on 10/26/2025.
 ****************************************************************/

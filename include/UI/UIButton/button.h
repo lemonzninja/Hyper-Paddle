@@ -3,11 +3,10 @@
  *  All the buttons for the game
  *  Created by Squid on 10/26/2025.
 ****************************************************************/
-
-#include "raylib.h"
-
 #ifndef HYPER_PADDLE_BUTTONS_H
 #define HYPER_PADDLE_BUTTONS_H
+
+#include "raylib.h"
 
 // button state management
 typedef enum {
@@ -23,16 +22,23 @@ typedef struct UIButton {
     Color ClickedColor;
     ButtonState state;
     Rectangle rectangle;
-    Color color;
+    //Color color;
     Color textcolor;
 }UIButton;
 
-void InitUiButton(UIButton* uiButton, int x, int y,int width,
-    int height, Color idleColor,
-    Color hoverColor,
-    Color clickedColor, Color textColor);
-void DrawUiButton(UIButton* uiButton,const char* text, int fontSize);
+void InitUiButton(UIButton* uiButton,
+                    int x,
+                    int y,
+                    int width,
+                    int height,
+                    Color idleColor,
+                    Color hoverColor,
+                    Color clickedColor,
+                    Color textColor);
 void UpdateUiButton(UIButton* uiButton);
+void DrawUiButton(UIButton* uiButton,
+                    const char* text,
+                    int fontSize);
 bool IsUiButtonClicked(UIButton* uiButton);
 
 #endif //HYPER_PADDLE_BUTTONS_H

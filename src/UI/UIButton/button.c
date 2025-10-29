@@ -3,7 +3,6 @@
  *
  *  Created by Squid on 10/26/2025.
  ****************************************************************/
-
 #include "../../../include/UI/UIButton/button.h"
 
 Vector2 mousePosition = {0.0f,0.0f};
@@ -20,6 +19,20 @@ void InitUiButton(UIButton *uiButton, int x, int y, int width, int height,
     uiButton->ClickedColor = clickedColor;
     uiButton->state = BUTTON_IDLE;
     uiButton->textcolor = textColor;
+}
+
+void UpdateUiButton(UIButton *uiButton) {
+    mousePosition = GetMousePosition();
+    
+    if (CheckCollisionPointRec(mousePosition, uiButton->bounds)) {
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+            uiButton->state = BUTTON_CLICKED;
+        } else {
+            uiButton->state = BUTTON_HOVER;
+        }
+    } else {
+        uiButton->state = BUTTON_IDLE;
+    }
 }
 
 void DrawUiButton(UIButton* uiButton, const char* text, int fontSize){
@@ -45,27 +58,11 @@ void DrawUiButton(UIButton* uiButton, const char* text, int fontSize){
     DrawText(text, textx, texty, fontSize, uiButton->textcolor);
 }
 
-void UpdateUiButton(UIButton *uiButton) {
-    mousePosition = GetMousePosition();
-    
-    if (CheckCollisionPointRec(mousePosition, uiButton->bounds)) {
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-            uiButton->state = BUTTON_CLICKED;
-        } else {
-            uiButton->state = BUTTON_HOVER;
-        }
-    } else {
-        uiButton->state = BUTTON_IDLE;
-    }
-}
-
 bool IsUiButtonClicked(UIButton *uiButton) {
     // Check if the mouse is on the button and the left mouse button is cliked
     if (CheckCollisionPointRec(GetMousePosition(), uiButton->bounds) &&
         IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         return true;
         }
-
     return false;
 }
-

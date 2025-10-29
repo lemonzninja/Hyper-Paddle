@@ -32,6 +32,10 @@ add_executable(${PROJECT_NAME} src/main.c
         include/UI/UIButton/button.h
         src/UI/UIButton/button.c
         src/Screens/screen_main_game.c
+        include/GameObjects/Paddle/Paddle.h
+        src/GameObjects/Paddle/Paddle.c
+        src/GameManager/Game_Manager.h
+        src/GameManager/Main_Game.c
 )
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
