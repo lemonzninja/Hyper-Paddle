@@ -23,6 +23,8 @@ void InitLogoScreen(void) {
 }
 
 void DrawLogoScreen(void) {
+    ClearBackground(BLACK);
+
     // Draw the logo image in the center of the screen
     DrawTexture(logoTexture, GetScreenWidth()/2
     - logoTexture.width/2, GetScreenHeight()/2

@@ -55,8 +55,14 @@ void InitMenuScreen(void) {
 }
 
 void UpdateMenuScreen(void) {
+    ClearBackground(BLACK);
+
     UpdateUiButton(&startButton);
     UpdateUiButton(&quitButton);
+
+    if (IsUiButtonClicked(&startButton)) {
+        // TODO have the start button go to the game screen.
+    }
 
     if (IsUiButtonClicked(&quitButton)) {
         // close the window and unload assets
