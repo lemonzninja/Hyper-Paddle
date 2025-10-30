@@ -4,9 +4,9 @@
 ****************************************************************/
 
 #include "Game_Manager.h"
-#include "../../../../include/GameObjects/Paddle/Paddle.h"
-
-float deltaTime = 0;
+#include "GameObjects/Paddle/Paddle.h"
+#include "Systems/deltaTime.h"
+#include "Systems/KeybordManager/KeybordManager.h"
 
 float playerPaddleX = 45;
 float playerPaddleY = 299;
@@ -30,14 +30,14 @@ void InitMainGame() {
 }
 
 void UpdateMainGame() {
-    deltaTime = GetFrameTime();
 
-    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) {
-        playerPaddle.Shape.y -= PLayerSpeed * deltaTime;
+
+    if (IsUpPressed()) {
+        playerPaddle.Shape.y -= PLayerSpeed * deltaTime();
     }
 
-    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) {
-        playerPaddle.Shape.y += PLayerSpeed * deltaTime;
+    if (IsDownPressed()) {
+        playerPaddle.Shape.y += PLayerSpeed * deltaTime();
     }
 }
 

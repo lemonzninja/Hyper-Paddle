@@ -36,7 +36,12 @@ add_executable(${PROJECT_NAME} src/main.c
         src/GameObjects/Paddle/Paddle.c
         src/GameManager/Game_Manager.h
         src/GameManager/Main_Game.c
+        include/Systems/deltaTIme.h
+        include/Systems/KeybordManager/Keybordmanager.h
+        src/Systems/KeybordManager.c
 )
+# Ensure project headers under include/ are discoverable
+target_include_directories(${PROJECT_NAME} PRIVATE include)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 
