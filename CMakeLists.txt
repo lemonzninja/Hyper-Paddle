@@ -36,8 +36,8 @@ add_executable(${PROJECT_NAME} src/main.c
         src/GameObjects/Paddle/Paddle.c
         src/GameManager/Game_Manager.h
         src/GameManager/Main_Game.c
-        include/Systems/deltaTIme.h
-        include/Systems/KeybordManager/Keybordmanager.h
+        include/Systems/deltaTime.h
+        include/Systems/KeybordManager/KeybordManager.h
         src/Systems/KeybordManager.c
 )
 # Ensure project headers under include/ are discoverable
