@@ -3,6 +3,8 @@
 //
 
 #include "GameObjects/Ball/Ball.h"
+#include "Systems/deltaTime.h"
+
 
 void InitBall(Ball *ball, const float x, const float y, const float width, const float height, const float velocity, const Color ballColor) {
     ball->Shape.x = x;
@@ -14,11 +16,32 @@ void InitBall(Ball *ball, const float x, const float y, const float width, const
 }
 
 void UpdateBall(Ball *ball) {
-    // move the ball to the right.
-    ball->Shape.x += ball->Velocity.x;
+    ball->Shape.x += -ball->Velocity.x * deltaTime();
 }
 
 void DrawBall(const Ball *ball) {
     // Draw the ball
     DrawRectangleRec(ball->Shape, ball->BallColor);
+}
+
+void HandleHorizontalBounds(Ball *ball) {
+    // Left edge
+    if (ball->Shape.x <= 0.0f - ball->Shape.width) {
+        ball->Shape.x = 0.0f;
+        ball->Velocity.x = -ball->Velocity.x;
+    }
+
+
+    // Store the right side of the screen as a variable.
+    const float screenRightSide = (float)GetScreenWidth();
+    // Get the right side of the ball and
+    // store it in the "ballsRightSide" variable.
+    const float ballsRightSide = ball->Shape.x + ball->Shape.width;
+    // If the balls right is the same as the right edge.
+    if (ballsRightSide >= screenRightSide) {
+        // set the balls right side to the screens right side.
+        ball->Shape.x = screenRightSide - ball->Shape.width;
+        // revers the balls velocity.
+        ball->Velocity.x = -ball->Velocity.x;
+    }
 }
