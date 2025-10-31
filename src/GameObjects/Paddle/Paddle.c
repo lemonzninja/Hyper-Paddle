@@ -4,6 +4,8 @@
 ****************************************************************/
 
 #include "GameObjects/Paddle/Paddle.h"
+#include "Systems/deltaTime.h"
+#include "Systems/KeybordManager/KeybordManager.h"
 
 
 
@@ -18,6 +20,18 @@ void InitPaddle(Paddle *paddle, const float x, const float y, const float width,
 void UpdatePaddle(Paddle* paddle) {
 
 }
+
+void UpdatePlayerPaddle(Paddle *paddle, const float Speed) {
+    // Move up
+    if (IsUpPressed()) {
+        paddle->Shape.y -= Speed * deltaTime();
+    }
+    // move Down
+    if (IsDownPressed()) {
+        paddle->Shape.y += Speed * deltaTime();
+    }
+}
+
 
 void DrawPaddle(const Paddle *paddle) {
     DrawRectangle((int)paddle->Shape.x, (int)paddle->Shape.y,
