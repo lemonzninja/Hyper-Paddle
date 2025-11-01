@@ -25,5 +25,7 @@ void UpdateBall(Ball* ball);
 void DrawBall(const Ball* ball);
 
 void HandleHorizontalBounds(Ball* ball);
+void HandleVerticalBounds(Ball* ball);
+
 
 #endif //HYPER_PADDLE_BALL_H

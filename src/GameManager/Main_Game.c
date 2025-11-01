@@ -42,7 +42,7 @@ void InitMainGame() {
     ballY = (float)GetScreenHeight() / 2.0f - ballRadius;
 
     // Start the ball at the top of the screen and in the center
-    ballY = 60;
+    ballY = 200;
     InitBall(&ball, ballX, ballY, ballRadius * 2, ballRadius * 2, ballSpeed, ballColor);
 }
 
@@ -51,6 +51,7 @@ void UpdateMainGame() {
     UpdateBall(&ball);
 
     HandleHorizontalBounds(&ball);
+    HandleVerticalBounds(&ball);
 }
 
 void drawMainGame() {
