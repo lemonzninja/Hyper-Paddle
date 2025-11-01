@@ -1,5 +1,6 @@
 /****************************************************************
-*              - The Manager of the game -
+*              - The Main game -
+*   All the logic of the Main game goes here.
 *  Created by Squid on 10/29/2025
 ****************************************************************/
 
@@ -40,7 +41,7 @@ void InitMainGame() {
     ballX = (float)GetScreenWidth() / 2.0f - ballRadius;
     ballY = (float)GetScreenHeight() / 2.0f - ballRadius;
 
-    //ballY = 60;
+    ballY = 60;
     InitBall(&ball, ballX, ballY, ballRadius * 2, ballRadius * 2, ballSpeed, ballColor);
 }
 
@@ -52,7 +53,7 @@ void UpdateMainGame() {
 }
 
 void drawMainGame() {
-    // DrawPaddle(&playerPaddle);
+    DrawPaddle(&playerPaddle);
     // DrawPaddle(&playerTwoPaddle);
     DrawBall(&ball);
 }

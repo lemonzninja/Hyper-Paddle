@@ -13,10 +13,12 @@ void InitBall(Ball *ball, const float x, const float y, const float width, const
     ball->Shape.height = height;
     ball->BallColor = ballColor;
     ball->Velocity.x = velocity;
+    ball->Velocity.y = velocity;
 }
 
 void UpdateBall(Ball *ball) {
     ball->Shape.x += -ball->Velocity.x * deltaTime();
+    ball->Shape.y += ball->Velocity.y * deltaTime();
 }
 
 void DrawBall(const Ball *ball) {
@@ -31,12 +33,12 @@ void HandleHorizontalBounds(Ball *ball) {
         ball->Velocity.x = -ball->Velocity.x;
     }
 
-
     // Store the right side of the screen as a variable.
     const float screenRightSide = (float)GetScreenWidth();
+
     // Get the right side of the ball and
-    // store it in the "ballsRightSide" variable.
     const float ballsRightSide = ball->Shape.x + ball->Shape.width;
+
     // If the balls right is the same as the right edge.
     if (ballsRightSide >= screenRightSide) {
         // set the balls right side to the screens right side.
