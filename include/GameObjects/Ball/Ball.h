@@ -20,7 +20,10 @@ void InitBall(Ball *ball,
                 float height,
                 float velocity,
                 Color ballColor);
+
 void UpdateBall(Ball* ball);
 void DrawBall(const Ball* ball);
+
+void HandleHorizontalBounds(Ball* ball);
 
 #endif //HYPER_PADDLE_BALL_H

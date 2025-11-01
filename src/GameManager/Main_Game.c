@@ -1,5 +1,6 @@
 /****************************************************************
-*              - The Manager of the game -
+*              - The Main game -
+*   All the logic of the Main game goes here.
 *  Created by Squid on 10/29/2025
 ****************************************************************/
 
@@ -7,13 +8,11 @@
 #include "GameObjects/Paddle/Paddle.h"
 #include "GameObjects/Ball/Ball.h"
 
-
-
 Ball ball;
 float ballRadius = 10;
 float ballX = 0;
 float ballY = 0;
-float ballSpeed = 50.0f;
+float ballSpeed = 300.0f;
 Color ballColor = WHITE;
 
 float playerPaddleX = 45;
@@ -39,20 +38,22 @@ void InitMainGame() {
                playerTwoColor);
 
     // Init the ball in the center of the screen.
-    ballX = GetScreenWidth() / 2.0f - ballRadius;
-    ballY = GetScreenHeight() / 2.0f - ballRadius;
+    ballX = (float)GetScreenWidth() / 2.0f - ballRadius;
+    ballY = (float)GetScreenHeight() / 2.0f - ballRadius;
+
+    ballY = 60;
     InitBall(&ball, ballX, ballY, ballRadius * 2, ballRadius * 2, ballSpeed, ballColor);
 }
 
 void UpdateMainGame() {
-    UpdatePlayerPaddle(&playerPaddle, 10);
+    UpdatePlayerPaddle(&playerPaddle, PLayerSpeed);
     UpdateBall(&ball);
+
+    HandleHorizontalBounds(&ball);
 }
 
 void drawMainGame() {
     DrawPaddle(&playerPaddle);
-    DrawPaddle(&playerTwoPaddle);
+    // DrawPaddle(&playerTwoPaddle);
     DrawBall(&ball);
 }
-
-
