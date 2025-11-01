@@ -41,6 +41,7 @@ void InitMainGame() {
     ballX = (float)GetScreenWidth() / 2.0f - ballRadius;
     ballY = (float)GetScreenHeight() / 2.0f - ballRadius;
 
+    // Start the ball at the top of the screen and in the center
     ballY = 60;
     InitBall(&ball, ballX, ballY, ballRadius * 2, ballRadius * 2, ballSpeed, ballColor);
 }
