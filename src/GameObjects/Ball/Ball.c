@@ -1,6 +1,7 @@
-//
-// Created by Squid on 10/30/2025.
-//
+/****************************************************************
+*              - Ball Game Object -
+*  Created by Squid on 10/30/2025
+****************************************************************/
 
 #include "GameObjects/Ball/Ball.h"
 #include "Systems/deltaTime.h"
