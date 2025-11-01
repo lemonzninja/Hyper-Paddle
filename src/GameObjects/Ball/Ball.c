@@ -4,7 +4,11 @@
 ****************************************************************/
 
 #include "GameObjects/Ball/Ball.h"
+
+#include <stdio.h>
+
 #include "Systems/deltaTime.h"
+
 
 
 void InitBall(Ball *ball, const float x, const float y, const float width, const float height, const float velocity, const Color ballColor) {
@@ -46,5 +50,20 @@ void HandleHorizontalBounds(Ball *ball) {
         ball->Shape.x = screenRightSide - ball->Shape.width;
         // revers the balls velocity.
         ball->Velocity.x = -ball->Velocity.x;
+    }
+}
+
+void HandleVerticalBounds(Ball *ball) {
+    if (ball->Shape.y <= 0.0f) {
+        ball->Shape.y = 0.0f;
+        ball->Velocity.y = -ball->Velocity.y;
+    }
+
+    const float screenBottomSide = (float)GetScreenHeight();
+    const float ballBottomSide = ball->Shape.y - ball->Shape.height;
+
+    if (ball->Shape.y >= screenBottomSide) {
+        ball->Shape.y = ballBottomSide - ball->Shape.height;
+        ball->Velocity.y = -ball->Velocity.y;
     }
 }

@@ -25,6 +25,8 @@ void InitPaddle(Paddle *paddle,
                 Color paddleColor);
 void UpdatePaddle(Paddle* paddle);
 void UpdatePlayerPaddle(Paddle* paddle, float Speed);
+void UpdateAIPaddle(Paddle* paddle, float Speed);
+
 void DrawPaddle(const Paddle *paddle);
 
 #endif //HYPER_PADDLE_PADDLE_H

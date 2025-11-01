@@ -32,8 +32,11 @@ void UpdatePlayerPaddle(Paddle *paddle, const float Speed) {
     }
 }
 
+void UpdateAIPaddle(Paddle *paddle, float Speed) {
+
+}
+
 
 void DrawPaddle(const Paddle *paddle) {
-    DrawRectangle((int)paddle->Shape.x, (int)paddle->Shape.y,
-                    (int)paddle->Shape.width, (int)paddle->Shape.height, paddle->PaddleColor);
+    DrawRectangle((int)paddle->Shape.x, (int)paddle->Shape.y, (int)paddle->Shape.width, (int)paddle->Shape.height, paddle->PaddleColor);
 }
