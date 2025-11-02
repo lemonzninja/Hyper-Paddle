@@ -12,19 +12,22 @@
 
 #include "raylib.h"
 
+
 typedef struct Paddle {
     Rectangle Shape;
     Color PaddleColor;
+    float targetY; // For AI paddle smooth interpolation
 }Paddle;
+
 
 void InitPaddle(Paddle *paddle,
                 float x,
                 float y,
                 float width,
                 float height,
-                Color paddleColor);
-void UpdatePaddle(Paddle* paddle);
+                Color color);
 void UpdatePlayerPaddle(Paddle* paddle, float Speed);
+float ai_vertical_step(float offset_y, float speed, float dt, float dead_zone);
 void UpdateAIPaddle(Paddle* paddle, float Speed);
 
 void DrawPaddle(const Paddle *paddle);

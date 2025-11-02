@@ -11,12 +11,12 @@
 
 
 
-void InitBall(Ball *ball, const float x, const float y, const float width, const float height, const float velocity, const Color ballColor) {
+void InitBall(Ball *ball, const float x, const float y, const float width, const float height, const float velocity, const Color color) {
     ball->Shape.x = x;
     ball->Shape.y = y;
     ball->Shape.width = width;
     ball->Shape.height = height;
-    ball->BallColor = ballColor;
+    ball->BallColor = color;
     ball->Velocity.x = velocity;
     ball->Velocity.y = velocity;
 }

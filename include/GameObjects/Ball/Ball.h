@@ -19,7 +19,7 @@ void InitBall(Ball *ball,
                 float width,
                 float height,
                 float velocity,
-                Color ballColor);
+                Color color);
 
 void UpdateBall(Ball* ball);
 void DrawBall(const Ball* ball);
