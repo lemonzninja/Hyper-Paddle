@@ -60,10 +60,10 @@ void HandleVerticalBounds(Ball *ball) {
     }
 
     const float screenBottomSide = (float)GetScreenHeight();
-    const float ballBottomSide = ball->Shape.y - ball->Shape.height;
+    const float ballBottomSide = ball->Shape.y + ball->Shape.height;
 
-    if (ball->Shape.y >= screenBottomSide) {
-        ball->Shape.y = ballBottomSide - ball->Shape.height;
+    if (ballBottomSide >= screenBottomSide) {
+        ball->Shape.y = screenBottomSide - ball->Shape.height;
         ball->Velocity.y = -ball->Velocity.y;
     }
 }
