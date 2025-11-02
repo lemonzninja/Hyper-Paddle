@@ -17,6 +17,7 @@
 // - Applies an EMA to reduce micro-jitter without adding a noticeable latency
 // Tune constants below to your preference.
 float deltaTime(void) {
+
     // Reasonable bounds: allow slow-mo down to 20 FPS equivalent, block huge spikes
     const float MAX_DT = 0.05f;   // 50 ms (cap)
     const float MIN_DT = 0.0f;    // never negative
