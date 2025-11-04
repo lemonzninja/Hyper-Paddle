@@ -5,8 +5,8 @@
 *  Created by Squid on 10/25/2025
 ****************************************************************/
 
-#include <strsafe.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include "raylib.h"
 #include "Screens/screens.h"
 
@@ -27,7 +27,7 @@ void Unload(void);
 int main(void)
 {
     // Combine the title and version into a single string.
-    StringCchPrintfA(gameTitle, sizeof(gameTitle), "%s %s", Hyp_Paddle_Title, Hyp_Paddle_Version);
+    snprintf(gameTitle, sizeof(gameTitle), "%s %s", Hyp_Paddle_Title, Hyp_Paddle_Version);
 
     // Init the Game/Items
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, gameTitle);
