@@ -18,6 +18,10 @@
 // Tune constants below to your preference.
 float deltaTime(void) {
 
+    // static float delta_Time = 0.0f;
+    // delta_Time = GetFrameTime();
+    // return delta_Time;
+
     // Reasonable bounds: allow slow-mo down to 20 FPS equivalent, block huge spikes
     const float MAX_DT = 0.05f;   // 50 ms (cap)
     const float MIN_DT = 0.0f;    // never negative
@@ -28,11 +32,11 @@ float deltaTime(void) {
     // Start near 60 FPS to avoid the initial burst
     static float smoothed = 1.0f / 60.0f;
 
-    float dt = GetFrameTime();
-    if (dt < MIN_DT) dt = MIN_DT;
-    if (dt > MAX_DT) dt = MAX_DT;
+    float delta_Time = GetFrameTime();
+    if (delta_Time < MIN_DT) delta_Time = MIN_DT;
+    if (delta_Time > MAX_DT) delta_Time = MAX_DT;
 
     // Exponential moving average
-    smoothed += (dt - smoothed) * SMOOTHING_ALPHA;
+    smoothed += (delta_Time - smoothed) * SMOOTHING_ALPHA;
     return smoothed;
 }

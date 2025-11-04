@@ -9,8 +9,6 @@
 
 #include "Systems/deltaTime.h"
 
-
-
 void InitBall(Ball *ball, const float x, const float y, const float width, const float height, const float velocity, const Color color) {
     ball->Shape.x = x;
     ball->Shape.y = y;
@@ -38,10 +36,8 @@ void HandleHorizontalBounds(Ball *ball) {
         ball->Velocity.x = -ball->Velocity.x;
     }
 
-    // Store the right side of the screen as a variable.
-    const float screenRightSide = (float)GetScreenWidth();
 
-    // Get the right side of the ball and
+    const float screenRightSide = (float)GetScreenWidth();
     const float ballsRightSide = ball->Shape.x + ball->Shape.width;
 
     // If the balls right is the same as the right edge.
@@ -54,6 +50,7 @@ void HandleHorizontalBounds(Ball *ball) {
 }
 
 void HandleVerticalBounds(Ball *ball) {
+    // Top Check
     if (ball->Shape.y <= 0.0f) {
         ball->Shape.y = 0.0f;
         ball->Velocity.y = -ball->Velocity.y;
@@ -62,6 +59,7 @@ void HandleVerticalBounds(Ball *ball) {
     const float screenBottomSide = (float)GetScreenHeight();
     const float ballBottomSide = ball->Shape.y + ball->Shape.height;
 
+    // Bottom Check
     if (ballBottomSide >= screenBottomSide) {
         ball->Shape.y = screenBottomSide - ball->Shape.height;
         ball->Velocity.y = -ball->Velocity.y;
