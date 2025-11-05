@@ -12,5 +12,7 @@ void InitMainGame();
 void UpdateMainGame();
 void drawMainGame();
 
+// Function declarations
+void updateGameScore();
 
 #endif //HYPER_PADDLE_GAME_MANAGER_H

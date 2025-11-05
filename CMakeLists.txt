@@ -38,12 +38,14 @@ add_executable(${PROJECT_NAME} src/main.c
         src/GameManager/Main_Game.c
         include/Systems/deltaTime.h
         include/Systems/KeybordManager/KeybordManager.h
-        src/Systems/KeybordManager.c
+        src/Systems/KeybordManager/KeybordManager.c
         src/Systems/deltaTime.c
         include/GameObjects/Ball/Ball.h
         src/GameObjects/Ball/Ball.c
         include/Math/ComputeCenterYofRectangle.h
         src/Math/computerCenterYofRectangle.c
+        include/Systems/ScoreManager/ScoreManager.h
+        src/Systems/ScoreManager/ScoreManager.c
 )
 # Ensure project headers under include/ are discoverable
 target_include_directories(${PROJECT_NAME} PRIVATE include)

@@ -7,7 +7,7 @@
 
 Vector2 mousePosition = {0.0f,0.0f};
 
-void InitUiButton(UIButton *uiButton, int x, int y, int width, int height,
+void InitUiButton(UIButton *uiButton, const float x, const float y, const float width, const float height,
     const Color idleColor, const Color hoverColor,
     const Color clickedColor, const Color textColor) {
     uiButton->bounds.x = x;
@@ -17,7 +17,7 @@ void InitUiButton(UIButton *uiButton, int x, int y, int width, int height,
     uiButton->NormalColor = idleColor;
     uiButton->HoverColor = hoverColor;
     uiButton->ClickedColor = clickedColor;
-    uiButton->state = BUTTON_IDLE;
+    uiButton->currentState = BUTTON_IDLE;
     uiButton->textcolor = textColor;
 }
 
@@ -26,16 +26,16 @@ void UpdateUiButton(UIButton *uiButton) {
     
     if (CheckCollisionPointRec(mousePosition, uiButton->bounds)) {
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-            uiButton->state = BUTTON_CLICKED;
+            uiButton->currentState = BUTTON_CLICKED;
         } else {
-            uiButton->state = BUTTON_HOVER;
+            uiButton->currentState = BUTTON_HOVER;
         }
     } else {
-        uiButton->state = BUTTON_IDLE;
+        uiButton->currentState = BUTTON_IDLE;
     }
 }
 
-void DrawUiButton(UIButton* uiButton, const char* text, int fontSize){
+void DrawUiButton(const UIButton* uiButton, const char* text, int fontSize){
     // Get the center of the button.
     const Rectangle bounds = uiButton->bounds;
     const int btnCenterX = (int)(bounds.x + bounds.width * 0.5f);
@@ -51,14 +51,14 @@ void DrawUiButton(UIButton* uiButton, const char* text, int fontSize){
 
     // Draw the button
     Color currentColor = uiButton->NormalColor;
-    if (uiButton->state == BUTTON_HOVER) currentColor = uiButton->HoverColor;
-    if (uiButton->state == BUTTON_CLICKED) currentColor = uiButton->ClickedColor;
+    if (uiButton->currentState == BUTTON_HOVER) currentColor = uiButton->HoverColor;
+    if (uiButton->currentState == BUTTON_CLICKED) currentColor = uiButton->ClickedColor;
 
-    DrawRectangle(bounds.x, bounds.y, bounds.width, bounds.height, currentColor);
+    DrawRectangle((int)bounds.x, (int)bounds.y, (int)bounds.width, (int)bounds.height, currentColor);
     DrawText(text, textx, texty, fontSize, uiButton->textcolor);
 }
 
-bool IsUiButtonClicked(UIButton *uiButton) {
+bool IsUiButtonClicked(const UIButton *uiButton) {
     // Check if the mouse is on the button and the left mouse button is cliked
     if (CheckCollisionPointRec(GetMousePosition(), uiButton->bounds) &&
         IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

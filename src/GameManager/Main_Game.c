@@ -4,9 +4,27 @@
 *  Created by Squid on 10/29/2025
 ****************************************************************/
 
+#include <stdio.h>
+
 #include "Game_Manager.h"
 #include "GameObjects/Paddle/Paddle.h"
 #include "GameObjects/Ball/Ball.h"
+#include "Systems/ScoreManager/ScoreManager.h"
+
+// score variables
+Counter playerScoreText;
+float playerScoreX;
+float playerScoreY;
+float playerScoreSize;
+Color playerScoreColor;
+int playerScore;
+
+Counter aiScoreText;
+float aiScoreX;
+float aiScoreY;
+float aiScoreSize;
+Color aiScoreColor;
+int aiScore;
 
 Ball ball;
 float ballRadius = 10;
@@ -14,6 +32,9 @@ float ballX = 0;
 float ballY = 0;
 float ballSpeed = 300.0f;
 Color ballColor = WHITE;
+
+float ballResetX = 0;
+float ballResetY = 0;
 
 Paddle playerPaddle;
 float playerPaddleX = 45;
@@ -32,6 +53,19 @@ float aiPaddleSpeed = 450.0f;
 Color playerTwoColor = WHITE;
 
 void InitMainGame() {
+
+    playerScoreX = (float)GetScreenWidth() / 2.f - 50.f;
+    playerScoreY = 30.f;
+    playerScoreSize = 30.f;
+    playerScoreColor = WHITE;
+    playerScore = 0;
+
+    aiScoreX = (float) GetScreenWidth() / 2.f + 50.f;
+    aiScoreY = 30.f;
+    aiScoreSize = 30.f;
+    aiScoreColor = WHITE;
+    aiScore = 0;
+
     // Init the player Paddle.
     InitPaddle(&playerPaddle, playerPaddleX, playerPaddleY, playerPaddleWidth, playerPaddleHeight, playerColor);
     // Init the AI Paddle.
@@ -42,12 +76,20 @@ void InitMainGame() {
     ballX = (float)GetScreenWidth() / 2.0f - ballRadius;
     ballY = (float)GetScreenHeight() / 2.0f - ballRadius;
 
+    // ball re-star pos
+    ballResetX = (float)GetScreenWidth() / 2.0f - ballRadius;
+    ballResetY = (float)GetScreenHeight() / 2.0f - ballRadius;
+
     // Start the ball at the top of the screen and in the center
     ballY = 200;
     InitBall(&ball, ballX, ballY, ballRadius * 2, ballRadius * 2, ballSpeed, ballColor);
+
+    // init the score for player one
+    InitScore(&playerScoreText,playerScore, playerScoreX, playerScoreY, playerScoreColor, "0", playerScoreSize);
+    InitScore(&aiScoreText, aiScore, aiScoreX, aiScoreY, aiScoreColor, "0", aiScoreSize);
 }
 
-void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, bool isRightPaddle) {
+void HandleBallPaddleCollision(Ball* ball, const Paddle* paddle, const bool isRightPaddle) {
     if (CheckCollisionRecs(ball->Shape, paddle->Shape)) {
         if (isRightPaddle) {
             ball->Shape.x = paddle->Shape.x - ball->Shape.width;
@@ -66,16 +108,39 @@ void UpdateMainGame() {
     UpdateBall(&ball);
 
     // The Ball Paddle Collisions
-    HandleBallPaddleCollision(&ball, &playerPaddle, false);
-    HandleBallPaddleCollision(&ball, &AIPaddle, true);
+    HandleBallPaddleCollision(&ball, &playerPaddle, false); // The player collision.
+    HandleBallPaddleCollision(&ball, &AIPaddle, true); // The AI collision.
 
-    HandleHorizontalBounds(&ball);
+    //HandleHorizontalBounds(&ball);
     HandleVerticalBounds(&ball);
+
+    UpdateGameScore(&ball);
+
+    if (ball.isLefSide) {
+        aiScore += 1;
+        ball.isLefSide = false;
+        // re set ball.
+        ball.Shape.x = ballResetX;
+        ball.Shape.y = ballResetY;
+    }
+
+
+    //ball.Velocity.x = ballSpeed;
+    //ball.Velocity.y = ballSpeed;
+    //ball.isLefSide = false;
+
+
 }
 
+
 void drawMainGame() {
+    DrawScore(&playerScoreText, playerScore, playerScoreSize, playerScoreColor);
+    DrawScore(&aiScoreText, aiScore, aiScoreSize, aiScoreColor);
+
     DrawPaddle(&playerPaddle);
     DrawPaddle(&AIPaddle);
 
     DrawBall(&ball);
 }
+
+
