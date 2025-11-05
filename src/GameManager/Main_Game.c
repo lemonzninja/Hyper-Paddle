@@ -89,6 +89,21 @@ void InitMainGame() {
     InitScore(&aiScoreText, aiScore, aiScoreX, aiScoreY, aiScoreColor, "0", aiScoreSize);
 }
 
+static void ResetBallAfterScore(Ball* scoredBall, const bool launchTowardsLeft) {
+    scoredBall->Shape.x = ballResetX;
+    scoredBall->Shape.y = ballResetY;
+
+    float absoluteVelocityX = scoredBall->Velocity.x;
+    if (absoluteVelocityX < 0.0f) {
+        absoluteVelocityX = -absoluteVelocityX;
+    }
+    if (absoluteVelocityX == 0.0f) {
+        absoluteVelocityX = ballSpeed;
+    }
+
+    scoredBall->Velocity.x = launchTowardsLeft ? absoluteVelocityX : -absoluteVelocityX;
+}
+
 void HandleBallPaddleCollision(Ball* ball, const Paddle* paddle, const bool isRightPaddle) {
     if (CheckCollisionRecs(ball->Shape, paddle->Shape)) {
         if (isRightPaddle) {
@@ -119,9 +134,13 @@ void UpdateMainGame() {
     if (ball.isLefSide) {
         aiScore += 1;
         ball.isLefSide = false;
-        // re set ball.
-        ball.Shape.x = ballResetX;
-        ball.Shape.y = ballResetY;
+        ResetBallAfterScore(&ball, false);
+    }
+
+    if (ball.isRightSide) {
+        playerScore += 1;
+        ball.isRightSide = false;
+        ResetBallAfterScore(&ball, true);
     }
 
 
