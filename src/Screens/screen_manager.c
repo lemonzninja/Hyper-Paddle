@@ -14,8 +14,8 @@ static void NextScreenToInit(void);
 
 void ScreenManagerInit(void) {
     // We set the current screen to the main game screen.
-    currentScreen = SCREEN_MAIN_GAME;
-    nextScreen = SCREEN_MAIN_GAME; // Initialize the next screen to the main game screen.
+    currentScreen = SCREEN_LOGO;
+    nextScreen = SCREEN_LOGO; // Initialize the next screen to the main game screen.
     // Now we load the main game screen.
     InitGameScreen();
 }

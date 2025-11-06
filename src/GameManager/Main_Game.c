@@ -12,25 +12,19 @@
 #include "Systems/ScoreManager/ScoreManager.h"
 
 // score variables
+int newScore = 1;
+
 Counter playerScoreText;
-float playerScoreX;
-float playerScoreY;
-float playerScoreSize;
-Color playerScoreColor;
-int playerScore;
 
 Counter aiScoreText;
-float aiScoreX;
-float aiScoreY;
-float aiScoreSize;
-Color aiScoreColor;
-int aiScore;
+
+
 
 Ball ball;
 float ballRadius = 10;
 float ballX = 0;
 float ballY = 0;
-float ballSpeed = 300.0f;
+float ballSpeed = 350.0f;
 Color ballColor = WHITE;
 
 float ballResetX = 0;
@@ -49,22 +43,27 @@ float aiTwoPaddleX = 1200;
 float aiTwoPaddleY = 299;
 float aiTwoPaddleWidth = 20;
 float aiPaddleHeight = 80;
-float aiPaddleSpeed = 450.0f;
+float aiPaddleSpeed = 321.0f;
 Color playerTwoColor = WHITE;
 
 void InitMainGame() {
+    constexpr float scoreSize = 30.f;
+    const auto scoreTextColor = WHITE;
 
-    playerScoreX = (float)GetScreenWidth() / 2.f - 50.f;
-    playerScoreY = 30.f;
-    playerScoreSize = 30.f;
-    playerScoreColor = WHITE;
-    playerScore = 0;
+    playerScoreText.position.x = (float)GetScreenWidth() / 2.f - 50.f;
+    playerScoreText.position.y = 30.f;
+    playerScoreText.textSize = scoreSize;
+    playerScoreText.textColor = scoreTextColor;
 
-    aiScoreX = (float) GetScreenWidth() / 2.f + 50.f;
-    aiScoreY = 30.f;
-    aiScoreSize = 30.f;
-    aiScoreColor = WHITE;
-    aiScore = 0;
+    //aiScore = aiScoreText.score;
+    aiScoreText.position.x = (float) GetScreenWidth() / 2.f + 50.f;
+    aiScoreText.position.y = 30.f;
+    aiScoreText.textSize = scoreSize;
+    aiScoreText.textColor = scoreTextColor;
+
+    // init player score
+    InitScore(&playerScoreText, playerScoreText.score, playerScoreText.position.x, playerScoreText.position.y, playerScoreText.textColor, playerScoreText.textSize);
+    InitScore(&aiScoreText, aiScoreText.score, aiScoreText.position.x, aiScoreText.position.y, aiScoreText.textColor, scoreSize);
 
     // Init the player Paddle.
     InitPaddle(&playerPaddle, playerPaddleX, playerPaddleY, playerPaddleWidth, playerPaddleHeight, playerColor);
@@ -83,10 +82,6 @@ void InitMainGame() {
     // Start the ball at the top of the screen and in the center
     ballY = 200;
     InitBall(&ball, ballX, ballY, ballRadius * 2, ballRadius * 2, ballSpeed, ballColor);
-
-    // init the score for player one
-    InitScore(&playerScoreText,playerScore, playerScoreX, playerScoreY, playerScoreColor, "0", playerScoreSize);
-    InitScore(&aiScoreText, aiScore, aiScoreX, aiScoreY, aiScoreColor, "0", aiScoreSize);
 }
 
 static void ResetBallAfterScore(Ball* scoredBall, const bool launchTowardsLeft) {
@@ -131,14 +126,14 @@ void UpdateMainGame() {
 
     UpdateGameScore(&ball);
 
-    if (ball.isLefSide) {
-        aiScore += 1;
-        ball.isLefSide = false;
+    if (ball.isLeftSide) {
+        aiScoreText.score += newScore;
+        ball.isLeftSide = false;
         ResetBallAfterScore(&ball, false);
     }
 
     if (ball.isRightSide) {
-        playerScore += 1;
+        playerScoreText.score += newScore;
         ball.isRightSide = false;
         ResetBallAfterScore(&ball, true);
     }
@@ -153,8 +148,9 @@ void UpdateMainGame() {
 
 
 void drawMainGame() {
-    DrawScore(&playerScoreText, playerScore, playerScoreSize, playerScoreColor);
-    DrawScore(&aiScoreText, aiScore, aiScoreSize, aiScoreColor);
+    DrawScore(&playerScoreText);
+    DrawScore(&aiScoreText);
+
 
     DrawPaddle(&playerPaddle);
     DrawPaddle(&AIPaddle);

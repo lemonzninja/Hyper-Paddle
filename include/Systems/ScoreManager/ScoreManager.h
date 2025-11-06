@@ -12,20 +12,12 @@ typedef struct Counter {
     int score;
     Vector2 position;
     Color textColor;
-    const char* text;
     float textSize;
-
 } Counter;
 
-void InitScore(Counter* counter,
-                int score,
-                float posX,
-                float posY,
-                Color color,
-                const char* scoreText,
-                float textSize);
-
-void DrawScore(const Counter* counter, int score, float textSize, Color textColor);
+void InitScore(Counter* counter, int initialScore,
+    float posX, float posY, Color textColor, float textSize);
+void DrawScore(const Counter* counter);
 
 
 #endif //HYPER_PADDLE_SCOREMANAGAER_H

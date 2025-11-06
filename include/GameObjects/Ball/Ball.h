@@ -11,7 +11,7 @@ typedef struct Ball {
     Rectangle Shape;
     Color BallColor;
     Vector2 Velocity;
-    bool isLefSide;
+    bool isLeftSide;
     bool isRightSide;
 }Ball;
 

@@ -18,7 +18,7 @@ void InitBall(Ball *ball, const float x, const float y, const float width, const
     ball->Velocity.x = velocity;
     ball->Velocity.y = velocity;
 
-    ball->isLefSide = false;
+    ball->isLeftSide = false;
     ball->isRightSide = false;
 }
 
@@ -72,7 +72,7 @@ void HandleVerticalBounds(Ball *ball) {
 void UpdateGameScore(Ball *ball) {
     // if the ball hits the left edge have aiScore go up 1.
     if (ball->Shape.x <= 0.0f) {
-        ball->isLefSide = true;
+        ball->isLeftSide = true;
     }
 
 
