@@ -11,6 +11,8 @@ typedef struct Ball {
     Rectangle Shape;
     Color BallColor;
     Vector2 Velocity;
+    bool isLeftSide;
+    bool isRightSide;
 }Ball;
 
 void InitBall(Ball *ball,
@@ -26,6 +28,10 @@ void DrawBall(const Ball* ball);
 
 void HandleHorizontalBounds(Ball* ball);
 void HandleVerticalBounds(Ball* ball);
+
+
+void UpdateGameScore(Ball* ball);
+
 
 
 #endif //HYPER_PADDLE_BALL_H

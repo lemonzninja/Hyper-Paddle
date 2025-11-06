@@ -17,6 +17,9 @@ void InitBall(Ball *ball, const float x, const float y, const float width, const
     ball->BallColor = color;
     ball->Velocity.x = velocity;
     ball->Velocity.y = velocity;
+
+    ball->isLeftSide = false;
+    ball->isRightSide = false;
 }
 
 void UpdateBall(Ball *ball) {
@@ -30,24 +33,24 @@ void DrawBall(const Ball *ball) {
 }
 
 void HandleHorizontalBounds(Ball *ball) {
-    // Left edge
-    if (ball->Shape.x <= 0.0f - ball->Shape.width) {
-        ball->Shape.x = 0.0f;
-        ball->Velocity.x = -ball->Velocity.x;
-    }
+    // if (ball->Shape.x <= 0.0f - ball->Shape.width) { // Left edge
+    //     ball->Shape.x = 0.0f;
+    //     ball->Velocity.x = -ball->Velocity.x;
+    // }
 
-
-    const float screenRightSide = (float)GetScreenWidth();
-    const float ballsRightSide = ball->Shape.x + ball->Shape.width;
-
-    // If the balls right is the same as the right edge.
-    if (ballsRightSide >= screenRightSide) {
-        // set the balls right side to the screens right side.
-        ball->Shape.x = screenRightSide - ball->Shape.width;
-        // revers the balls velocity.
-        ball->Velocity.x = -ball->Velocity.x;
-    }
+    // const float screenRightSide = (float)GetScreenWidth();
+    // const float ballsRightSide = ball->Shape.x + ball->Shape.width;
+    //
+    // // If the balls right is the same as the right edge.
+    // if (ballsRightSide >= screenRightSide) { // Right edge
+    //     // set the balls right side to the screens right side.
+    //     ball->Shape.x = screenRightSide - ball->Shape.width;
+    //     // revers the balls velocity.
+    //     ball->Velocity.x = -ball->Velocity.x;
+    // }
 }
+
+
 
 void HandleVerticalBounds(Ball *ball) {
     // Top Check
@@ -63,5 +66,18 @@ void HandleVerticalBounds(Ball *ball) {
     if (ballBottomSide >= screenBottomSide) {
         ball->Shape.y = screenBottomSide - ball->Shape.height;
         ball->Velocity.y = -ball->Velocity.y;
+    }
+}
+
+void UpdateGameScore(Ball *ball) {
+    // if the ball hits the left edge have aiScore go up 1.
+    if (ball->Shape.x <= 0.0f) {
+        ball->isLeftSide = true;
+    }
+
+
+    // if the ball hits the right edge have playerScore go up 1.
+    if (ball->Shape.x >= (float) GetScreenWidth() - ball->Shape.width) {
+        ball->isRightSide = true;
     }
 }
