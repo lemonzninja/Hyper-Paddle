@@ -26,11 +26,9 @@ void InitBall(Ball *ball,
 void UpdateBall(Ball* ball);
 void DrawBall(const Ball* ball);
 
-// void HandleHorizontalBounds(Ball* ball);
 void HandleVerticalBounds(Ball* ball);
 
-
-void UpdateGameScore(Ball* ball);
+void ballDetectGoal(Ball* ball);
 
 
 

@@ -32,24 +32,6 @@ void DrawBall(const Ball *ball) {
     DrawRectangleRec(ball->Shape, ball->BallColor);
 }
 
-// void HandleHorizontalBounds(Ball *ball) {
-//     if (ball->Shape.x <= 0.0f - ball->Shape.width) {
-//         ball->Shape.x = 0.0f;
-//         ball->Velocity.x = -ball->Velocity.x;
-//     }
-//
-//     const float screenRightSide = (float)GetScreenWidth();
-//     const float ballsRightSide = ball->Shape.x + ball->Shape.width;
-//
-//     if (ballsRightSide >= screenRightSide) {
-//
-//         ball->Shape.x = screenRightSide - ball->Shape.width;
-//         ball->Velocity.x = -ball->Velocity.x;
-//     }
-// }
-
-
-
 void HandleVerticalBounds(Ball *ball) {
     if (ball->Shape.y <= 0.0f) {
         ball->Shape.y = 0.0f;
@@ -65,7 +47,7 @@ void HandleVerticalBounds(Ball *ball) {
     }
 }
 
-void UpdateGameScore(Ball *ball) {
+void ballDetectGoal(Ball *ball) {
     // if the ball hits the left edge have aiScore go up 1.
     if (ball->Shape.x <= 0.0f) {
         ball->isLeftSide = true;

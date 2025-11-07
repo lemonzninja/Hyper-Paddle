@@ -52,8 +52,8 @@ void InitMainGame() {
     aiScoreText.textColor = scoreTextColor;
     aiScoreText.score = scoreToAdd;
 
+    ballSpeed = 450.0f;
     ballRadius = 10;
-    ballSpeed = 350.0f;
     ballColor = WHITE;
     ballResetX = (float)GetScreenWidth() / 2.0f - ballRadius;;
     ballResetY = 200;
@@ -72,7 +72,7 @@ void InitMainGame() {
     aiPaddle.Shape.width = 20;
     aiPaddle.Shape.height = 80;
     aiPaddle.PaddleColor = WHITE;
-    aiPaddleSpeed = 321.0f;
+    aiPaddleSpeed = 370.0f;
 
     // init player score
     InitScore(&playerScoreText, playerScoreText.score, playerScoreText.position.x, playerScoreText.position.y, playerScoreText.textColor, playerScoreText.textSize);
@@ -101,13 +101,13 @@ static void ResetBallAfterScore(Ball* ball, const bool launchTowardsLeft) {
     float absoluteVelocityX = ball->Velocity.x;
 
     if (absoluteVelocityX < 0.0f) {
-        absoluteVelocityX = -absoluteVelocityX * ballSpeed * 0.5f;
+        absoluteVelocityX = -absoluteVelocityX;
     }
     if (absoluteVelocityX == 0.0f) {
-        absoluteVelocityX = ballSpeed * deltaTime();
+        absoluteVelocityX = ballSpeed;
     }
 
-    ball->Velocity.x = (float)launchTowardsLeft * deltaTime() ? ballSpeed : -ballSpeed;
+    ball->Velocity.x = launchTowardsLeft ? ballSpeed : -ballSpeed;
 }
 
 void HandleBallPaddleCollision(Ball* ball, const Paddle* paddle, const bool isRightPaddle) {
@@ -134,7 +134,7 @@ void UpdateMainGame() {
 
     HandleVerticalBounds(&ball);
 
-    UpdateGameScore(&ball);
+    ballDetectGoal(&ball);
 
     if (ball.isLeftSide) {
         aiScoreText.score += newScore;
