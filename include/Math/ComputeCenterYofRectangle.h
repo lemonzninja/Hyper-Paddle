@@ -1,6 +1,7 @@
-//
-// Created by Squid on 11/2/2025.
-//
+/****************************************************************
+*              - The Logo Screen -
+*  Created by Squid on 10/26/2025
+****************************************************************/
 
 #ifndef HYPER_PADDLE_COMPUTECENTERYOFRECTANGLE_H
 #define HYPER_PADDLE_COMPUTECENTERYOFRECTANGLE_H
