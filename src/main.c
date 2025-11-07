@@ -13,7 +13,7 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define Hyp_Paddle_Title "Hyper Paddle"
-#define Hyp_Paddle_Version "0.0.1"
+#define Hyp_Paddle_Version "0.0.9"
 char gameTitle[64];
 int frames = 0;
 bool gameShouldClose = false;
