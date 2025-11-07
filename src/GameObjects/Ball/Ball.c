@@ -23,7 +23,7 @@ void InitBall(Ball *ball, const float x, const float y, const float width, const
 }
 
 void UpdateBall(Ball *ball) {
-    ball->Shape.x += -ball->Velocity.x * deltaTime();
+    ball->Shape.x += ball->Velocity.x * deltaTime();
     ball->Shape.y += ball->Velocity.y * deltaTime();
 }
 
