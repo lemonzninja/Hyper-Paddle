@@ -26,7 +26,7 @@ void InitBall(Ball *ball,
 void UpdateBall(Ball* ball);
 void DrawBall(const Ball* ball);
 
-void HandleHorizontalBounds(Ball* ball);
+// void HandleHorizontalBounds(Ball* ball);
 void HandleVerticalBounds(Ball* ball);
 
 

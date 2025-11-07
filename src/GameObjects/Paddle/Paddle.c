@@ -10,7 +10,7 @@
 #include "Systems/deltaTime.h"
 #include "Systems/KeybordManager/KeybordManager.h"
 #include "GameObjects/Ball/Ball.h"
-#include "../include/Math/ComputeCenterYofRectangle.h"
+#include "Math/ComputeCenterYofRectangle.h"
 
 extern Ball ball;
 

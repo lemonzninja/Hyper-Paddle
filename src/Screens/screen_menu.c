@@ -4,7 +4,7 @@
  *  Created by Squid on 10/27/2025.
 ****************************************************************/
 
-#include <io.h>
+//#include <io.h>
 
 #include "screens.h"
 #include "../../include/UI/UIButton/button.h"
@@ -44,13 +44,13 @@ void InitMenuScreen(void) {
     nextScreen = SCREEN_MENU;
 
     // Start Button
-    InitUiButton(&startButton, strButtonX,
-                 strButtonY, strButtonWidth,
-                 strButtonHeight, BLUE, DARKBLUE,
+    InitUiButton(&startButton, (float)strButtonX,
+                 (float)strButtonY, (float)strButtonWidth,
+                 (float)strButtonHeight, BLUE, DARKBLUE,
                  SKYBLUE, BLACK);
     //Quit Button
-    InitUiButton(&quitButton, quitButtonX, quitButtonY,
-        quitButtonWidth, quitButtonHeight,
+    InitUiButton(&quitButton, (float)quitButtonX, (float)quitButtonY,
+        (float)quitButtonWidth, (float)quitButtonHeight,
         RED, DARKPURPLE, SKYBLUE, BLACK);
 }
 
