@@ -33,9 +33,10 @@ int main(void)
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, gameTitle);
     InitGame();
 
-    // Set FPS.
-    frames = 60;
-    SetTargetFPS(frames);   // Set our game to run at 60 frames-per-second
+    frames = 120;
+
+    // Set FPS
+    SetTargetFPS(frames);
 
     // Main game loop
     while (!WindowShouldClose() && !gameShouldClose)   // Detect window close button or ESC key
@@ -65,8 +66,6 @@ void InitGame(void)
 
 void UpdateGame(void)
 {
-    //use draw text to show fps in the top-left corner. with small text.
-    DrawText(TextFormat("FPS:  %02i", GetFPS()), 10, 10, 10, DARKGRAY);
     // Update The Screens with the Screen Manager.
     ScreenManagerUpdate();
 }
@@ -74,6 +73,9 @@ void UpdateGame(void)
 void DrawGame(void)
 {
     // Draw all the screens with the Screen Manger.
+    //use draw text to show fps in the top-left corner. with small text.
+    DrawText(TextFormat("FPS:  %02i", GetFPS()), 10, 10, 10, DARKGRAY);
+
     ScreenManagerDraw();
 }
 

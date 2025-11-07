@@ -17,7 +17,7 @@ void ScreenManagerInit(void) {
     currentScreen = SCREEN_LOGO;
     nextScreen = SCREEN_LOGO; // Initialize the next screen to the main game screen.
     // Now we load the main game screen.
-    InitGameScreen();
+    InitLogoScreen();
 }
 
 void ScreenManagerUpdate(void) {
@@ -34,7 +34,8 @@ void ScreenManagerUpdate(void) {
             break;
         case SCREEN_MAIN_GAME:
             UpdateGameScreen();
-        default: break;
+            break;
+        default:
     }
 
     if (nextScreen != currentScreen)
@@ -55,8 +56,9 @@ void ScreenManagerDraw(void) {
             break;
         case SCREEN_MAIN_GAME:
             DrawGameScreen();
-        default:
             break;
+        default:
+
     }
 }
 
@@ -70,12 +72,12 @@ void UnloadCurrent(void) {
             UnloadLogoScreen();
             break;
         case SCREEN_MENU:
-           UnloadMenuScreen();
+            UnloadMenuScreen();
             break;
-            case SCREEN_MAIN_GAME:
+        case SCREEN_MAIN_GAME:
             UnloadGameScreen();
-        default:
             break;
+        default:
     }
 }
 
@@ -89,7 +91,7 @@ void NextScreenToInit(void) {
             break;
         case SCREEN_MAIN_GAME:
             InitGameScreen();
-        default:
             break;
+        default:
     }
 }

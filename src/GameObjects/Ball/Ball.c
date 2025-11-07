@@ -32,28 +32,7 @@ void DrawBall(const Ball *ball) {
     DrawRectangleRec(ball->Shape, ball->BallColor);
 }
 
-void HandleHorizontalBounds(Ball *ball) {
-    // if (ball->Shape.x <= 0.0f - ball->Shape.width) { // Left edge
-    //     ball->Shape.x = 0.0f;
-    //     ball->Velocity.x = -ball->Velocity.x;
-    // }
-
-    // const float screenRightSide = (float)GetScreenWidth();
-    // const float ballsRightSide = ball->Shape.x + ball->Shape.width;
-    //
-    // // If the balls right is the same as the right edge.
-    // if (ballsRightSide >= screenRightSide) { // Right edge
-    //     // set the balls right side to the screens right side.
-    //     ball->Shape.x = screenRightSide - ball->Shape.width;
-    //     // revers the balls velocity.
-    //     ball->Velocity.x = -ball->Velocity.x;
-    // }
-}
-
-
-
 void HandleVerticalBounds(Ball *ball) {
-    // Top Check
     if (ball->Shape.y <= 0.0f) {
         ball->Shape.y = 0.0f;
         ball->Velocity.y = -ball->Velocity.y;
@@ -62,14 +41,13 @@ void HandleVerticalBounds(Ball *ball) {
     const float screenBottomSide = (float)GetScreenHeight();
     const float ballBottomSide = ball->Shape.y + ball->Shape.height;
 
-    // Bottom Check
     if (ballBottomSide >= screenBottomSide) {
         ball->Shape.y = screenBottomSide - ball->Shape.height;
         ball->Velocity.y = -ball->Velocity.y;
     }
 }
 
-void UpdateGameScore(Ball *ball) {
+void ballDetectGoal(Ball *ball) {
     // if the ball hits the left edge have aiScore go up 1.
     if (ball->Shape.x <= 0.0f) {
         ball->isLeftSide = true;

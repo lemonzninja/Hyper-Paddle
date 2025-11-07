@@ -23,7 +23,6 @@ void InitUiButton(UIButton *uiButton, const float x, const float y, const float 
 
 void UpdateUiButton(UIButton *uiButton) {
     mousePosition = GetMousePosition();
-    
     if (CheckCollisionPointRec(mousePosition, uiButton->bounds)) {
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
             uiButton->currentState = BUTTON_CLICKED;
@@ -32,6 +31,7 @@ void UpdateUiButton(UIButton *uiButton) {
         }
     } else {
         uiButton->currentState = BUTTON_IDLE;
+
     }
 }
 

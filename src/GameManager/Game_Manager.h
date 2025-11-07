@@ -7,6 +7,9 @@
 #define HYPER_PADDLE_GAME_MANAGER_H
 
 #include "raylib.h"
+#include "GameObjects/Paddle/Paddle.h"
+#include "GameObjects/Ball/Ball.h"
+#include "Systems/ScoreManager/ScoreManager.h"
 
 void InitMainGame();
 void UpdateMainGame();
