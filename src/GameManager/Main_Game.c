@@ -33,25 +33,26 @@ Paddle aiPaddle;
 float aiPaddleSpeed;
 
 void InitMainGame() {
+    // Score number.
     scoreToAdd = 0;
+    // The number of points to add to the score.
     newScore = 1;
-
+    // Score Stuff.
     scoreSize = 30.f;
     scoreTextColor = WHITE;
-
+    // Player Score text.
     playerScoreText.position.x = (float)GetScreenWidth() / 2.f - 50.f;
     playerScoreText.position.y = 30.f;
     playerScoreText.textSize = scoreSize;
     playerScoreText.textColor = scoreTextColor;
     playerScoreText.score = scoreToAdd;
-
-    //aiScore = aiScoreText.score;
+    // Ai Score text.
     aiScoreText.position.x = (float) GetScreenWidth() / 2.f + 50.f;
     aiScoreText.position.y = 30.f;
     aiScoreText.textSize = scoreSize;
     aiScoreText.textColor = scoreTextColor;
     aiScoreText.score = scoreToAdd;
-
+    // Ball.
     ballSpeed = 450.0f;
     ballRadius = 10;
     ballColor = WHITE;
@@ -59,14 +60,14 @@ void InitMainGame() {
     ballResetY = 200;
     ball.Shape.x = 0;
     ball.Shape.y = 0;
-
+    // Player Paddle.
     playerPaddle.Shape.x = 45;
     playerPaddle.Shape.y = 299;
     playerPaddle.Shape.width = 20;
     playerPaddle.Shape.height = 80;
     playerPaddle.PaddleColor = WHITE;
     PLayerSpeed = 400.f;
-
+    // AI Paddle.
     aiPaddle.Shape.x = 1200;
     aiPaddle.Shape.y = 299;
     aiPaddle.Shape.width = 20;
@@ -74,7 +75,7 @@ void InitMainGame() {
     aiPaddle.PaddleColor = WHITE;
     aiPaddleSpeed = 370.0f;
 
-    // init player score
+    // init player score.
     InitScore(&playerScoreText, playerScoreText.score, playerScoreText.position.x, playerScoreText.position.y, playerScoreText.textColor, playerScoreText.textSize);
     InitScore(&aiScoreText, aiScoreText.score, aiScoreText.position.x, aiScoreText.position.y, aiScoreText.textColor, scoreSize);
 
@@ -87,10 +88,6 @@ void InitMainGame() {
     // Init the ball in the center of the screen.
     ball.Shape.x = (float)GetScreenWidth() / 2.0f - ballRadius;
     ball.Shape.y = 200;
-
-    // ball re-star pos
-    //ballResetX = (float)GetScreenWidth() / 2.0f - ballRadius;
-    //ballResetY = (float)GetScreenHeight() / 2.0f - ballRadius;
 
     InitBall(&ball, ball.Shape.x, ball.Shape.y, ballRadius * 2, ballRadius * 2, ballSpeed, ballColor);
 }
