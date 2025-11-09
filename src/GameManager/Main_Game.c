@@ -48,7 +48,7 @@ void InitMainGame() {
     nextScreen = SCREEN_MAIN_GAME;
 
     // The number of points to add to the score.
-    newScore = 10;
+    newScore = 1;
     // Score Stuff.
     scoreSize = 30.f;
     scoreTextColor = WHITE;
@@ -87,9 +87,9 @@ void InitMainGame() {
     aiPaddle.PaddleColor = WHITE;
     aiPaddleSpeed = 370.0f;
 
-    InitUiButton(&restartButton, GetScreenWidth() / 2 - 150, GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY,
+    InitUiButton(&restartButton, (float)GetScreenWidth() / 2 - 150, (float)GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY,
                  BLACK);
-    InitUiButton(&menuButton, GetScreenWidth() / 2 + 50, GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
+    InitUiButton(&menuButton, (float)GetScreenWidth() / 2 + 50, (float)GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
 
     // init player score.
     InitScore(&playerScoreText, playerScoreText.score, playerScoreText.position.x, playerScoreText.position.y, playerScoreText.textColor, playerScoreText.textSize);
@@ -209,13 +209,13 @@ void drawMainGame() {
     if (gameOver) {
         const Color menuBackgroundColor = DARKBLUE;
         const Rectangle menuBackground = {
-            GetScreenWidth() / 2.0f - 200,
-            GetScreenHeight() / 2.0f - 50,
+            (float)GetScreenWidth() / 2.0f - 200,
+            (float)GetScreenHeight() / 2.0f - 50,
             400,
             150
         };
-        DrawRectangle(menuBackground.x, menuBackground.y,
-                      menuBackground.width, menuBackground.height,
+        DrawRectangle((int)menuBackground.x, (int)menuBackground.y,
+                      (int)menuBackground.width, (int)menuBackground.height,
                       menuBackgroundColor);
 
         // Draw "GAME OVER" text
@@ -223,8 +223,8 @@ void drawMainGame() {
         const int gameOverFontSize = 40;
         int textWidth = MeasureText(gameOverText, gameOverFontSize);
         DrawText(gameOverText,
-                 menuBackground.x + (menuBackground.width - textWidth) / 2,
-                 menuBackground.y - 20,
+                 menuBackground.x + (menuBackground.width - (float)textWidth) / 2,
+                 (int)menuBackground.y - 20,
                  gameOverFontSize, WHITE);
 
         // Draw winner announcement
