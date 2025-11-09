@@ -57,7 +57,6 @@ void UpdateMenuScreen(void) {
     UpdateUiButton(&quitButton);
 
     if (IsUiButtonClicked(&startButton)) {
-        // TODO have the start button go to the game screen.
         nextScreen = SCREEN_MAIN_GAME;
     }
 
@@ -90,6 +89,6 @@ void UnloadMenuScreen(void) {
     // Nothing to unload yet
 }
 
-GameScreen FinishMenuScreen(void) {
+GameScreen GetMainGameScreen(void) {
     return nextScreen;
 }

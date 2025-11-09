@@ -3,10 +3,11 @@
 *   All the logic of the Main game goes here.
 *  Created by Squid on 10/29/2025
 ****************************************************************/
-
-#include <stdio.h>
 #include "Game_Manager.h"
-#include "Systems/deltaTime.h"
+
+extern bool gameShouldClose;
+
+static GameScreen nextScreen;
 
 // score variables
 Counter playerScoreText;
@@ -32,11 +33,22 @@ float PLayerSpeed;
 Paddle aiPaddle;
 float aiPaddleSpeed;
 
+// Game over state
+static const int WIN_SCORE = 10;
+typedef enum {WINER_NONE, WINER_PLAYER, WINER_AI} Winer;
+static bool gameOver = false;
+static Winer winer = WINER_NONE;
+
+UIButton restartButton;
+UIButton menuButton;
+
+
 void InitMainGame() {
-    // Score number.
-    scoreToAdd = 0;
+
+    nextScreen = SCREEN_MAIN_GAME;
+
     // The number of points to add to the score.
-    newScore = 1;
+    newScore = 10;
     // Score Stuff.
     scoreSize = 30.f;
     scoreTextColor = WHITE;
@@ -45,13 +57,13 @@ void InitMainGame() {
     playerScoreText.position.y = 30.f;
     playerScoreText.textSize = scoreSize;
     playerScoreText.textColor = scoreTextColor;
-    playerScoreText.score = scoreToAdd;
+    playerScoreText.score  = 0;
     // Ai Score text.
     aiScoreText.position.x = (float) GetScreenWidth() / 2.f + 50.f;
     aiScoreText.position.y = 30.f;
     aiScoreText.textSize = scoreSize;
     aiScoreText.textColor = scoreTextColor;
-    aiScoreText.score = scoreToAdd;
+    aiScoreText.score = 0;
     // Ball.
     ballSpeed = 450.0f;
     ballRadius = 10;
@@ -75,6 +87,10 @@ void InitMainGame() {
     aiPaddle.PaddleColor = WHITE;
     aiPaddleSpeed = 370.0f;
 
+    InitUiButton(&restartButton, GetScreenWidth() / 2 - 150, GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY,
+                 BLACK);
+    InitUiButton(&menuButton, GetScreenWidth() / 2 + 50, GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
+
     // init player score.
     InitScore(&playerScoreText, playerScoreText.score, playerScoreText.position.x, playerScoreText.position.y, playerScoreText.textColor, playerScoreText.textSize);
     InitScore(&aiScoreText, aiScoreText.score, aiScoreText.position.x, aiScoreText.position.y, aiScoreText.textColor, scoreSize);
@@ -84,6 +100,12 @@ void InitMainGame() {
     // Init the AI Paddle.
     InitPaddle(&aiPaddle, aiPaddle.Shape.x, aiPaddle.Shape.y, aiPaddle.Shape.width, aiPaddle.Shape.height,
                aiPaddle.PaddleColor);
+
+    // Reset game state scores.
+    gameOver = false;
+    winer = WINER_NONE;
+    playerScoreText.score = 0;
+    aiScoreText.score = 0;
 
     // Init the ball in the center of the screen.
     ball.Shape.x = (float)GetScreenWidth() / 2.0f - ballRadius;
@@ -119,6 +141,21 @@ void HandleBallPaddleCollision(Ball* ball, const Paddle* paddle, const bool isRi
 }
 
 void UpdateMainGame() {
+    // If game over, pause gameplay and wait for user input
+    if (gameOver) {
+        UpdateUiButton(&restartButton);
+        UpdateUiButton(&menuButton);
+
+        if (IsUiButtonClicked(&restartButton)) {
+            InitMainGame();
+        }
+
+        if (IsUiButtonClicked(&menuButton)) {
+            nextScreen = SCREEN_MENU;
+        }
+        return;
+    }
+
     // Move Paddles
     UpdatePlayerPaddle(&playerPaddle, PLayerSpeed);
     UpdateAIPaddle(&aiPaddle, aiPaddleSpeed);
@@ -137,17 +174,29 @@ void UpdateMainGame() {
         aiScoreText.score += newScore;
         ball.isLeftSide = false;
         ResetBallAfterScore(&ball, false);
+        // Check Ai WIN condition
+        if (aiScoreText.score >= WIN_SCORE) {
+            gameOver = true;
+            winer = WINER_AI;
+        }
     }
 
     if (ball.isRightSide) {
         playerScoreText.score += newScore;
         ball.isRightSide = false;
         ResetBallAfterScore(&ball, true);
+        // Check Player WIN condition
+        if (playerScoreText.score >= WIN_SCORE) {
+            gameOver = true;
+            winer = WINER_PLAYER;
+        }
     }
 }
 
 
 void drawMainGame() {
+    ClearBackground(BLACK);
+
     DrawScore(&playerScoreText);
     DrawScore(&aiScoreText);
 
@@ -155,6 +204,43 @@ void drawMainGame() {
     DrawPaddle(&aiPaddle);
 
     DrawBall(&ball);
+
+    // Draw overlay if the game is over.
+    if (gameOver) {
+        const Color menuBackgroundColor = DARKBLUE;
+        const Rectangle menuBackground = {
+            GetScreenWidth() / 2.0f - 200,
+            GetScreenHeight() / 2.0f - 50,
+            400,
+            150
+        };
+        DrawRectangle(menuBackground.x, menuBackground.y,
+                      menuBackground.width, menuBackground.height,
+                      menuBackgroundColor);
+
+        // Draw "GAME OVER" text
+        const char *gameOverText = "GAME OVER";
+        const int gameOverFontSize = 40;
+        int textWidth = MeasureText(gameOverText, gameOverFontSize);
+        DrawText(gameOverText,
+                 menuBackground.x + (menuBackground.width - textWidth) / 2,
+                 menuBackground.y - 20,
+                 gameOverFontSize, WHITE);
+
+        // Draw winner announcement
+        const char *winnerText = winer == WINER_PLAYER ? "Player Wins!" : "AI Wins!";
+        const int winnerFontSize = 30;
+        textWidth = MeasureText(winnerText, winnerFontSize);
+        DrawText(winnerText,
+                 menuBackground.x + (menuBackground.width - textWidth) / 2,
+                 menuBackground.y - 60,
+                 winnerFontSize, WHITE);
+
+        DrawUiButton(&restartButton, "Restart", 20);
+        DrawUiButton(&menuButton, "Exit", 20);
+    }
 }
 
-
+GameScreen GetMenuScreen(void) {
+    return nextScreen;
+}

@@ -8,8 +8,6 @@
 
 static GameScreen nextScreen;
 
-
-
 void InitGameScreen(void) {
     InitMainGame();
 }
@@ -28,6 +26,6 @@ void UnloadGameScreen(void) {
 
 }
 
-GameScreen FinisGameScreen(void) {
+GameScreen FinishGameScreen(void) {
     return nextScreen;
 }
