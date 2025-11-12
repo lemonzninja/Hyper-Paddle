@@ -232,8 +232,8 @@ void drawMainGame() {
         const int winnerFontSize = 30;
         textWidth = MeasureText(winnerText, winnerFontSize);
         DrawText(winnerText,
-                 menuBackground.x + (menuBackground.width - textWidth) / 2,
-                 menuBackground.y - 60,
+                 menuBackground.x + (menuBackground.width - (float)textWidth) / 2,
+                 (int)menuBackground.y - 60,
                  winnerFontSize, WHITE);
 
         DrawUiButton(&restartButton, "Restart", 20);
