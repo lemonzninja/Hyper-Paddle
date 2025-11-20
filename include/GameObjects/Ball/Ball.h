@@ -13,6 +13,7 @@ typedef struct Ball {
     Vector2 Velocity;
     bool isLeftSide;
     bool isRightSide;
+    Sound bounceSound;
 }Ball;
 
 void InitBall(Ball *ball,

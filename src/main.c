@@ -31,6 +31,7 @@ int main(void)
 
     // Init the Game/Items
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, gameTitle);
+    InitAudioDevice();
     InitGame();
 
     frames = 120;
@@ -45,6 +46,7 @@ int main(void)
     }
     // De-Initialization
     Unload();  // Unload Assets.
+    CloseAudioDevice();
     CloseWindow(); // Close the window and OpenGL context
     // End of program.
     return 0;
