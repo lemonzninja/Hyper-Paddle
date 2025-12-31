@@ -24,6 +24,19 @@ void InitBall(Ball *ball, const float x, const float y, const float width, const
     ball->bounceSound = LoadSound("assets/soundFX/ballSound.wav");
 }
 
+void ResetBall(Ball* ball, float x, float y, float velocity) {
+    ball->Shape.x = x;
+    ball->Shape.y = y;
+    ball->Velocity.x = velocity;
+    ball->Velocity.y = velocity;
+    ball->isLeftSide = false;
+    ball->isRightSide = false;
+}
+
+void UnloadBall(Ball* ball) {
+    UnloadSound(ball->bounceSound);
+}
+
 void UpdateBall(Ball *ball) {
     ball->Shape.x += -ball->Velocity.x * deltaTime();
     ball->Shape.y += ball->Velocity.y * deltaTime();

@@ -1,6 +1,6 @@
 /****************************************************************
- *             - The Mane Menu Screen -
- *  All the logic for a Mane Menu of are game.
+ *             - The Main Menu Screen -
+ *  All the logic for a Main Menu of our game.
  *  Created by Squid on 10/27/2025.
 ****************************************************************/
 

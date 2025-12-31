@@ -23,7 +23,7 @@ void DrawGameScreen(void) {
 }
 
 void UnloadGameScreen(void) {
-
+    UnloadMainGame();
 }
 
 GameScreen FinishGameScreen(void) {

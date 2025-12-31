@@ -24,6 +24,9 @@ void InitBall(Ball *ball,
                 float velocity,
                 Color color);
 
+void ResetBall(Ball* ball, float x, float y, float velocity);
+void UnloadBall(Ball* ball);
+
 void UpdateBall(Ball* ball);
 void DrawBall(const Ball* ball);
 

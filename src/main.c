@@ -74,7 +74,7 @@ void UpdateGame(void)
 
 void DrawGame(void)
 {
-    // Draw all the screens with the Screen Manger.
+    // Draw all the screens with the Screen Manager.
     //use draw text to show fps in the top-left corner. with small text.
     DrawText(TextFormat("FPS:  %02i", GetFPS()), 10, 10, 10, DARKGRAY);
 
