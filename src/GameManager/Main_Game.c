@@ -94,7 +94,7 @@ void ResetMainGame(void) {
     aiPaddle.Shape.width = 20;
     aiPaddle.Shape.height = 80;
     aiPaddle.PaddleColor = WHITE;
-    aiPaddleSpeed = 370.0f;
+    aiPaddleSpeed = 390.0f;
 
     InitUiButton(&restartButton, (float)GetScreenWidth() / 2 - 150, (float)GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY,
                  BLACK);
@@ -202,7 +202,6 @@ void UpdateMainGame() {
         }
     }
 }
-
 
 void drawMainGame() {
     ClearBackground(BLACK);
