@@ -35,18 +35,34 @@ float aiPaddleSpeed;
 
 // Game over state
 static const int WIN_SCORE = 10;
-typedef enum {WINER_NONE, WINER_PLAYER, WINER_AI} Winer;
+typedef enum {WINNER_NONE, WINNER_PLAYER, WINNER_AI} Winner;
 static bool gameOver = false;
-static Winer winer = WINER_NONE;
+static Winner winner = WINNER_NONE;
 
 UIButton restartButton;
 UIButton menuButton;
 
 
 void InitMainGame() {
-
     nextScreen = SCREEN_MAIN_GAME;
 
+    // Initialize Resources that need to be loaded
+
+    // Ball.
+    ballSpeed = 450.0f;
+    ballRadius = 10;
+    ballColor = WHITE;
+    ballResetX = (float)GetScreenWidth() / 2.0f - ballRadius;
+    ballResetY = 200;
+
+    // InitBall loads the sound.
+    InitBall(&ball, ballResetX, ballResetY, ballRadius * 2, ballRadius * 2, ballSpeed, ballColor);
+
+    // Reset the rest of the game state.
+    ResetMainGame();
+}
+
+void ResetMainGame(void) {
     // The number of points to add to the score.
     newScore = 1;
     // Score Stuff.
@@ -64,14 +80,7 @@ void InitMainGame() {
     aiScoreText.textSize = scoreSize;
     aiScoreText.textColor = scoreTextColor;
     aiScoreText.score = 0;
-    // Ball.
-    ballSpeed = 450.0f;
-    ballRadius = 10;
-    ballColor = WHITE;
-    ballResetX = (float)GetScreenWidth() / 2.0f - ballRadius;;
-    ballResetY = 200;
-    ball.Shape.x = 0;
-    ball.Shape.y = 0;
+
     // Player Paddle.
     playerPaddle.Shape.x = 45;
     playerPaddle.Shape.y = 299;
@@ -103,15 +112,16 @@ void InitMainGame() {
 
     // Reset game state scores.
     gameOver = false;
-    winer = WINER_NONE;
+    winner = WINNER_NONE;
     playerScoreText.score = 0;
     aiScoreText.score = 0;
 
-    // Init the ball in the center of the screen.
-    ball.Shape.x = (float)GetScreenWidth() / 2.0f - ballRadius;
-    ball.Shape.y = 200;
+    // Reset the ball state (position, velocity)
+    ResetBall(&ball, ballResetX, ballResetY, ballSpeed);
+}
 
-    InitBall(&ball, ball.Shape.x, ball.Shape.y, ballRadius * 2, ballRadius * 2, ballSpeed, ballColor);
+void UnloadMainGame(void) {
+    UnloadBall(&ball);
 }
 
 static void ResetBallAfterScore(Ball* ball, const bool launchTowardsLeft) {
@@ -147,7 +157,7 @@ void UpdateMainGame() {
         UpdateUiButton(&menuButton);
 
         if (IsUiButtonClicked(&restartButton)) {
-            InitMainGame();
+            ResetMainGame();
         }
 
         if (IsUiButtonClicked(&menuButton)) {
@@ -158,7 +168,7 @@ void UpdateMainGame() {
 
     // Move Paddles
     UpdatePlayerPaddle(&playerPaddle, PLayerSpeed);
-    UpdateAIPaddle(&aiPaddle, aiPaddleSpeed);
+    UpdateAIPaddle(&aiPaddle, aiPaddleSpeed, &ball);
     // Move Ball
     UpdateBall(&ball);
 
@@ -177,7 +187,7 @@ void UpdateMainGame() {
         // Check Ai WIN condition
         if (aiScoreText.score >= WIN_SCORE) {
             gameOver = true;
-            winer = WINER_AI;
+            winner = WINNER_AI;
         }
     }
 
@@ -188,7 +198,7 @@ void UpdateMainGame() {
         // Check Player WIN condition
         if (playerScoreText.score >= WIN_SCORE) {
             gameOver = true;
-            winer = WINER_PLAYER;
+            winner = WINNER_PLAYER;
         }
     }
 }
@@ -228,7 +238,7 @@ void drawMainGame() {
                  gameOverFontSize, WHITE);
 
         // Draw winner announcement
-        const char *winnerText = winer == WINER_PLAYER ? "Player Wins!" : "AI Wins!";
+        const char *winnerText = winner == WINNER_PLAYER ? "Player Wins!" : "AI Wins!";
         const int winnerFontSize = 30;
         textWidth = MeasureText(winnerText, winnerFontSize);
         DrawText(winnerText,

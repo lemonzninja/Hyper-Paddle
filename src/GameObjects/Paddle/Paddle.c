@@ -12,7 +12,6 @@
 #include "GameObjects/Ball/Ball.h"
 #include "Math/ComputeCenterYofRectangle.h"
 
-extern Ball ball;
 
 
 void InitPaddle(Paddle *paddle, const float x, const float y, const float width, const float height, const Color color) {
@@ -51,7 +50,7 @@ float ai_vertical_step(float offset_y, float speed, float dt, float dead_zone) {
     return (offset_y > 0.0f ? 1.0f : -1.0f) * speed * dt;
 }
 
-void UpdateAIPaddle(Paddle *paddle, float Speed) {
+void UpdateAIPaddle(Paddle *paddle, float Speed, const Ball* ball) {
     // Clamp target position to screen bounds
     float screenHeight = (float) GetScreenHeight();
 
@@ -59,7 +58,7 @@ void UpdateAIPaddle(Paddle *paddle, float Speed) {
     const float dt = deltaTime();
 
     const float paddle_center_y = rect_center_y(&paddle->Shape);
-    const float ball_center_y = rect_center_y(&ball.Shape);
+    const float ball_center_y = rect_center_y(&ball->Shape);
 
     // Positive offset means ball is below paddle
     const float offset_y = ball_center_y - paddle_center_y;

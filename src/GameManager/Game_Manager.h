@@ -15,6 +15,8 @@
 #include "UI/UIButton/button.h"
 
 void InitMainGame();
+void ResetMainGame(void);
+void UnloadMainGame(void);
 void UpdateMainGame();
 void drawMainGame();
 GameScreen GetMainGameScreen();
