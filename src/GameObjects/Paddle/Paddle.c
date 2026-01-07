@@ -8,7 +8,7 @@
 #include <tgmath.h>
 
 #include "Systems/deltaTime.h"
-#include "Systems/KeybordManager/KeybordManager.h"
+#include "Systems/KeyboardManager/keyboardManager.h"
 #include "GameObjects/Ball/Ball.h"
 #include "Math/ComputeCenterYofRectangle.h"
 

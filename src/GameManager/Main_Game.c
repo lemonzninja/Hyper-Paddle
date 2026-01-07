@@ -15,7 +15,7 @@ static const float BALL_RADIUS = 10.0f;
 static const float PLAYER_PADDLE_SPEED = 400.0f;
 static const float AI_PADDLE_SPEED = 390.0f;
 static const float SCORE_SIZE = 30.0f;
-static const int WIN_SCORE = 10;
+static const int WIN_SCORE = 5;
 
 // Score display
 static Counter playerScoreText;

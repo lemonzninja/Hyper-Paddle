@@ -51,7 +51,7 @@ void HandleVerticalBounds(Ball *ball) {
     if (ball->Shape.y <= 0.0f) {
         ball->Shape.y = 0.0f;
         ball->Velocity.y = -ball->Velocity.y;
-        PlaySound(ball->bounceSound);
+        //PlaySound(ball->bounceSound);
     }
 
     const float screenBottomSide = (float)GetScreenHeight();
@@ -60,7 +60,7 @@ void HandleVerticalBounds(Ball *ball) {
     if (ballBottomSide >= screenBottomSide) {
         ball->Shape.y = screenBottomSide - ball->Shape.height;
         ball->Velocity.y = -ball->Velocity.y;
-        PlaySound(ball->bounceSound);
+        //PlaySound(ball->bounceSound);
     }
 }
 

@@ -37,8 +37,8 @@ add_executable(${PROJECT_NAME} src/main.c
         src/GameManager/Game_Manager.h
         src/GameManager/Main_Game.c
         include/Systems/deltaTime.h
-        include/Systems/KeybordManager/KeybordManager.h
-        src/Systems/KeybordManager/KeybordManager.c
+        include/Systems/KeyboardManager/keyboardManager.h
+        src/Systems/KeyboardManager/keyboardManager.c
         src/Systems/deltaTime.c
         include/GameObjects/Ball/Ball.h
         src/GameObjects/Ball/Ball.c
