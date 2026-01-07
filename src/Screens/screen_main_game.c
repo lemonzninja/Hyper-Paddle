@@ -6,8 +6,6 @@
 #include "screens.h"
 #include "../GameManager/Game_Manager.h"
 
-static GameScreen nextScreen;
-
 void InitGameScreen(void) {
     InitMainGame();
 }
@@ -27,5 +25,5 @@ void UnloadGameScreen(void) {
 }
 
 GameScreen FinishGameScreen(void) {
-    return nextScreen;
+    return GetMenuScreen();
 }

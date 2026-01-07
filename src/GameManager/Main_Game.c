@@ -9,115 +9,73 @@ extern bool gameShouldClose;
 
 static GameScreen nextScreen;
 
-// score variables
-Counter playerScoreText;
-Counter aiScoreText;
-float scoreSize;
-int scoreToAdd;
-int newScore;
-Color scoreTextColor;
-
-// ball variables
-Ball ball;
-float ballRadius;
-float ballSpeed;
-Color ballColor;
-float ballResetX;
-float ballResetY;
-
-// player paddle
-Paddle playerPaddle;
-float PLayerSpeed;
-
-// Ai paddle
-Paddle aiPaddle;
-float aiPaddleSpeed;
-
-// Game over state
+// Game configuration constants
+static const float BALL_SPEED = 450.0f;
+static const float BALL_RADIUS = 10.0f;
+static const float PLAYER_PADDLE_SPEED = 400.0f;
+static const float AI_PADDLE_SPEED = 390.0f;
+static const float SCORE_SIZE = 30.0f;
 static const int WIN_SCORE = 10;
+
+// Score display
+static Counter playerScoreText;
+static Counter aiScoreText;
+
+// Ball
+static Ball ball;
+static float ballResetX;
+static float ballResetY;
+
+// Paddles
+static Paddle playerPaddle;
+static Paddle aiPaddle;
 typedef enum {WINNER_NONE, WINNER_PLAYER, WINNER_AI} Winner;
 static bool gameOver = false;
 static Winner winner = WINNER_NONE;
 
-UIButton restartButton;
-UIButton menuButton;
+static UIButton restartButton;
+static UIButton menuButton;
 
 
 void InitMainGame() {
     nextScreen = SCREEN_MAIN_GAME;
 
-    // Initialize Resources that need to be loaded
+    // Calculate ball reset position
+    ballResetX = (float)GetScreenWidth() / 2.0f - BALL_RADIUS;
+    ballResetY = 200.0f;
 
-    // Ball.
-    ballSpeed = 450.0f;
-    ballRadius = 10;
-    ballColor = WHITE;
-    ballResetX = (float)GetScreenWidth() / 2.0f - ballRadius;
-    ballResetY = 200;
+    // Initialize ball (loads sound resource)
+    InitBall(&ball, ballResetX, ballResetY, BALL_RADIUS * 2, BALL_RADIUS * 2, BALL_SPEED, WHITE);
 
-    // InitBall loads the sound.
-    InitBall(&ball, ballResetX, ballResetY, ballRadius * 2, ballRadius * 2, ballSpeed, ballColor);
+    // Initialize UI buttons (one-time setup)
+    InitUiButton(&restartButton, (float)GetScreenWidth() / 2 - 150, (float)GetScreenHeight() / 2,
+                 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
+    InitUiButton(&menuButton, (float)GetScreenWidth() / 2 + 50, (float)GetScreenHeight() / 2,
+                 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
 
-    // Reset the rest of the game state.
+    // Reset game state
     ResetMainGame();
 }
 
 void ResetMainGame(void) {
-    // The number of points to add to the score.
-    newScore = 1;
-    // Score Stuff.
-    scoreSize = 30.f;
-    scoreTextColor = WHITE;
-    // Player Score text.
-    playerScoreText.position.x = (float)GetScreenWidth() / 2.f - 50.f;
-    playerScoreText.position.y = 30.f;
-    playerScoreText.textSize = scoreSize;
-    playerScoreText.textColor = scoreTextColor;
-    playerScoreText.score  = 0;
-    // Ai Score text.
-    aiScoreText.position.x = (float) GetScreenWidth() / 2.f + 50.f;
-    aiScoreText.position.y = 30.f;
-    aiScoreText.textSize = scoreSize;
-    aiScoreText.textColor = scoreTextColor;
-    aiScoreText.score = 0;
+    // Reset scores
+    InitScore(&playerScoreText, 0,
+              (float)GetScreenWidth() / 2.f - 50.f, 30.f,
+              WHITE, SCORE_SIZE);
+    InitScore(&aiScoreText, 0,
+              (float)GetScreenWidth() / 2.f + 50.f, 30.f,
+              WHITE, SCORE_SIZE);
 
-    // Player Paddle.
-    playerPaddle.Shape.x = 45;
-    playerPaddle.Shape.y = 299;
-    playerPaddle.Shape.width = 20;
-    playerPaddle.Shape.height = 80;
-    playerPaddle.PaddleColor = WHITE;
-    PLayerSpeed = 400.f;
-    // AI Paddle.
-    aiPaddle.Shape.x = 1200;
-    aiPaddle.Shape.y = 299;
-    aiPaddle.Shape.width = 20;
-    aiPaddle.Shape.height = 80;
-    aiPaddle.PaddleColor = WHITE;
-    aiPaddleSpeed = 390.0f;
+    // Reset paddles to starting positions
+    InitPaddle(&playerPaddle, 45, 299, 20, 80, WHITE);
+    InitPaddle(&aiPaddle, 1200, 299, 20, 80, WHITE);
 
-    InitUiButton(&restartButton, (float)GetScreenWidth() / 2 - 150, (float)GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY,
-                 BLACK);
-    InitUiButton(&menuButton, (float)GetScreenWidth() / 2 + 50, (float)GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
+    // Reset ball
+    ResetBall(&ball, ballResetX, ballResetY, BALL_SPEED);
 
-    // init player score.
-    InitScore(&playerScoreText, playerScoreText.score, playerScoreText.position.x, playerScoreText.position.y, playerScoreText.textColor, playerScoreText.textSize);
-    InitScore(&aiScoreText, aiScoreText.score, aiScoreText.position.x, aiScoreText.position.y, aiScoreText.textColor, scoreSize);
-
-    // Init the player Paddle.
-    InitPaddle(&playerPaddle, playerPaddle.Shape.x, playerPaddle.Shape.y, playerPaddle.Shape.width, playerPaddle.Shape.height, playerPaddle.PaddleColor);
-    // Init the AI Paddle.
-    InitPaddle(&aiPaddle, aiPaddle.Shape.x, aiPaddle.Shape.y, aiPaddle.Shape.width, aiPaddle.Shape.height,
-               aiPaddle.PaddleColor);
-
-    // Reset game state scores.
+    // Reset game state
     gameOver = false;
     winner = WINNER_NONE;
-    playerScoreText.score = 0;
-    aiScoreText.score = 0;
-
-    // Reset the ball state (position, velocity)
-    ResetBall(&ball, ballResetX, ballResetY, ballSpeed);
 }
 
 void UnloadMainGame(void) {
@@ -126,17 +84,7 @@ void UnloadMainGame(void) {
 
 static void ResetBallAfterScore(Ball* ball, const bool launchTowardsLeft) {
     ball->Shape.x = ballResetX;
-
-    float absoluteVelocityX = ball->Velocity.x;
-
-    if (absoluteVelocityX < 0.0f) {
-        absoluteVelocityX = -absoluteVelocityX;
-    }
-    if (absoluteVelocityX == 0.0f) {
-        absoluteVelocityX = ballSpeed;
-    }
-
-    ball->Velocity.x = launchTowardsLeft ? ballSpeed : -ballSpeed;
+    ball->Velocity.x = launchTowardsLeft ? BALL_SPEED : -BALL_SPEED;
 }
 
 void HandleBallPaddleCollision(Ball* ball, const Paddle* paddle, const bool isRightPaddle) {
@@ -167,8 +115,8 @@ void UpdateMainGame() {
     }
 
     // Move Paddles
-    UpdatePlayerPaddle(&playerPaddle, PLayerSpeed);
-    UpdateAIPaddle(&aiPaddle, aiPaddleSpeed, &ball);
+    UpdatePlayerPaddle(&playerPaddle, PLAYER_PADDLE_SPEED);
+    UpdateAIPaddle(&aiPaddle, AI_PADDLE_SPEED, &ball);
     // Move Ball
     UpdateBall(&ball);
 
@@ -181,7 +129,7 @@ void UpdateMainGame() {
     ballDetectGoal(&ball);
 
     if (ball.isLeftSide) {
-        aiScoreText.score += newScore;
+        aiScoreText.score += 1;
         ball.isLeftSide = false;
         ResetBallAfterScore(&ball, false);
         // Check Ai WIN condition
@@ -192,7 +140,7 @@ void UpdateMainGame() {
     }
 
     if (ball.isRightSide) {
-        playerScoreText.score += newScore;
+        playerScoreText.score += 1;
         ball.isRightSide = false;
         ResetBallAfterScore(&ball, true);
         // Check Player WIN condition
