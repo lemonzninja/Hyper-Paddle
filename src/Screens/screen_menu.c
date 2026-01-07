@@ -72,8 +72,8 @@ void DrawMenuScreen(void) {
     // Title
     //********************************************************
     const char *title = "Hyper Paddle";
-    int titleFont = titleFontSize;
-    int titleWidth = MeasureText(title, titleFont);
+    const int titleFont = titleFontSize;
+    const int titleWidth = MeasureText(title, titleFont);
     DrawText(title,
              (GetScreenWidth() - titleWidth) / 2,
              ((int) (GetScreenHeight() / (int) 2.0f) - 120),

@@ -17,7 +17,6 @@ void UpdateGameScreen(void) {
 void DrawGameScreen(void) {
     ClearBackground(BLACK);
     drawMainGame();
-
 }
 
 void UnloadGameScreen(void) {

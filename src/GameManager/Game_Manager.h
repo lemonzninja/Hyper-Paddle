@@ -14,11 +14,11 @@
 #include "Systems/ScoreManager/ScoreManager.h"
 #include "UI/UIButton/button.h"
 
-void InitMainGame();
+void InitMainGame(void);
 void ResetMainGame(void);
 void UnloadMainGame(void);
-void UpdateMainGame();
-void drawMainGame();
-GameScreen GetMainGameScreen();
+void UpdateMainGame(void);
+void drawMainGame(void);
+GameScreen GetMainGameScreen(void);
 
 #endif //HYPER_PADDLE_GAME_MANAGER_H

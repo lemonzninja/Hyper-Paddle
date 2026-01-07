@@ -22,22 +22,12 @@ typedef struct UIButton {
     Color ClickedColor;
     ButtonState currentState;
     Rectangle rectangle;
-    Color textcolor;
+    Color textColor;
 }UIButton;
 
-void InitUiButton(UIButton* uiButton,
-                    float x,
-                    float y,
-                    float width,
-                    float height,
-                    Color idleColor,
-                    Color hoverColor,
-                    Color clickedColor,
-                    Color textColor);
+void InitUiButton(UIButton* uiButton, float x, float y, float width, float height, Color idleColor, Color hoverColor, Color clickedColor, Color textColor);
 void UpdateUiButton(UIButton* uiButton);
-void DrawUiButton(const UIButton* uiButton,
-                    const char* text,
-                    int fontSize);
+void DrawUiButton(const UIButton* uiButton, const char* text, int fontSize);
 bool IsUiButtonClicked(const UIButton* uiButton);
 
 #endif //HYPER_PADDLE_BUTTONS_H

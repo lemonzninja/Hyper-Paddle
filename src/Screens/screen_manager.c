@@ -36,7 +36,7 @@ void ScreenManagerUpdate(void) {
             UpdateGameScreen();
             nextScreen = GetMenuScreen();
             break;
-        default:
+        default: break;
     }
 
     if (nextScreen != currentScreen)
@@ -58,8 +58,7 @@ void ScreenManagerDraw(void) {
         case SCREEN_MAIN_GAME:
             DrawGameScreen();
             break;
-        default:
-
+        default: break;
     }
 }
 
@@ -78,7 +77,7 @@ void UnloadCurrent(void) {
         case SCREEN_MAIN_GAME:
             UnloadGameScreen();
             break;
-        default:
+        default: break;
     }
 }
 
@@ -93,6 +92,6 @@ void NextScreenToInit(void) {
         case SCREEN_MAIN_GAME:
             InitGameScreen();
             break;
-        default:
+        default: break;
     }
 }

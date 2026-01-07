@@ -1,7 +1,7 @@
 /****************************************************************
 *              - Hyper Paddle -
 *  A Pong clone Made in C using Raylib A simple -
-*  and easy-to-use library to enjoy videogames programming.
+*  and easy-to-use library to enjoy video games programming.
 *  Created by Squid on 10/25/2025
 ****************************************************************/
 

@@ -18,7 +18,7 @@ void InitUiButton(UIButton *uiButton, const float x, const float y, const float 
     uiButton->HoverColor = hoverColor;
     uiButton->ClickedColor = clickedColor;
     uiButton->currentState = BUTTON_IDLE;
-    uiButton->textcolor = textColor;
+    uiButton->textColor = textColor;
 }
 
 void UpdateUiButton(UIButton *uiButton) {
@@ -46,8 +46,8 @@ void DrawUiButton(const UIButton* uiButton, const char* text, int fontSize){
     const int textHeight = fontSize;
 
     // Center text position
-    const int textx = btnCenterX - (textWidth / 2);
-    const int texty = btnCenterY - (textHeight / 2);
+    const int pos_x = btnCenterX - (textWidth / 2);
+    const int pos_y = btnCenterY - (textHeight / 2);
 
     // Draw the button
     Color currentColor = uiButton->NormalColor;
@@ -55,7 +55,7 @@ void DrawUiButton(const UIButton* uiButton, const char* text, int fontSize){
     if (uiButton->currentState == BUTTON_CLICKED) currentColor = uiButton->ClickedColor;
 
     DrawRectangle((int)bounds.x, (int)bounds.y, (int)bounds.width, (int)bounds.height, currentColor);
-    DrawText(text, textx, texty, fontSize, uiButton->textcolor);
+    DrawText(text, pos_x, pos_y, fontSize, uiButton->textColor);
 }
 
 bool IsUiButtonClicked(const UIButton *uiButton) {

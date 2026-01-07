@@ -4,9 +4,6 @@
 ****************************************************************/
 
 #include "GameObjects/Ball/Ball.h"
-
-#include <stdio.h>
-
 #include "Systems/deltaTime.h"
 
 void InitBall(Ball *ball, const float x, const float y, const float width, const float height, const float velocity, const Color color) {
@@ -24,7 +21,7 @@ void InitBall(Ball *ball, const float x, const float y, const float width, const
     ball->bounceSound = LoadSound("assets/soundFX/ballSound.wav");
 }
 
-void ResetBall(Ball* ball, float x, float y, float velocity) {
+void ResetBall(Ball* ball, const float x, const float y, const float velocity) {
     ball->Shape.x = x;
     ball->Shape.y = y;
     ball->Velocity.x = velocity;
@@ -33,7 +30,7 @@ void ResetBall(Ball* ball, float x, float y, float velocity) {
     ball->isRightSide = false;
 }
 
-void UnloadBall(Ball* ball) {
+void UnloadBall(const Ball* ball) {
     UnloadSound(ball->bounceSound);
 }
 

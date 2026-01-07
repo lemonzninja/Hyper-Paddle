@@ -5,8 +5,6 @@
 ****************************************************************/
 #include "Game_Manager.h"
 
-extern bool gameShouldClose;
-
 static GameScreen nextScreen;
 
 // Game configuration constants
@@ -37,7 +35,7 @@ static UIButton restartButton;
 static UIButton menuButton;
 
 
-void InitMainGame() {
+void InitMainGame(void) {
     nextScreen = SCREEN_MAIN_GAME;
 
     // Calculate ball reset position
@@ -87,7 +85,7 @@ static void ResetBallAfterScore(Ball* ball, const bool launchTowardsLeft) {
     ball->Velocity.x = launchTowardsLeft ? BALL_SPEED : -BALL_SPEED;
 }
 
-void HandleBallPaddleCollision(Ball* ball, const Paddle* paddle, const bool isRightPaddle) {
+static void HandleBallPaddleCollision(Ball* ball, const Paddle* paddle, const bool isRightPaddle) {
     if (CheckCollisionRecs(ball->Shape, paddle->Shape)) {
         if (isRightPaddle) {
             ball->Shape.x = paddle->Shape.x - ball->Shape.width;
@@ -98,7 +96,7 @@ void HandleBallPaddleCollision(Ball* ball, const Paddle* paddle, const bool isRi
     }
 }
 
-void UpdateMainGame() {
+void UpdateMainGame(void) {
     // If game over, pause gameplay and wait for user input
     if (gameOver) {
         UpdateUiButton(&restartButton);
@@ -151,7 +149,7 @@ void UpdateMainGame() {
     }
 }
 
-void drawMainGame() {
+void drawMainGame(void) {
     ClearBackground(BLACK);
 
     DrawScore(&playerScoreText);

@@ -5,8 +5,8 @@
 #include "Systems/ScoreManager/ScoreManager.h"
 
 
-void InitScore(Counter* counter, int initialScore,
-    float posX, float posY, Color textColor, float textSize) {
+void InitScore(Counter* counter, const int initialScore,
+    const float posX, const float posY, const Color textColor, const float textSize) {
 
     counter->score = initialScore;
     counter->position.x = posX;

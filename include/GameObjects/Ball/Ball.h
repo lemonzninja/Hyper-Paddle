@@ -16,24 +16,12 @@ typedef struct Ball {
     Sound bounceSound;
 }Ball;
 
-void InitBall(Ball *ball,
-                float x,
-                float y,
-                float width,
-                float height,
-                float velocity,
-                Color color);
-
+void InitBall(Ball *ball, float x, float y, float width, float height, float velocity, Color color);
 void ResetBall(Ball* ball, float x, float y, float velocity);
-void UnloadBall(Ball* ball);
-
 void UpdateBall(Ball* ball);
 void DrawBall(const Ball* ball);
-
 void HandleVerticalBounds(Ball* ball);
-
 void ballDetectGoal(Ball* ball);
-
-
+void UnloadBall(const Ball* ball);
 
 #endif //HYPER_PADDLE_BALL_H

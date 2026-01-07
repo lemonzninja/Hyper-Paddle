@@ -7,6 +7,6 @@
 
 float rect_center_y(const Rectangle* rectangle) {
     // Compute the vertical center without modifying the input rectangle
-    float centerY = rectangle->y + (rectangle->height * 0.5f);
+    const float centerY = rectangle->y + (rectangle->height * 0.5f);
     return centerY;
 }
