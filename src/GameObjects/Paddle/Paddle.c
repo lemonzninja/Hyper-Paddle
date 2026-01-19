@@ -52,7 +52,7 @@ void UpdateAIPaddle(Paddle *paddle, const float Speed, const Ball* ball) {
 
     const float dt = deltaTime();
     static float reactionTimer = 0.0f;
-    const bool ballMovingRight = ball->Velocity.x < 0.0f;
+    const bool ballMovingRight = ball->Velocity.x > 0.0f;
 
     reactionTimer -= dt;
     if (ballMovingRight) {

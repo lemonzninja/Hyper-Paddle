@@ -8,45 +8,45 @@
 #include "Systems/deltaTime.h"
 
 static float RandomizeBallVerticalSpeed(const float velocity) {
-    const float range = velocity * 0.65f;
-    const float randomScale = (float)GetRandomValue(-(int)(range), (int)(range));
-    float vertical = randomScale;
-    if (fabsf(vertical) < velocity * 0.2f) {
-        vertical = (vertical < 0.0f ? -1.0f : 1.0f) * velocity * 0.25f;
+    const float speed = fabsf(velocity);
+    const float range = speed * 0.65f;
+    const float randomScale = (float)GetRandomValue(0, 1000) / 1000.0f;
+    float vertical = (randomScale * 2.0f - 1.0f) * range;
+    if (fabsf(vertical) < speed * 0.2f) {
+        vertical = (vertical < 0.0f ? -1.0f : 1.0f) * speed * 0.25f;
     }
     return vertical;
 }
 
 void InitBall(Ball *ball, const float x, const float y, const float width, const float height, const float velocity, const Color color) {
+    const float direction = GetRandomValue(0, 1) == 0 ? -1.0f : 1.0f;
+
     ball->Shape.x = x;
     ball->Shape.y = y;
     ball->Shape.width = width;
     ball->Shape.height = height;
     ball->BallColor = color;
-    ball->Velocity.x = velocity;
+    ball->Velocity.x = direction * fabsf(velocity);
     ball->Velocity.y = RandomizeBallVerticalSpeed(velocity);
-
-    ball->isLeftSide = false;
-    ball->isRightSide = false;
 
     ball->bounceSound = LoadSound("assets/soundFX/ballSound.wav");
 }
 
-void ResetBall(Ball* ball, const float x, const float y, const float velocity) {
+void ResetBall(Ball *ball, const float x, const float y, const float velocity) {
+    const float direction = GetRandomValue(0, 1) == 0 ? -1.0f : 1.0f;
+
     ball->Shape.x = x;
     ball->Shape.y = y;
-    ball->Velocity.x = velocity;
+    ball->Velocity.x = direction * fabsf(velocity);
     ball->Velocity.y = RandomizeBallVerticalSpeed(velocity);
-    ball->isLeftSide = false;
-    ball->isRightSide = false;
 }
 
-void UnloadBall(const Ball* ball) {
+void UnloadBall(const Ball *ball) {
     UnloadSound(ball->bounceSound);
 }
 
 void UpdateBall(Ball *ball) {
-    ball->Shape.x += -ball->Velocity.x * deltaTime();
+    ball->Shape.x += ball->Velocity.x * deltaTime();
     ball->Shape.y += ball->Velocity.y * deltaTime();
 }
 
@@ -72,15 +72,16 @@ void HandleVerticalBounds(Ball *ball) {
     }
 }
 
-void ballDetectGoal(Ball *ball) {
+BallGoal DetectBallGoal(const Ball *ball) {
     // if the ball hits the left edge have aiScore go up 1.
     if (ball->Shape.x <= 0.0f) {
-        ball->isLeftSide = true;
+        return BALL_GOAL_LEFT;
     }
-
 
     // if the ball hits the right edge have playerScore go up 1.
-    if (ball->Shape.x >= (float) GetScreenWidth() - ball->Shape.width) {
-        ball->isRightSide = true;
+    if (ball->Shape.x >= (float)GetScreenWidth() - ball->Shape.width) {
+        return BALL_GOAL_RIGHT;
     }
+
+    return BALL_GOAL_NONE;
 }
