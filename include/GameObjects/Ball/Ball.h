@@ -21,7 +21,7 @@ typedef enum BallGoal {
 } BallGoal;
 
 void InitBall(Ball *ball, float x, float y, float width, float height, float velocity, Color color);
-void ResetBall(Ball *ball, float x, float y, float velocity);
+void ResetBall(Ball *ball, float x, float y, float velocity, float directionX);
 void UpdateBall(Ball *ball);
 void DrawBall(const Ball *ball);
 void HandleVerticalBounds(Ball *ball);

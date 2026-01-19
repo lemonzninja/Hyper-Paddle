@@ -19,21 +19,22 @@ static float RandomizeBallVerticalSpeed(const float velocity) {
 }
 
 void InitBall(Ball *ball, const float x, const float y, const float width, const float height, const float velocity, const Color color) {
-    const float direction = GetRandomValue(0, 1) == 0 ? -1.0f : 1.0f;
-
-    ball->Shape.x = x;
-    ball->Shape.y = y;
     ball->Shape.width = width;
     ball->Shape.height = height;
     ball->BallColor = color;
-    ball->Velocity.x = direction * fabsf(velocity);
-    ball->Velocity.y = RandomizeBallVerticalSpeed(velocity);
+    
+    ResetBall(ball, x, y, velocity, 0.0f);
 
     ball->bounceSound = LoadSound("assets/soundFX/ballSound.wav");
 }
 
-void ResetBall(Ball *ball, const float x, const float y, const float velocity) {
-    const float direction = GetRandomValue(0, 1) == 0 ? -1.0f : 1.0f;
+void ResetBall(Ball *ball, const float x, const float y, const float velocity, const float directionX) {
+    float direction = directionX;
+    if (direction == 0.0f) {
+        direction = GetRandomValue(0, 1) == 0 ? -1.0f : 1.0f;
+    } else {
+        direction = (directionX > 0.0f) ? 1.0f : -1.0f;
+    }
 
     ball->Shape.x = x;
     ball->Shape.y = y;

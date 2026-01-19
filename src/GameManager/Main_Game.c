@@ -76,8 +76,8 @@ void ResetMainGame(void) {
     InitPaddle(&playerPaddle, 45, 299, 20, 80, WHITE);
     InitPaddle(&aiPaddle, 1200, 299, 20, 80, WHITE);
 
-    // Reset ball
-    ResetBall(&ball, ballResetX, ballResetY, BALL_START_SPEED);
+    // Reset Ball
+    ResetBall(&ball, ballResetX, ballResetY, BALL_START_SPEED, 0.0f);
 
     // Reset game state
     gameOver = false;
@@ -88,8 +88,7 @@ void UnloadMainGame(void) { UnloadBall(&ball); }
 
 static void ResetBallAfterScore(Ball *ball, const bool launchTowardsLeft) {
     const float direction = launchTowardsLeft ? -1.0f : 1.0f;
-    ResetBall(ball, ballResetX, ballResetY, BALL_START_SPEED);
-    ball->Velocity.x = direction * fabsf(ball->Velocity.x);
+    ResetBall(ball, ballResetX, ballResetY, BALL_START_SPEED, direction);
 }
 
 static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, const bool isRightPaddle) {
