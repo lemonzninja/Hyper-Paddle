@@ -44,7 +44,10 @@ add_executable(${PROJECT_NAME} src/main.c
         src/GameObjects/Ball/Ball.c
         include/Math/ComputeCenterYofRectangle.h
         src/Math/computerCenterYofRectangle.c
+        include/Math/Utils.h
+        src/Math/Utils.c
         include/Systems/ScoreManager/ScoreManager.h
+
         src/Systems/ScoreManager/ScoreManager.c
 )
 # Ensure project headers under include/ are discoverable

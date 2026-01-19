@@ -9,7 +9,7 @@
 
 static float RandomizeBallVerticalSpeed(const float velocity) {
     const float range = velocity * 0.65f;
-    float randomScale = (float)GetRandomValue(-(int)(range), (int)(range));
+    const float randomScale = (float)GetRandomValue(-(int)(range), (int)(range));
     float vertical = randomScale;
     if (fabsf(vertical) < velocity * 0.2f) {
         vertical = (vertical < 0.0f ? -1.0f : 1.0f) * velocity * 0.25f;

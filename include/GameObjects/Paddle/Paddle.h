@@ -22,7 +22,7 @@ typedef struct Paddle {
 
 void InitPaddle(Paddle *paddle, float x, float y, float width, float height, Color color);
 void UpdatePlayerPaddle(Paddle* paddle, float Speed);
-float ai_vertical_step(float offset_y, float speed, float dt, float dead_zone);
+float AiVerticalStep(float offset_y, float speed, float dt, float dead_zone);
 void UpdateAIPaddle(Paddle* paddle, float Speed, const Ball* ball);
 void DrawPaddle(const Paddle *paddle);
 

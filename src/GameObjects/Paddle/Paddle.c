@@ -8,7 +8,7 @@
 #include "Systems/deltaTime.h"
 #include "Systems/KeyboardManager/keyboardManager.h"
 #include "GameObjects/Ball/Ball.h"
-#include "Math/ComputeCenterYofRectangle.h"
+#include "Math/Utils.h"
 
 void InitPaddle(Paddle *paddle, const float x, const float y, const float width, const float height, const Color color) {
     paddle->Shape.x = x;
@@ -40,7 +40,7 @@ void UpdatePlayerPaddle(Paddle *paddle, const float Speed) {
 }
 
 // Decide the AI vertical step based on offset and dead zone
-float ai_vertical_step(const float offset_y, const float speed, const float dt, const float dead_zone) {
+float AiVerticalStep(const float offset_y, const float speed, const float dt, const float dead_zone) {
     if (fabsf(offset_y) <= dead_zone) return 0.0f;
     // move up or down by speed * dt depending on the sign of offset
     return (offset_y > 0.0f ? 1.0f : -1.0f) * speed * dt;
@@ -57,6 +57,9 @@ void UpdateAIPaddle(Paddle *paddle, const float Speed, const Ball* ball) {
     reactionTimer -= dt;
     if (ballMovingRight) {
         if (reactionTimer <= 0.0f) {
+            const float errorSpeedFacter = 0.05f;
+            const float errorBase = 16.0f;
+            const float reactionDelay = 0.12f;
             const float speedX = fabsf(ball->Velocity.x);
             const float distanceX = paddle->Shape.x - (ball->Shape.x + ball->Shape.width);
             float prediction = ball->Shape.y;
@@ -74,17 +77,18 @@ void UpdateAIPaddle(Paddle *paddle, const float Speed, const Ball* ball) {
                 }
             }
 
-            const float errorRange = 16.0f + (speedX * 0.05f);
+            const float errorRange = errorBase + (speedX * errorSpeedFacter);
             const float error = ((float)GetRandomValue(-(int)errorRange, (int)errorRange));
             paddle->targetY = prediction + error;
-            reactionTimer = 0.12f;
+            reactionTimer = reactionDelay;
         }
     } else {
         paddle->targetY = maxY * 0.5f;
         reactionTimer = 0.0f;
     }
 
-    paddle->targetY = fminf(maxY, fmaxf(0.0f, paddle->targetY));
+    paddle->targetY = ClampFloat(paddle->targetY, 0.0f, maxY);
+
     const float delta = paddle->targetY - paddle->Shape.y;
     const float maxStep = Speed * dt;
     if (fabsf(delta) <= maxStep) {
@@ -94,7 +98,7 @@ void UpdateAIPaddle(Paddle *paddle, const float Speed, const Ball* ball) {
     }
 
     // Keep paddle inside screen bounds (safety check)
-    paddle->Shape.y = fminf(maxY, fmaxf(0.0f, paddle->Shape.y));
+    paddle->Shape.y = ClampFloat(paddle->Shape.y, 0.0f, maxY);
 }
 
 void DrawPaddle(const Paddle *paddle) {
