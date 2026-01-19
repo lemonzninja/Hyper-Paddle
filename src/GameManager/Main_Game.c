@@ -76,8 +76,8 @@ void ResetMainGame(void) {
     InitPaddle(&playerPaddle, 45, 299, 20, 80, WHITE);
     InitPaddle(&aiPaddle, 1200, 299, 20, 80, WHITE);
 
-    // Reset ball
-    ResetBall(&ball, ballResetX, ballResetY, BALL_START_SPEED);
+    // Reset Ball
+    ResetBall(&ball, ballResetX, ballResetY, BALL_START_SPEED, 0.0f);
 
     // Reset game state
     gameOver = false;
@@ -87,8 +87,8 @@ void ResetMainGame(void) {
 void UnloadMainGame(void) { UnloadBall(&ball); }
 
 static void ResetBallAfterScore(Ball *ball, const bool launchTowardsLeft) {
-    ResetBall(ball, ballResetX, ballResetY, BALL_START_SPEED);
-    ball->Velocity.x *= launchTowardsLeft ? 1.0f : -1.0f;
+    const float direction = launchTowardsLeft ? -1.0f : 1.0f;
+    ResetBall(ball, ballResetX, ballResetY, BALL_START_SPEED, direction);
 }
 
 static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, const bool isRightPaddle) {
@@ -102,13 +102,13 @@ static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, const bo
         const float ballCenter = ball->Shape.y + ball->Shape.height * 0.5f;
         const float relative = (ballCenter - paddleCenter) / (paddle->Shape.height * 0.5f);
         const float speedX = fminf(BALL_MAX_SPEED, fabsf(ball->Velocity.x) + BALL_SPEED_INCREMENT);
-        const float newSign = isRightPaddle ? 1.0f : -1.0f;
+        const float newSign = isRightPaddle ? -1.0f : 1.0f;
 
         ball->Velocity.x = newSign * speedX;
-        ball->Velocity.y =
-                ClampFloat(relative * BALL_MAX_VERTICAL_SPEED, -BALL_MAX_VERTICAL_SPEED,
-                           BALL_MAX_VERTICAL_SPEED) *
-                BALL_VERTICAL_SPIN;
+        ball->Velocity.y = ClampFloat(relative * BALL_MAX_VERTICAL_SPEED,
+                                      -BALL_MAX_VERTICAL_SPEED,
+                                      BALL_MAX_VERTICAL_SPEED) *
+                           BALL_VERTICAL_SPIN;
     }
 }
 
@@ -141,11 +141,10 @@ void UpdateMainGame(void) {
 
     HandleVerticalBounds(&ball);
 
-    ballDetectGoal(&ball);
+    const BallGoal goal = DetectBallGoal(&ball);
 
-    if (ball.isLeftSide) {
+    if (goal == BALL_GOAL_LEFT) {
         aiScoreText.score += 1;
-        ball.isLeftSide = false;
         ResetBallAfterScore(&ball, false);
         // Check Ai WIN condition
         if (aiScoreText.score >= WIN_SCORE) {
@@ -154,9 +153,8 @@ void UpdateMainGame(void) {
         }
     }
 
-    if (ball.isRightSide) {
+    if (goal == BALL_GOAL_RIGHT) {
         playerScoreText.score += 1;
-        ball.isRightSide = false;
         ResetBallAfterScore(&ball, true);
         // Check Player WIN condition
         if (playerScoreText.score >= WIN_SCORE) {
