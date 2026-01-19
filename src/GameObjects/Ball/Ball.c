@@ -4,7 +4,18 @@
 ****************************************************************/
 
 #include "GameObjects/Ball/Ball.h"
+#include <math.h>
 #include "Systems/deltaTime.h"
+
+static float RandomizeBallVerticalSpeed(const float velocity) {
+    const float range = velocity * 0.65f;
+    const float randomScale = (float)GetRandomValue(-(int)(range), (int)(range));
+    float vertical = randomScale;
+    if (fabsf(vertical) < velocity * 0.2f) {
+        vertical = (vertical < 0.0f ? -1.0f : 1.0f) * velocity * 0.25f;
+    }
+    return vertical;
+}
 
 void InitBall(Ball *ball, const float x, const float y, const float width, const float height, const float velocity, const Color color) {
     ball->Shape.x = x;
@@ -13,7 +24,7 @@ void InitBall(Ball *ball, const float x, const float y, const float width, const
     ball->Shape.height = height;
     ball->BallColor = color;
     ball->Velocity.x = velocity;
-    ball->Velocity.y = velocity;
+    ball->Velocity.y = RandomizeBallVerticalSpeed(velocity);
 
     ball->isLeftSide = false;
     ball->isRightSide = false;
@@ -25,7 +36,7 @@ void ResetBall(Ball* ball, const float x, const float y, const float velocity) {
     ball->Shape.x = x;
     ball->Shape.y = y;
     ball->Velocity.x = velocity;
-    ball->Velocity.y = velocity;
+    ball->Velocity.y = RandomizeBallVerticalSpeed(velocity);
     ball->isLeftSide = false;
     ball->isRightSide = false;
 }

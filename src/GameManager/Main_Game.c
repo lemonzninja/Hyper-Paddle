@@ -1,17 +1,23 @@
 /****************************************************************
-*              - The Main game -
-*   All the logic of the Main game goes here.
-*  Created by Squid on 10/29/2025
-****************************************************************/
+ *              - The Main game -
+ *   All the logic of the Main game goes here.
+ *  Created by Squid on 10/29/2025
+ ****************************************************************/
 #include "Game_Manager.h"
+#include "Math/Utils.h"
+#include <math.h>
 
 static GameScreen nextScreen;
 
 // Game configuration constants
-static const float BALL_SPEED = 450.0f;
+static const float BALL_START_SPEED = 450.0f;
+static const float BALL_MAX_SPEED = 900.0f;
+static const float BALL_SPEED_INCREMENT = 35.0f;
+static const float BALL_MAX_VERTICAL_SPEED = 520.0f;
+static const float BALL_VERTICAL_SPIN = 0.85f;
 static const float BALL_RADIUS = 10.0f;
-static const float PLAYER_PADDLE_SPEED = 400.0f;
-static const float AI_PADDLE_SPEED = 390.0f;
+static const float PLAYER_PADDLE_SPEED = 420.0f;
+static const float AI_PADDLE_SPEED = 420.0f;
 static const float SCORE_SIZE = 30.0f;
 static const int WIN_SCORE = 5;
 
@@ -27,29 +33,33 @@ static float ballResetY;
 // Paddles
 static Paddle playerPaddle;
 static Paddle aiPaddle;
-typedef enum {WINNER_NONE, WINNER_PLAYER, WINNER_AI} Winner;
+
+typedef enum { WINNER_NONE, WINNER_PLAYER, WINNER_AI } Winner;
+
 static bool gameOver = false;
 static Winner winner = WINNER_NONE;
 
 static UIButton restartButton;
 static UIButton menuButton;
 
-
 void InitMainGame(void) {
     nextScreen = SCREEN_MAIN_GAME;
 
     // Calculate ball reset position
-    ballResetX = (float)GetScreenWidth() / 2.0f - BALL_RADIUS;
+    ballResetX = (float) GetScreenWidth() / 2.0f - BALL_RADIUS;
     ballResetY = 200.0f;
 
     // Initialize ball (loads sound resource)
-    InitBall(&ball, ballResetX, ballResetY, BALL_RADIUS * 2, BALL_RADIUS * 2, BALL_SPEED, WHITE);
+    InitBall(&ball, ballResetX, ballResetY, BALL_RADIUS * 2, BALL_RADIUS * 2,
+             BALL_START_SPEED, WHITE);
 
     // Initialize UI buttons (one-time setup)
-    InitUiButton(&restartButton, (float)GetScreenWidth() / 2 - 150, (float)GetScreenHeight() / 2,
-                 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
-    InitUiButton(&menuButton, (float)GetScreenWidth() / 2 + 50, (float)GetScreenHeight() / 2,
-                 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
+    InitUiButton(&restartButton, (float) GetScreenWidth() / 2 - 150,
+                 (float) GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY,
+                 BLACK);
+    InitUiButton(&menuButton, (float) GetScreenWidth() / 2 + 50,
+                 (float) GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY,
+                 BLACK);
 
     // Reset game state
     ResetMainGame();
@@ -57,42 +67,48 @@ void InitMainGame(void) {
 
 void ResetMainGame(void) {
     // Reset scores
-    InitScore(&playerScoreText, 0,
-              (float)GetScreenWidth() / 2.f - 50.f, 30.f,
+    InitScore(&playerScoreText, 0, (float) GetScreenWidth() / 2.f - 50.f, 30.f,
               WHITE, SCORE_SIZE);
-    InitScore(&aiScoreText, 0,
-              (float)GetScreenWidth() / 2.f + 50.f, 30.f,
-              WHITE, SCORE_SIZE);
+    InitScore(&aiScoreText, 0, (float) GetScreenWidth() / 2.f + 50.f, 30.f, WHITE,
+              SCORE_SIZE);
 
     // Reset paddles to starting positions
     InitPaddle(&playerPaddle, 45, 299, 20, 80, WHITE);
     InitPaddle(&aiPaddle, 1200, 299, 20, 80, WHITE);
 
     // Reset ball
-    ResetBall(&ball, ballResetX, ballResetY, BALL_SPEED);
+    ResetBall(&ball, ballResetX, ballResetY, BALL_START_SPEED);
 
     // Reset game state
     gameOver = false;
     winner = WINNER_NONE;
 }
 
-void UnloadMainGame(void) {
-    UnloadBall(&ball);
+void UnloadMainGame(void) { UnloadBall(&ball); }
+
+static void ResetBallAfterScore(Ball *ball, const bool launchTowardsLeft) {
+    ResetBall(ball, ballResetX, ballResetY, BALL_START_SPEED);
+    ball->Velocity.x *= launchTowardsLeft ? 1.0f : -1.0f;
 }
 
-static void ResetBallAfterScore(Ball* ball, const bool launchTowardsLeft) {
-    ball->Shape.x = ballResetX;
-    ball->Velocity.x = launchTowardsLeft ? BALL_SPEED : -BALL_SPEED;
-}
-
-static void HandleBallPaddleCollision(Ball* ball, const Paddle* paddle, const bool isRightPaddle) {
+static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, const bool isRightPaddle) {
     if (CheckCollisionRecs(ball->Shape, paddle->Shape)) {
         if (isRightPaddle) {
             ball->Shape.x = paddle->Shape.x - ball->Shape.width;
         } else {
             ball->Shape.x = paddle->Shape.x + paddle->Shape.width;
         }
-        ball->Velocity.x = -ball->Velocity.x;
+        const float paddleCenter = paddle->Shape.y + paddle->Shape.height * 0.5f;
+        const float ballCenter = ball->Shape.y + ball->Shape.height * 0.5f;
+        const float relative = (ballCenter - paddleCenter) / (paddle->Shape.height * 0.5f);
+        const float speedX = fminf(BALL_MAX_SPEED, fabsf(ball->Velocity.x) + BALL_SPEED_INCREMENT);
+        const float newSign = isRightPaddle ? 1.0f : -1.0f;
+
+        ball->Velocity.x = newSign * speedX;
+        ball->Velocity.y =
+                ClampFloat(relative * BALL_MAX_VERTICAL_SPEED, -BALL_MAX_VERTICAL_SPEED,
+                           BALL_MAX_VERTICAL_SPEED) *
+                BALL_VERTICAL_SPIN;
     }
 }
 
@@ -119,7 +135,8 @@ void UpdateMainGame(void) {
     UpdateBall(&ball);
 
     // The Ball Paddle Collisions
-    HandleBallPaddleCollision(&ball, &playerPaddle, false); // The player collision.
+    HandleBallPaddleCollision(&ball, &playerPaddle,
+                              false); // The player collision.
     HandleBallPaddleCollision(&ball, &aiPaddle, true); // The AI collision.
 
     HandleVerticalBounds(&ball);
@@ -164,13 +181,12 @@ void drawMainGame(void) {
     if (gameOver) {
         const Color menuBackgroundColor = DARKBLUE;
         const Rectangle menuBackground = {
-            (float)GetScreenWidth() / 2.0f - 200,
-            (float)GetScreenHeight() / 2.0f - 50,
-            400,
+            (float) GetScreenWidth() / 2.0f - 200,
+            (float) GetScreenHeight() / 2.0f - 50, 400,
             150
         };
-        DrawRectangle((int)menuBackground.x, (int)menuBackground.y,
-                      (int)menuBackground.width, (int)menuBackground.height,
+        DrawRectangle((int) menuBackground.x, (int) menuBackground.y,
+                      (int) menuBackground.width, (int) menuBackground.height,
                       menuBackgroundColor);
 
         // Draw "GAME OVER" text
@@ -178,24 +194,21 @@ void drawMainGame(void) {
         const int gameOverFontSize = 40;
         int textWidth = MeasureText(gameOverText, gameOverFontSize);
         DrawText(gameOverText,
-                 menuBackground.x + (menuBackground.width - (float)textWidth) / 2,
-                 (int)menuBackground.y - 20,
-                 gameOverFontSize, WHITE);
+                 menuBackground.x + (menuBackground.width - (float) textWidth) / 2,
+                 (int) menuBackground.y - 20, gameOverFontSize, WHITE);
 
         // Draw winner announcement
-        const char *winnerText = winner == WINNER_PLAYER ? "Player Wins!" : "AI Wins!";
+        const char *winnerText =
+                winner == WINNER_PLAYER ? "Player Wins!" : "AI Wins!";
         const int winnerFontSize = 30;
         textWidth = MeasureText(winnerText, winnerFontSize);
         DrawText(winnerText,
-                 menuBackground.x + (menuBackground.width - (float)textWidth) / 2,
-                 (int)menuBackground.y - 60,
-                 winnerFontSize, WHITE);
+                 menuBackground.x + (menuBackground.width - (float) textWidth) / 2,
+                 (int) menuBackground.y - 60, winnerFontSize, WHITE);
 
         DrawUiButton(&restartButton, "Restart", 20);
         DrawUiButton(&menuButton, "Exit", 20);
     }
 }
 
-GameScreen GetMenuScreen(void) {
-    return nextScreen;
-}
+GameScreen GetMenuScreen(void) { return nextScreen; }

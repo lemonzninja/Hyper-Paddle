@@ -1,0 +1,254 @@
+[
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\main.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\main.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/main.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/main.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\Screens\\screen_logo.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\Screens\\screen_logo.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/Screens/screen_logo.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/Screens/screen_logo.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\Screens\\screen_manager.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\Screens\\screen_manager.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/Screens/screen_manager.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/Screens/screen_manager.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\Screens\\screen_menu.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\Screens\\screen_menu.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/Screens/screen_menu.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/Screens/screen_menu.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\UI\\UIButton\\button.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\UI\\UIButton\\button.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/UI/UIButton/button.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/UI/UIButton/button.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\Screens\\screen_main_game.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\Screens\\screen_main_game.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/Screens/screen_main_game.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/Screens/screen_main_game.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\GameObjects\\Paddle\\Paddle.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\GameObjects\\Paddle\\Paddle.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/GameObjects/Paddle/Paddle.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/GameObjects/Paddle/Paddle.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\GameManager\\Main_Game.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\GameManager\\Main_Game.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/GameManager/Main_Game.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/GameManager/Main_Game.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\Systems\\KeyboardManager\\keyboardManager.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\Systems\\KeyboardManager\\keyboardManager.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/Systems/KeyboardManager/keyboardManager.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/Systems/KeyboardManager/keyboardManager.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\Systems\\deltaTime.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\Systems\\deltaTime.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/Systems/deltaTime.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/Systems/deltaTime.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\GameObjects\\Ball\\Ball.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\GameObjects\\Ball\\Ball.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/GameObjects/Ball/Ball.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/GameObjects/Ball/Ball.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\Math\\computerCenterYofRectangle.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\Math\\computerCenterYofRectangle.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/Math/computerCenterYofRectangle.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/Math/computerCenterYofRectangle.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\Math\\Utils.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\Math\\Utils.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/Math/Utils.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/Math/Utils.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\Hyper-Paddle.dir\\src\\Systems\\ScoreManager\\ScoreManager.c.obj /FdCMakeFiles\\Hyper-Paddle.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\src\\Systems\\ScoreManager\\ScoreManager.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/src/Systems/ScoreManager/ScoreManager.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/CMakeFiles/Hyper-Paddle.dir/src/Systems/ScoreManager/ScoreManager.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -external:IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /Fo_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\raudio.c.obj /Fd_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\raylib.pdb /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\raudio.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/raudio.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/CMakeFiles/raylib.dir/raudio.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -external:IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /Fo_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\rcore.c.obj /Fd_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\raylib.pdb /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\rcore.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/rcore.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rcore.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -external:IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /Fo_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\rmodels.c.obj /Fd_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\raylib.pdb /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\rmodels.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/rmodels.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rmodels.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -external:IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /Fo_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\rshapes.c.obj /Fd_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\raylib.pdb /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\rshapes.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/rshapes.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rshapes.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -external:IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /Fo_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\rtext.c.obj /Fd_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\raylib.pdb /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\rtext.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/rtext.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtext.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -external:IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /Fo_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\rtextures.c.obj /Fd_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\raylib.pdb /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\rtextures.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/rtextures.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtextures.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src -external:IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /Fo_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\utils.c.obj /Fd_deps\\raylib-build\\raylib\\CMakeFiles\\raylib.dir\\raylib.pdb /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\utils.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/utils.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/CMakeFiles/raylib.dir/utils.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\context.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\context.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/context.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/context.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\init.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\init.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/init.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/init.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\input.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\input.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/input.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/input.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\monitor.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\monitor.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/monitor.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/monitor.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\platform.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\platform.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/platform.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/platform.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\vulkan.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\vulkan.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/vulkan.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/vulkan.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\window.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\window.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/window.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/window.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\egl_context.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\egl_context.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/egl_context.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/egl_context.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\osmesa_context.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\osmesa_context.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/osmesa_context.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\null_init.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\null_init.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/null_init.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_init.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\null_monitor.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\null_monitor.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/null_monitor.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_monitor.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\null_window.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\null_window.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/null_window.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_window.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\null_joystick.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\null_joystick.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/null_joystick.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_joystick.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\win32_module.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_module.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/win32_module.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_module.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\win32_time.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_time.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/win32_time.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_time.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\win32_thread.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_thread.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/win32_thread.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_thread.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\win32_init.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_init.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/win32_init.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_init.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\win32_joystick.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_joystick.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/win32_joystick.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_joystick.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\win32_monitor.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_monitor.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/win32_monitor.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_monitor.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\win32_window.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\win32_window.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/win32_window.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/win32_window.c.obj"
+},
+{
+  "directory": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\18\\COMMUN~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx86\\x86\\cl.exe  /nologo -DUNICODE -D_CRT_SECURE_NO_WARNINGS -D_GLFW_WIN32 -D_UNICODE -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\include -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src -IE:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-build\\raylib\\external\\glfw\\src /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3 /Fo_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\wgl_context.c.obj /Fd_deps\\raylib-build\\raylib\\external\\glfw\\src\\CMakeFiles\\glfw.dir\\ /FS -c E:\\Programming\\_Projects\\RetroGames\\Hyper-Paddle\\build\\_deps\\raylib-src\\src\\external\\glfw\\src\\wgl_context.c",
+  "file": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-src/src/external/glfw/src/wgl_context.c",
+  "output": "E:/Programming/_Projects/RetroGames/Hyper-Paddle/build/_deps/raylib-build/raylib/external/glfw/src/CMakeFiles/glfw.dir/wgl_context.c.obj"
+}
+]

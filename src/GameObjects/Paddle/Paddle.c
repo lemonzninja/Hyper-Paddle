@@ -8,7 +8,7 @@
 #include "Systems/deltaTime.h"
 #include "Systems/KeyboardManager/keyboardManager.h"
 #include "GameObjects/Ball/Ball.h"
-#include "Math/ComputeCenterYofRectangle.h"
+#include "Math/Utils.h"
 
 void InitPaddle(Paddle *paddle, const float x, const float y, const float width, const float height, const Color color) {
     paddle->Shape.x = x;
@@ -16,6 +16,7 @@ void InitPaddle(Paddle *paddle, const float x, const float y, const float width,
     paddle->Shape.width = width;
     paddle->Shape.height = height;
     paddle->PaddleColor = color;
+    paddle->targetY = y;
 }
 
 void UpdatePlayerPaddle(Paddle *paddle, const float Speed) {
@@ -39,37 +40,65 @@ void UpdatePlayerPaddle(Paddle *paddle, const float Speed) {
 }
 
 // Decide the AI vertical step based on offset and dead zone
-float ai_vertical_step(const float offset_y, const float speed, const float dt, const float dead_zone) {
+float AiVerticalStep(const float offset_y, const float speed, const float dt, const float dead_zone) {
     if (fabsf(offset_y) <= dead_zone) return 0.0f;
     // move up or down by speed * dt depending on the sign of offset
     return (offset_y > 0.0f ? 1.0f : -1.0f) * speed * dt;
 }
 
 void UpdateAIPaddle(Paddle *paddle, const float Speed, const Ball* ball) {
-    // Clamp target position to screen bounds
     const float screenHeight = (float) GetScreenHeight();
+    const float maxY = screenHeight - paddle->Shape.height;
 
-    const float dead_zone = 5.0f;
     const float dt = deltaTime();
+    static float reactionTimer = 0.0f;
+    const bool ballMovingRight = ball->Velocity.x < 0.0f;
 
-    const float paddle_center_y = rect_center_y(&paddle->Shape);
-    const float ball_center_y = rect_center_y(&ball->Shape);
+    reactionTimer -= dt;
+    if (ballMovingRight) {
+        if (reactionTimer <= 0.0f) {
+            const float errorSpeedFacter = 0.05f;
+            const float errorBase = 16.0f;
+            const float reactionDelay = 0.12f;
+            const float speedX = fabsf(ball->Velocity.x);
+            const float distanceX = paddle->Shape.x - (ball->Shape.x + ball->Shape.width);
+            float prediction = ball->Shape.y;
 
-    // Positive offset means ball is below paddle
-    const float offset_y = ball_center_y - paddle_center_y;
+            if (distanceX > 0.0f && speedX > 0.01f) {
+                const float time = distanceX / speedX;
+                prediction = ball->Shape.y + ball->Velocity.y * time;
 
-    // Apply a vertical step
-    paddle->Shape.y += ai_vertical_step(offset_y, Speed, dt, dead_zone);
+                while (prediction < 0.0f || prediction > maxY) {
+                    if (prediction < 0.0f) {
+                        prediction = -prediction;
+                    } else if (prediction > maxY) {
+                        prediction = 2.0f * maxY - prediction;
+                    }
+                }
+            }
+
+            const float errorRange = errorBase + (speedX * errorSpeedFacter);
+            const float error = ((float)GetRandomValue(-(int)errorRange, (int)errorRange));
+            paddle->targetY = prediction + error;
+            reactionTimer = reactionDelay;
+        }
+    } else {
+        paddle->targetY = maxY * 0.5f;
+        reactionTimer = 0.0f;
+    }
+
+    paddle->targetY = ClampFloat(paddle->targetY, 0.0f, maxY);
+
+    const float delta = paddle->targetY - paddle->Shape.y;
+    const float maxStep = Speed * dt;
+    if (fabsf(delta) <= maxStep) {
+        paddle->Shape.y = paddle->targetY;
+    } else {
+        paddle->Shape.y += (delta > 0.0f ? 1.0f : -1.0f) * maxStep;
+    }
 
     // Keep paddle inside screen bounds (safety check)
-    if (paddle->Shape.y < 0)
-    {
-        paddle->Shape.y = 0;
-    }
-    if (paddle->Shape.y + paddle->Shape.height > screenHeight)
-    {
-        paddle->Shape.y = screenHeight - paddle->Shape.height;
-    }
+    paddle->Shape.y = ClampFloat(paddle->Shape.y, 0.0f, maxY);
 }
 
 void DrawPaddle(const Paddle *paddle) {
