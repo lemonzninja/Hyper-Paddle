@@ -18,7 +18,11 @@ typedef struct Paddle {
     Rectangle Shape;
     Color PaddleColor;
     float targetY; // For AI paddle smooth interpolation
+    Vector2 PreviousPosition;
+    Vector2 RenderPosition;
+    float timeAccumulator;
 }Paddle;
+
 
 void InitPaddle(Paddle *paddle, float x, float y, float width, float height, Color color);
 void UpdatePlayerPaddle(Paddle* paddle, float Speed);
