@@ -84,13 +84,17 @@ void DrawBall(const Ball *ball) {
   DrawRectangleRec(renderShape, ball->BallColor);
 }
 
+void ResetBallInterpolation(Ball *ball) {
+  ball->PreviousPosition = (Vector2){ball->Shape.x, ball->Shape.y};
+  ball->RenderPosition = ball->PreviousPosition;
+  ball->timeAccumulator = 0.0f;
+}
+
 void HandleVerticalBounds(Ball *ball) {
   if (ball->Shape.y <= 0.0f) {
     ball->Shape.y = 0.0f;
     ball->Velocity.y = -ball->Velocity.y;
-    ball->PreviousPosition = (Vector2){ball->Shape.x, ball->Shape.y};
-    ball->RenderPosition = ball->PreviousPosition;
-    ball->timeAccumulator = 0.0f;
+    ResetBallInterpolation(ball);
     // PlaySound(ball->bounceSound);
   }
 
@@ -100,9 +104,7 @@ void HandleVerticalBounds(Ball *ball) {
   if (ballBottomSide >= screenBottomSide) {
     ball->Shape.y = screenBottomSide - ball->Shape.height;
     ball->Velocity.y = -ball->Velocity.y;
-    ball->PreviousPosition = (Vector2){ball->Shape.x, ball->Shape.y};
-    ball->RenderPosition = ball->PreviousPosition;
-    ball->timeAccumulator = 0.0f;
+    ResetBallInterpolation(ball);
     // PlaySound(ball->bounceSound);
   }
 }
