@@ -109,6 +109,10 @@ static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, const bo
                                       -BALL_MAX_VERTICAL_SPEED,
                                       BALL_MAX_VERTICAL_SPEED) *
                            BALL_VERTICAL_SPIN;
+        ball->PreviousPosition = (Vector2){ ball->Shape.x, ball->Shape.y };
+        ball->RenderPosition = ball->PreviousPosition;
+        ball->timeAccumulator = 0.0f;
+
     }
 }
 

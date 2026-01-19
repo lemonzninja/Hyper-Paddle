@@ -22,7 +22,9 @@ void InitBall(Ball *ball, const float x, const float y, const float width, const
     ball->Shape.width = width;
     ball->Shape.height = height;
     ball->BallColor = color;
-    
+
+    ball->timeAccumulator = 0.0f;
+
     ResetBall(ball, x, y, velocity, 0.0f);
 
     ball->bounceSound = LoadSound("assets/soundFX/ballSound.wav");
@@ -38,6 +40,9 @@ void ResetBall(Ball *ball, const float x, const float y, const float velocity, c
 
     ball->Shape.x = x;
     ball->Shape.y = y;
+    ball->PreviousPosition = (Vector2){ x, y };
+    ball->RenderPosition = (Vector2){ x, y };
+    ball->timeAccumulator = 0.0f;
     ball->Velocity.x = direction * fabsf(velocity);
     ball->Velocity.y = RandomizeBallVerticalSpeed(velocity);
 }
@@ -47,19 +52,47 @@ void UnloadBall(const Ball *ball) {
 }
 
 void UpdateBall(Ball *ball) {
-    ball->Shape.x += ball->Velocity.x * deltaTime();
-    ball->Shape.y += ball->Velocity.y * deltaTime();
+    const float fixedStep = 1.0f / 120.0f;
+    ball->timeAccumulator += rawDeltaTime();
+
+    if (ball->timeAccumulator > 0.1f) {
+        ball->timeAccumulator = 0.1f;
+    }
+
+    while (ball->timeAccumulator >= fixedStep) {
+        ball->PreviousPosition = (Vector2){ ball->Shape.x, ball->Shape.y };
+        ball->Shape.x += ball->Velocity.x * fixedStep;
+        ball->Shape.y += ball->Velocity.y * fixedStep;
+        ball->timeAccumulator -= fixedStep;
+    }
+
+    if (ball->timeAccumulator > 0.0f) {
+        const float alpha = ball->timeAccumulator / fixedStep;
+        ball->RenderPosition.x = ball->PreviousPosition.x + (ball->Shape.x - ball->PreviousPosition.x) * alpha;
+        ball->RenderPosition.y = ball->PreviousPosition.y + (ball->Shape.y - ball->PreviousPosition.y) * alpha;
+    } else {
+        ball->RenderPosition.x = ball->Shape.x;
+        ball->RenderPosition.y = ball->Shape.y;
+    }
 }
 
 void DrawBall(const Ball *ball) {
-    // Draw the ball
-    DrawRectangleRec(ball->Shape, ball->BallColor);
+    const Rectangle renderShape = {
+        ball->RenderPosition.x,
+        ball->RenderPosition.y,
+        ball->Shape.width,
+        ball->Shape.height
+    };
+    DrawRectangleRec(renderShape, ball->BallColor);
 }
 
 void HandleVerticalBounds(Ball *ball) {
     if (ball->Shape.y <= 0.0f) {
         ball->Shape.y = 0.0f;
         ball->Velocity.y = -ball->Velocity.y;
+        ball->PreviousPosition = (Vector2){ ball->Shape.x, ball->Shape.y };
+        ball->RenderPosition = ball->PreviousPosition;
+        ball->timeAccumulator = 0.0f;
         //PlaySound(ball->bounceSound);
     }
 
@@ -69,6 +102,9 @@ void HandleVerticalBounds(Ball *ball) {
     if (ballBottomSide >= screenBottomSide) {
         ball->Shape.y = screenBottomSide - ball->Shape.height;
         ball->Velocity.y = -ball->Velocity.y;
+        ball->PreviousPosition = (Vector2){ ball->Shape.x, ball->Shape.y };
+        ball->RenderPosition = ball->PreviousPosition;
+        ball->timeAccumulator = 0.0f;
         //PlaySound(ball->bounceSound);
     }
 }

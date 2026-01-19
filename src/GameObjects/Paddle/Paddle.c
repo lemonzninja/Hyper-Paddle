@@ -17,27 +17,56 @@ void InitPaddle(Paddle *paddle, const float x, const float y, const float width,
     paddle->Shape.height = height;
     paddle->PaddleColor = color;
     paddle->targetY = y;
+    paddle->PreviousPosition = (Vector2){ x, y };
+    paddle->RenderPosition = (Vector2){ x, y };
+    paddle->timeAccumulator = 0.0f;
 }
+
 
 void UpdatePlayerPaddle(Paddle *paddle, const float Speed) {
-    // Move up
-    if (IsUpPressed()) {
-        paddle->Shape.y -= Speed * deltaTime();
-    }
-    // move Down
-    if (IsDownPressed()) {
-        paddle->Shape.y += Speed * deltaTime();
+    const float fixedStep = 1.0f / 120.0f;
+    paddle->timeAccumulator += rawDeltaTime();
+
+    if (paddle->timeAccumulator > 0.1f) {
+        paddle->timeAccumulator = 0.1f;
     }
 
-    // Keep paddle inside screen bounds (safety check)
-    const float screenHeight = (float) GetScreenHeight();
-    if (paddle->Shape.y < 0) {
-        paddle->Shape.y = 0;
+    while (paddle->timeAccumulator >= fixedStep) {
+        paddle->PreviousPosition = (Vector2){ paddle->Shape.x, paddle->Shape.y };
+
+        // Move up
+        if (IsUpPressed()) {
+            paddle->Shape.y -= Speed * fixedStep;
+        }
+        // move Down
+        if (IsDownPressed()) {
+            paddle->Shape.y += Speed * fixedStep;
+        }
+
+        // Keep paddle inside screen bounds (safety check)
+        const float screenHeight = (float) GetScreenHeight();
+        if (paddle->Shape.y < 0) {
+            paddle->Shape.y = 0;
+        }
+        if (paddle->Shape.y + paddle->Shape.height > screenHeight) {
+            paddle->Shape.y = screenHeight - paddle->Shape.height;
+        }
+
+        paddle->timeAccumulator -= fixedStep;
     }
-    if (paddle->Shape.y + paddle->Shape.height > screenHeight) {
-        paddle->Shape.y = screenHeight - paddle->Shape.height;
+
+    if (paddle->timeAccumulator > 0.0f) {
+        const float alpha = paddle->timeAccumulator / fixedStep;
+        paddle->RenderPosition.x = paddle->PreviousPosition.x +
+                                   (paddle->Shape.x - paddle->PreviousPosition.x) * alpha;
+        paddle->RenderPosition.y = paddle->PreviousPosition.y +
+                                   (paddle->Shape.y - paddle->PreviousPosition.y) * alpha;
+    } else {
+        paddle->RenderPosition.x = paddle->Shape.x;
+        paddle->RenderPosition.y = paddle->Shape.y;
     }
 }
+
 
 // Decide the AI vertical step based on offset and dead zone
 float AiVerticalStep(const float offset_y, const float speed, const float dt, const float dead_zone) {
@@ -47,60 +76,90 @@ float AiVerticalStep(const float offset_y, const float speed, const float dt, co
 }
 
 void UpdateAIPaddle(Paddle *paddle, const float Speed, const Ball* ball) {
-    const float screenHeight = (float) GetScreenHeight();
-    const float maxY = screenHeight - paddle->Shape.height;
+    const float fixedStep = 1.0f / 120.0f;
+    paddle->timeAccumulator += rawDeltaTime();
 
-    const float dt = deltaTime();
+    if (paddle->timeAccumulator > 0.1f) {
+        paddle->timeAccumulator = 0.1f;
+    }
+
     static float reactionTimer = 0.0f;
-    const bool ballMovingRight = ball->Velocity.x > 0.0f;
 
-    reactionTimer -= dt;
-    if (ballMovingRight) {
-        if (reactionTimer <= 0.0f) {
-            const float errorSpeedFacter = 0.05f;
-            const float errorBase = 16.0f;
-            const float reactionDelay = 0.12f;
-            const float speedX = fabsf(ball->Velocity.x);
-            const float distanceX = paddle->Shape.x - (ball->Shape.x + ball->Shape.width);
-            float prediction = ball->Shape.y;
+    while (paddle->timeAccumulator >= fixedStep) {
+        const float screenHeight = (float) GetScreenHeight();
+        const float maxY = screenHeight - paddle->Shape.height;
+        const bool ballMovingRight = ball->Velocity.x > 0.0f;
 
-            if (distanceX > 0.0f && speedX > 0.01f) {
-                const float time = distanceX / speedX;
-                prediction = ball->Shape.y + ball->Velocity.y * time;
+        paddle->PreviousPosition = (Vector2){ paddle->Shape.x, paddle->Shape.y };
 
-                while (prediction < 0.0f || prediction > maxY) {
-                    if (prediction < 0.0f) {
-                        prediction = -prediction;
-                    } else if (prediction > maxY) {
-                        prediction = 2.0f * maxY - prediction;
+        reactionTimer -= fixedStep;
+        if (ballMovingRight) {
+            if (reactionTimer <= 0.0f) {
+                const float errorSpeedFacter = 0.05f;
+                const float errorBase = 16.0f;
+                const float reactionDelay = 0.12f;
+                const float speedX = fabsf(ball->Velocity.x);
+                const float distanceX = paddle->Shape.x - (ball->Shape.x + ball->Shape.width);
+                float prediction = ball->Shape.y;
+
+                if (distanceX > 0.0f && speedX > 0.01f) {
+                    const float time = distanceX / speedX;
+                    prediction = ball->Shape.y + ball->Velocity.y * time;
+
+                    while (prediction < 0.0f || prediction > maxY) {
+                        if (prediction < 0.0f) {
+                            prediction = -prediction;
+                        } else if (prediction > maxY) {
+                            prediction = 2.0f * maxY - prediction;
+                        }
                     }
                 }
+
+                const float errorRange = errorBase + (speedX * errorSpeedFacter);
+                const float error = ((float)GetRandomValue(-(int)errorRange, (int)errorRange));
+                paddle->targetY = prediction + error;
+                reactionTimer = reactionDelay;
             }
-
-            const float errorRange = errorBase + (speedX * errorSpeedFacter);
-            const float error = ((float)GetRandomValue(-(int)errorRange, (int)errorRange));
-            paddle->targetY = prediction + error;
-            reactionTimer = reactionDelay;
+        } else {
+            paddle->targetY = maxY * 0.5f;
+            reactionTimer = 0.0f;
         }
-    } else {
-        paddle->targetY = maxY * 0.5f;
-        reactionTimer = 0.0f;
+
+        paddle->targetY = ClampFloat(paddle->targetY, 0.0f, maxY);
+
+        const float delta = paddle->targetY - paddle->Shape.y;
+        const float maxStep = Speed * fixedStep;
+        if (fabsf(delta) <= maxStep) {
+            paddle->Shape.y = paddle->targetY;
+        } else {
+            paddle->Shape.y += (delta > 0.0f ? 1.0f : -1.0f) * maxStep;
+        }
+
+        // Keep paddle inside screen bounds (safety check)
+        paddle->Shape.y = ClampFloat(paddle->Shape.y, 0.0f, maxY);
+
+        paddle->timeAccumulator -= fixedStep;
     }
 
-    paddle->targetY = ClampFloat(paddle->targetY, 0.0f, maxY);
-
-    const float delta = paddle->targetY - paddle->Shape.y;
-    const float maxStep = Speed * dt;
-    if (fabsf(delta) <= maxStep) {
-        paddle->Shape.y = paddle->targetY;
+    if (paddle->timeAccumulator > 0.0f) {
+        const float alpha = paddle->timeAccumulator / fixedStep;
+        paddle->RenderPosition.x = paddle->PreviousPosition.x +
+                                   (paddle->Shape.x - paddle->PreviousPosition.x) * alpha;
+        paddle->RenderPosition.y = paddle->PreviousPosition.y +
+                                   (paddle->Shape.y - paddle->PreviousPosition.y) * alpha;
     } else {
-        paddle->Shape.y += (delta > 0.0f ? 1.0f : -1.0f) * maxStep;
+        paddle->RenderPosition.x = paddle->Shape.x;
+        paddle->RenderPosition.y = paddle->Shape.y;
     }
-
-    // Keep paddle inside screen bounds (safety check)
-    paddle->Shape.y = ClampFloat(paddle->Shape.y, 0.0f, maxY);
 }
 
+
 void DrawPaddle(const Paddle *paddle) {
-    DrawRectangle((int)paddle->Shape.x, (int)paddle->Shape.y, (int)paddle->Shape.width, (int)paddle->Shape.height, paddle->PaddleColor);
+    const Rectangle renderShape = {
+        paddle->RenderPosition.x,
+        paddle->RenderPosition.y,
+        paddle->Shape.width,
+        paddle->Shape.height
+    };
+    DrawRectangleRec(renderShape, paddle->PaddleColor);
 }

@@ -11,6 +11,9 @@ typedef struct Ball {
     Rectangle Shape;
     Color BallColor;
     Vector2 Velocity;
+    Vector2 PreviousPosition;
+    Vector2 RenderPosition;
+    float timeAccumulator;
     Sound bounceSound;
 } Ball;
 

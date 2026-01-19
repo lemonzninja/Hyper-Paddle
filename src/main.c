@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include "raylib.h"
 #include "Screens/screens.h"
+#include "Systems/deltaTime.h"
+
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -54,12 +56,14 @@ int main(void)
 
 void UpdateDrawFrame(void)
 {   // Updating the game
+    UpdateDeltaTime();
     UpdateGame();
     // Drawing the Game.
     BeginDrawing();
         DrawGame();
     EndDrawing();
 }
+
 
 void InitGame(void)
 {

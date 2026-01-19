@@ -16,12 +16,10 @@
 // - Clamps very large frame times (e.g., when dragging the window or after stalls)
 // - Applies an EMA to reduce micro-jitter without adding a noticeable latency
 // Tune constant below to your preference.
-float deltaTime(void) {
+static float smoothedDeltaTime = 1.0f / 120.0f;
+static float currentDeltaTime = 1.0f / 120.0f;
 
-    // static float delta_Time = 0.0f;
-    // delta_Time = GetFrameTime();
-    // return delta_Time;
-
+void UpdateDeltaTime(void) {
     // Reasonable bounds: allow slo-mo down to 20 FPS equivalent, block huge spikes
     const float MAX_DT = 0.05f;   // 50 ms (cap)
     const float MIN_DT = 0.0f;    // never negative
@@ -29,14 +27,19 @@ float deltaTime(void) {
     // EMA smoothing factor: 0 = no update, 1 = no smoothing. 0.1–0.3 is typical.
     const float SMOOTHING_ALPHA = 0.2f;
 
-    // Start near 60 FPS to avoid the initial burst
-    static float smoothed = 1.0f / 60.0f;
-
-    float delta_Time = GetFrameTime();
-    if (delta_Time < MIN_DT) delta_Time = MIN_DT;
-    if (delta_Time > MAX_DT) delta_Time = MAX_DT;
+    currentDeltaTime = GetFrameTime();
+    if (currentDeltaTime < MIN_DT) currentDeltaTime = MIN_DT;
+    if (currentDeltaTime > MAX_DT) currentDeltaTime = MAX_DT;
 
     // Exponential moving average
-    smoothed += (delta_Time - smoothed) * SMOOTHING_ALPHA;
-    return smoothed;
+    smoothedDeltaTime += (currentDeltaTime - smoothedDeltaTime) * SMOOTHING_ALPHA;
 }
+
+float deltaTime(void) {
+    return smoothedDeltaTime;
+}
+
+float rawDeltaTime(void) {
+    return currentDeltaTime;
+}
+
