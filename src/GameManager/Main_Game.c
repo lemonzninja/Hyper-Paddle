@@ -109,9 +109,6 @@ static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, const bo
                                       -BALL_MAX_VERTICAL_SPEED,
                                       BALL_MAX_VERTICAL_SPEED) *
                            BALL_VERTICAL_SPIN;
-        ball->Velocity.y = ClampFloat(ball->Velocity.y,
-                                      -BALL_MAX_VERTICAL_SPEED,
-                                      BALL_MAX_VERTICAL_SPEED);
     }
 }
 
