@@ -12,6 +12,11 @@
 #include <stddef.h>
 #include <tgmath.h>
 
+// AI behavior constants
+static const float AI_ERROR_SPEED_FACTOR = 0.05f;
+static const float AI_ERROR_BASE = 16.0f;
+static const float AI_REACTION_DELAY = 0.12f;
+
 void InitPaddle(Paddle *paddle, const float x, const float y, const float width,
                 const float height, const Color color) {
   paddle->Shape.x = x;
@@ -53,11 +58,10 @@ static void UpdatePaddlePhysics(Paddle *paddle, float speed,
     strategy(paddle, FIXED_TIMESTEP, speed, context);
 
     // Keep paddle inside screen bounds (safety check)
-    const float screenHeight = (float)GetScreenHeight();
-    const float maxY = screenHeight - paddle->Shape.height;
+    const float maxY = SCREEN_HEIGHT_F - paddle->Shape.height;
 
-    if (paddle->Shape.y < 0) {
-      paddle->Shape.y = 0;
+    if (paddle->Shape.y <= 0.0f) {
+      paddle->Shape.y = 0.0f;
     }
     if (paddle->Shape.y > maxY) {
       paddle->Shape.y = maxY;
@@ -111,16 +115,12 @@ static void AIUpdateStrategy(Paddle *paddle, float fixedStep, float speed,
   const Ball *ball = aiData->ball;
   float *reactionTimer = aiData->reactionTimer;
 
-  const float screenHeight = (float)GetScreenHeight();
-  const float maxY = screenHeight - paddle->Shape.height;
+  const float maxY = SCREEN_HEIGHT_F - paddle->Shape.height;
   const bool ballMovingRight = ball->Velocity.x > 0.0f;
 
   *reactionTimer -= fixedStep;
   if (ballMovingRight) {
     if (*reactionTimer <= 0.0f) {
-      const float errorSpeedFacter = 0.05f;
-      const float errorBase = 16.0f;
-      const float reactionDelay = 0.12f;
       const float speedX = fabsf(ball->Velocity.x);
       const float distanceX =
           paddle->Shape.x - (ball->Shape.x + ball->Shape.width);
@@ -130,20 +130,30 @@ static void AIUpdateStrategy(Paddle *paddle, float fixedStep, float speed,
         const float time = distanceX / speedX;
         prediction = ball->Shape.y + ball->Velocity.y * time;
 
-        while (prediction < 0.0f || prediction > maxY) {
+        // Limit iterations to prevent performance issues with very high speeds
+        int iterations = 0;
+        const int MAX_BOUNCE_ITERATIONS = 10;
+        while ((prediction < 0.0f || prediction > maxY) &&
+               iterations < MAX_BOUNCE_ITERATIONS) {
           if (prediction < 0.0f) {
             prediction = -prediction;
           } else if (prediction > maxY) {
             prediction = 2.0f * maxY - prediction;
           }
+          iterations++;
+        }
+
+        // Clamp to valid range if we hit iteration limit
+        if (iterations >= MAX_BOUNCE_ITERATIONS) {
+          prediction = ClampFloat(prediction, 0.0f, maxY);
         }
       }
 
-      const float errorRange = errorBase + (speedX * errorSpeedFacter);
+      const float errorRange = AI_ERROR_BASE + (speedX * AI_ERROR_SPEED_FACTOR);
       const float error =
           ((float)GetRandomValue(-(int)errorRange, (int)errorRange));
       paddle->targetY = prediction + error;
-      *reactionTimer = reactionDelay;
+      *reactionTimer = AI_REACTION_DELAY;
     }
   } else {
     paddle->targetY = maxY * 0.5f;

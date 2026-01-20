@@ -8,19 +8,24 @@
 #include "config.h"
 #include <math.h>
 
+// Ball physics constants
+static const float BALL_VERTICAL_RANGE_FACTOR = 0.65f;
+static const float BALL_MIN_VERTICAL_FACTOR = 0.2f;
+static const float BALL_DEFAULT_VERTICAL_FACTOR = 0.25f;
+
 static float RandomizeBallVerticalSpeed(const float velocity) {
   const float speed = fabsf(velocity);
-  const float range = speed * 0.65f;
-  const float randomScale = (float)GetRandomValue(0, 1000) / 1000.0f;
+  const float range = speed * BALL_VERTICAL_RANGE_FACTOR;
+  // Use multiplication instead of division for better performance
+  const float randomScale = (float)GetRandomValue(0, 1000) * 0.001f;
   float vertical = (randomScale * 2.0f - 1.0f) * range;
-  if (fabsf(vertical) < speed * 0.2f) {
-    vertical = (vertical < 0.0f ? -1.0f : 1.0f) * speed * 0.25f;
+  if (fabsf(vertical) < speed * BALL_MIN_VERTICAL_FACTOR) {
+    vertical = (vertical < 0.0f ? -1.0f : 1.0f) * speed * BALL_DEFAULT_VERTICAL_FACTOR;
   }
   return vertical;
 }
 
-void InitBall(Ball *ball, const float x, const float y, const float width,
-              const float height, const float velocity, const Color color) {
+void InitBall(Ball *ball, const float x, const float y, const float width, const float height, const float velocity, const Color color) {
   ball->Shape.width = width;
   ball->Shape.height = height;
   ball->BallColor = color;
@@ -29,11 +34,19 @@ void InitBall(Ball *ball, const float x, const float y, const float width,
 
   ResetBall(ball, x, y, velocity, 0.0f);
 
-  ball->bounceSound = LoadSound("assets/soundFX/ballSound.wav");
+  ball->wallCollisionSound = LoadSound("assets/soundFX/ballsound2.wav");
+  ball->paddleCollisionSound = LoadSound("assets/soundFX/ballSound.wav");
+
+  // Validate that sound loaded successfully (check if the stream is valid)
+  if (ball->wallCollisionSound.frameCount == 0) {
+    TraceLog(LOG_WARNING, "BALL: Failed to load bounce sound");
+  }
+  if (ball->paddleCollisionSound.frameCount == 0) {
+    TraceLog(LOG_WARNING, "BALL: Failed to load paddle sound");
+  }
 }
 
-void ResetBall(Ball *ball, const float x, const float y, const float velocity,
-               const float directionX) {
+void ResetBall(Ball *ball, const float x, const float y, const float velocity, const float directionX) {
   float direction = directionX;
   if (direction == 0.0f) {
     direction = GetRandomValue(0, 1) == 0 ? -1.0f : 1.0f;
@@ -50,7 +63,10 @@ void ResetBall(Ball *ball, const float x, const float y, const float velocity,
   ball->Velocity.y = RandomizeBallVerticalSpeed(velocity);
 }
 
-void UnloadBall(const Ball *ball) { UnloadSound(ball->bounceSound); }
+void UnloadBall(const Ball *ball) {
+  UnloadSound(ball->wallCollisionSound);
+  UnloadSound(ball->paddleCollisionSound);
+}
 
 void UpdateBall(Ball *ball) {
   ball->timeAccumulator += rawDeltaTime();
@@ -95,17 +111,16 @@ void HandleVerticalBounds(Ball *ball) {
     ball->Shape.y = 0.0f;
     ball->Velocity.y = -ball->Velocity.y;
     ResetBallInterpolation(ball);
-    // PlaySound(ball->bounceSound);
+    PlaySound(ball->wallCollisionSound);
   }
 
-  const float screenBottomSide = (float)GetScreenHeight();
   const float ballBottomSide = ball->Shape.y + ball->Shape.height;
 
-  if (ballBottomSide >= screenBottomSide) {
-    ball->Shape.y = screenBottomSide - ball->Shape.height;
+  if (ballBottomSide >= SCREEN_HEIGHT_F) {
+    ball->Shape.y = SCREEN_HEIGHT_F - ball->Shape.height;
     ball->Velocity.y = -ball->Velocity.y;
     ResetBallInterpolation(ball);
-    // PlaySound(ball->bounceSound);
+    PlaySound(ball->wallCollisionSound);
   }
 }
 
@@ -116,7 +131,7 @@ BallGoal DetectBallGoal(const Ball *ball) {
   }
 
   // if the ball hits the right edge have playerScore go up 1.
-  if (ball->Shape.x >= (float)GetScreenWidth() - ball->Shape.width) {
+  if (ball->Shape.x >= SCREEN_WIDTH_F - ball->Shape.width) {
     return BALL_GOAL_RIGHT;
   }
 

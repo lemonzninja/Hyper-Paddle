@@ -5,6 +5,7 @@
  ****************************************************************/
 #include "Game_Manager.h"
 #include "Math/Utils.h"
+#include "config.h"
 #include <math.h>
 
 static GameScreen nextScreen;
@@ -46,7 +47,7 @@ void InitMainGame(void) {
   nextScreen = SCREEN_MAIN_GAME;
 
   // Calculate ball reset position
-  ballResetX = (float)GetScreenWidth() / 2.0f - BALL_RADIUS;
+  ballResetX = SCREEN_WIDTH_F / 2.0f - BALL_RADIUS;
   ballResetY = 200.0f;
 
   // Initialize ball (loads sound resource)
@@ -54,11 +55,11 @@ void InitMainGame(void) {
            BALL_START_SPEED, WHITE);
 
   // Initialize UI buttons (one-time setup)
-  InitUiButton(&restartButton, (float)GetScreenWidth() / 2 - 150,
-               (float)GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY,
+  InitUiButton(&restartButton, SCREEN_WIDTH_F / 2.0f - 150.0f,
+               SCREEN_HEIGHT_F / 2.0f, 100, 50, LIGHTGRAY, WHITE, GRAY,
                BLACK);
-  InitUiButton(&menuButton, (float)GetScreenWidth() / 2 + 50,
-               (float)GetScreenHeight() / 2, 100, 50, LIGHTGRAY, WHITE, GRAY,
+  InitUiButton(&menuButton, SCREEN_WIDTH_F / 2.0f + 50.0f,
+               SCREEN_HEIGHT_F / 2.0f, 100, 50, LIGHTGRAY, WHITE, GRAY,
                BLACK);
 
   // Reset game state
@@ -67,9 +68,9 @@ void InitMainGame(void) {
 
 void ResetMainGame(void) {
   // Reset scores
-  InitScore(&playerScoreText, 0, (float)GetScreenWidth() / 2.f - 50.f, 30.f,
+  InitScore(&playerScoreText, 0, SCREEN_WIDTH_F / 2.0f - 50.0f, 30.0f,
             WHITE, SCORE_SIZE);
-  InitScore(&aiScoreText, 0, (float)GetScreenWidth() / 2.f + 50.f, 30.f, WHITE,
+  InitScore(&aiScoreText, 0, SCREEN_WIDTH_F / 2.0f + 50.0f, 30.0f, WHITE,
             SCORE_SIZE);
 
   // Reset paddles to starting positions
@@ -91,27 +92,28 @@ static void ResetBallAfterScore(Ball *ball, const bool launchTowardsLeft) {
   ResetBall(ball, ballResetX, ballResetY, BALL_START_SPEED, direction);
 }
 
-static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle,
-                                      const bool isRightPaddle) {
+static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, const bool isRightPaddle) {
   if (CheckCollisionRecs(ball->Shape, paddle->Shape)) {
+    // Safety check: prevent division by zero if paddle height is invalid
+    if (paddle->Shape.height < 1.0f) {
+      return;
+    }
+
     if (isRightPaddle) {
       ball->Shape.x = paddle->Shape.x - ball->Shape.width;
     } else {
       ball->Shape.x = paddle->Shape.x + paddle->Shape.width;
     }
+    PlaySound(ball->paddleCollisionSound);
+
     const float paddleCenter = paddle->Shape.y + paddle->Shape.height * 0.5f;
     const float ballCenter = ball->Shape.y + ball->Shape.height * 0.5f;
-    const float relative =
-        (ballCenter - paddleCenter) / (paddle->Shape.height * 0.5f);
-    const float speedX =
-        fminf(BALL_MAX_SPEED, fabsf(ball->Velocity.x) + BALL_SPEED_INCREMENT);
+    const float relative = (ballCenter - paddleCenter) / (paddle->Shape.height * 0.5f);
+    const float speedX = fminf(BALL_MAX_SPEED, fabsf(ball->Velocity.x) + BALL_SPEED_INCREMENT);
     const float newSign = isRightPaddle ? -1.0f : 1.0f;
 
     ball->Velocity.x = newSign * speedX;
-    ball->Velocity.y =
-        ClampFloat(relative * BALL_MAX_VERTICAL_SPEED, -BALL_MAX_VERTICAL_SPEED,
-                   BALL_MAX_VERTICAL_SPEED) *
-        BALL_VERTICAL_SPIN;
+    ball->Velocity.y = ClampFloat(relative * BALL_MAX_VERTICAL_SPEED, -BALL_MAX_VERTICAL_SPEED, BALL_MAX_VERTICAL_SPEED) * BALL_VERTICAL_SPIN;
     ResetBallInterpolation(ball);
   }
 }
@@ -139,8 +141,7 @@ void UpdateMainGame(void) {
   UpdateBall(&ball);
 
   // The Ball Paddle Collisions
-  HandleBallPaddleCollision(&ball, &playerPaddle,
-                            false);                  // The player collision.
+  HandleBallPaddleCollision(&ball, &playerPaddle, false);                  // The player collision.
   HandleBallPaddleCollision(&ball, &aiPaddle, true); // The AI collision.
 
   HandleVerticalBounds(&ball);
@@ -182,10 +183,9 @@ void drawMainGame(void) {
   // Draw overlay if the game is over.
   if (gameOver) {
     const Color menuBackgroundColor = DARKBLUE;
-    const Rectangle menuBackground = {(float)GetScreenWidth() / 2.0f - 200,
-                                      (float)GetScreenHeight() / 2.0f - 50, 400,
-                                      150};
-    DrawRectangle((int)menuBackground.x, (int)menuBackground.y,
+    const Rectangle menuBackground = {SCREEN_WIDTH_F / 2.0f - 200.0f, SCREEN_HEIGHT_F / 2.0f - 50.0f, 400.0f, 150.0f}   ;
+
+      DrawRectangle((int)menuBackground.x, (int)menuBackground.y,
                   (int)menuBackground.width, (int)menuBackground.height,
                   menuBackgroundColor);
 
@@ -193,7 +193,8 @@ void drawMainGame(void) {
     const char *gameOverText = "GAME OVER";
     const int gameOverFontSize = 40;
     int textWidth = MeasureText(gameOverText, gameOverFontSize);
-    DrawText(gameOverText,
+
+      DrawText(gameOverText,
              menuBackground.x + (menuBackground.width - (float)textWidth) / 2,
              (int)menuBackground.y - 20, gameOverFontSize, WHITE);
 

@@ -19,6 +19,11 @@ void InitLogoScreen(void) {
     // Loading the logo image
     logoTexture = LoadTexture("assets/textures/logo.png");
 
+    // Validate that texture loaded successfully (check if ID is 0)
+    if (logoTexture.id == 0) {
+        TraceLog(LOG_WARNING, "SCREEN_LOGO: Failed to load logo texture");
+    }
+
     logoTimer = 0.0f;
     logoDone = false;
 }

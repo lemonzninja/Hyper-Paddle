@@ -24,8 +24,8 @@ void UpdateDeltaTime(void) {
     const float MAX_DT = 0.05f;   // 50 ms (cap)
     const float MIN_DT = 0.0f;    // never negative
 
-    // EMA smoothing factor: 0 = no update, 1 = no smoothing. 0.1–0.3 is typical.
-    const float SMOOTHING_ALPHA = 0.2f;
+    // EMA smoothing factor: Increased to 0.35 for faster response and less input lag
+    const float SMOOTHING_ALPHA = 0.35f;
 
     currentDeltaTime = GetFrameTime();
     if (currentDeltaTime < MIN_DT) currentDeltaTime = MIN_DT;

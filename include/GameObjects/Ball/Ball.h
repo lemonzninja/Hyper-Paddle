@@ -8,13 +8,15 @@
 #include "raylib.h"
 
 typedef struct Ball {
-  Rectangle Shape;
-  Color BallColor;
-  Vector2 Velocity;
-  Vector2 PreviousPosition;
-  Vector2 RenderPosition;
-  float timeAccumulator;
-  Sound bounceSound;
+    Rectangle Shape;
+    Color BallColor;
+    Vector2 Velocity;
+    Vector2 PreviousPosition;
+    Vector2 RenderPosition;
+    float timeAccumulator;
+    Sound wallCollisionSound;
+    Sound wallCollisionSound2;
+    Sound paddleCollisionSound;
 } Ball;
 
 typedef enum BallGoal {
