@@ -92,7 +92,19 @@ void UnloadMainGame(void) {
 static void ResetBallAfterScore(Ball *ball, const bool launchTowardsLeft) {
   const float direction = launchTowardsLeft ? -1.0f : 1.0f;
   ResetBall(ball, ballResetX, ballResetY, BALL_START_SPEED, direction);
+}
 
+static void GameOverDisplay(void) {
+  UpdateUiButton(&restartButton);
+  UpdateUiButton(&menuButton);
+
+  if (IsUiButtonClicked(&restartButton)) {
+    ResetMainGame();
+  }
+
+  if (IsUiButtonClicked(&menuButton)) {
+    nextScreen = SCREEN_MENU;
+  }
 }
 
 static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, const bool isRightPaddle) {
@@ -121,19 +133,22 @@ static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, const bo
   }
 }
 
+static void HandleScore(int goal, Counter *scoreText, Ball *ball, bool resetDirection,
+                        bool *gameOver, Winner *winner, Winner winnerValue) {
+    if (goal == (resetDirection ? BALL_GOAL_RIGHT : BALL_GOAL_LEFT)) {
+        scoreText->score += 1;
+        ResetBallAfterScore(ball, resetDirection);
+        if (scoreText->score >= WIN_SCORE) {
+            *gameOver = true;
+            *winner = winnerValue;
+        }
+    }
+}
+
 void UpdateMainGame(void) {
   // If game over, pause gameplay and wait for user input
   if (gameOver) {
-    UpdateUiButton(&restartButton);
-    UpdateUiButton(&menuButton);
-
-    if (IsUiButtonClicked(&restartButton)) {
-      ResetMainGame();
-    }
-
-    if (IsUiButtonClicked(&menuButton)) {
-      nextScreen = SCREEN_MENU;
-    }
+    GameOverDisplay();
     return;
   }
 
@@ -148,41 +163,23 @@ void UpdateMainGame(void) {
   HandleBallPaddleCollision(&ball, &aiPaddle, true); // The AI collision.
 
   HandleVerticalBounds(&ball);
+    const BallGoal goal = DetectBallGoal(&ball);
 
-  const BallGoal goal = DetectBallGoal(&ball);
-
-  if (goal == BALL_GOAL_LEFT) {
-    aiScoreText.score += 1;
-    ResetBallAfterScore(&ball, false);
-    // Check Ai WIN condition
-    if (aiScoreText.score >= WIN_SCORE) {
-      gameOver = true;
-      winner = WINNER_AI;
-    }
-  }
-
-  if (goal == BALL_GOAL_RIGHT) {
-    playerScoreText.score += 1;
-    ResetBallAfterScore(&ball, true);
-    // Check Player WIN condition
-    if (playerScoreText.score >= WIN_SCORE) {
-      gameOver = true;
-      winner = WINNER_PLAYER;
-    }
-  }
+    HandleScore(goal, &aiScoreText, &ball, false, &gameOver, &winner, WINNER_AI);
+    HandleScore(goal, &playerScoreText, &ball, true, &gameOver, &winner, WINNER_PLAYER);
 }
 
 void drawMainGame(void) {
-  ClearBackground(BLACK);
+    ClearBackground(BLACK);
 
-  DrawScore(&playerScoreText);
-  DrawScore(&aiScoreText);
+    DrawScore(&playerScoreText);
+    DrawScore(&aiScoreText);
 
 // Draw a dotted line down the middle of the screen in between the players like pong.
     const float centerX = SCREEN_WIDTH_F / 2.0f;
     const float dashHeight = 15.0f;
     const float dashGap = 10.0f;
-  for ( float y = 0; y < SCREEN_HEIGHT_F; y += dashGap + dashHeight) {
+    for ( float y = 0; y < SCREEN_HEIGHT_F; y += dashGap + dashHeight) {
       DrawRectangle((int) (centerX - 2.0f), (int) y, 4, (int) dashHeight, WHITE);
     }
 
