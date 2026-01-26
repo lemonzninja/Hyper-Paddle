@@ -11,6 +11,7 @@
 
 
 #include "Systems/deltaTime.h"
+#include "raylib.h"
 
 // Spike-resistant delta time with light smoothing.
 // - Clamps very large frame times (e.g., when dragging the window or after stalls)
@@ -33,10 +34,6 @@ void UpdateDeltaTime(void) {
 
     // Exponential moving average
     smoothedDeltaTime += (currentDeltaTime - smoothedDeltaTime) * SMOOTHING_ALPHA;
-}
-
-float deltaTime(void) {
-    return smoothedDeltaTime;
 }
 
 float rawDeltaTime(void) {

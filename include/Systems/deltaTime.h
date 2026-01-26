@@ -10,12 +10,7 @@
 #ifndef HYPER_PADDLE_DELTATIME_H
 #define HYPER_PADDLE_DELTATIME_H
 
-#include "raylib.h"
-
 void UpdateDeltaTime(void);
-float deltaTime(void);
 float rawDeltaTime(void);
-
-
 
 #endif // HYPER_PADDLE_DELTATIME_H
