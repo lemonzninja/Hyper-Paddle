@@ -16,6 +16,12 @@ int strButtonY;
 int strButtonWidth;
 int strButtonHeight;
 
+UIButton menuButton;
+int menuButtonX;
+int menuButtonY;
+int menuButtonWidth;
+int menuButtonHeight;
+
 UIButton quitButton;
 int quitButtonX;
 int quitButtonY;
@@ -27,12 +33,14 @@ int titleFontSize;
 
 int buttonHeight;
 int buttonWidth;
+int buttonSpacing;
 
 void InitMenuScreen(void) {
     titleFontSize = 90;
     btnTextSize = 30;
     buttonHeight = 50;
     buttonWidth = 100;
+    buttonSpacing = 85;
 
     // Start Button values
     strButtonWidth = buttonWidth;
@@ -40,11 +48,17 @@ void InitMenuScreen(void) {
     strButtonX = (GetScreenWidth() - strButtonWidth) / 2;
     strButtonY = (GetScreenHeight() - strButtonHeight) / 2 + titleFontSize - 50;
 
+    // Values for a menu button
+    menuButtonWidth = buttonWidth;
+    menuButtonHeight = buttonHeight;
+    menuButtonX = (GetScreenWidth() - menuButtonWidth) / 2;
+    menuButtonY = strButtonY + buttonSpacing;
+
     // Values for a quit button
     quitButtonWidth = buttonWidth;
     quitButtonHeight = buttonHeight;
     quitButtonX = (GetScreenWidth() - quitButtonWidth) / 2;
-    quitButtonY = (GetScreenHeight() - quitButtonHeight) / 2 + titleFontSize + 120;
+    quitButtonY = strButtonY + (buttonSpacing * 2);
 
     nextScreen = SCREEN_MENU;
 
@@ -53,6 +67,10 @@ void InitMenuScreen(void) {
                  (float)strButtonY, (float)strButtonWidth,
                  (float)strButtonHeight, BLUE, DARKBLUE,
                  SKYBLUE, LIGHTGRAY);
+    // Menu Button
+    InitUiButton(&menuButton, (float)menuButtonX, (float)menuButtonY,
+                 (float)menuButtonWidth, (float)menuButtonHeight,
+                 DARKGREEN, GREEN, SKYBLUE, BLACK);
     //Quit Button
     InitUiButton(&quitButton, (float)quitButtonX, (float)quitButtonY,
         (float)quitButtonWidth, (float)quitButtonHeight,
@@ -61,10 +79,15 @@ void InitMenuScreen(void) {
 
 void UpdateMenuScreen(void) {
     UpdateUiButton(&startButton);
+    UpdateUiButton(&menuButton);
     UpdateUiButton(&quitButton);
 
     if (IsUiButtonClicked(&startButton)) {
         nextScreen = SCREEN_MAIN_GAME;
+    }
+
+    if (IsUiButtonClicked(&menuButton)) {
+        nextScreen = SCREEN_SETTINGS;
     }
 
     if (IsUiButtonClicked(&quitButton)) {
@@ -89,6 +112,7 @@ void DrawMenuScreen(void) {
 
     // Draw the Start Button.
     DrawUiButton(&startButton, "Start", btnTextSize);
+    DrawUiButton(&menuButton, "Menu", btnTextSize);
     DrawUiButton(&quitButton, "Quit", btnTextSize);
 }
 

@@ -14,6 +14,7 @@
 typedef enum GameScreen {
     SCREEN_LOGO = 0,
     SCREEN_MENU,
+    SCREEN_SETTINGS,
     SCREEN_MAIN_GAME,
     SCREEN_GAME_OVER
 } GameScreen;
@@ -37,6 +38,13 @@ void UpdateMenuScreen(void);
 void DrawMenuScreen(void);
 void UnloadMenuScreen(void);
 GameScreen GetMainGameScreen(void);
+
+// -- Settings Screen functions --
+void InitSettingsScreen(void);
+void UpdateSettingsScreen(void);
+void DrawSettingsScreen(void);
+void UnloadSettingsScreen(void);
+GameScreen GetSettingsScreen(void);
 
 // -- Game Screen functions --
 void InitGameScreen(void);

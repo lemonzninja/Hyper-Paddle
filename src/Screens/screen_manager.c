@@ -32,6 +32,10 @@ void ScreenManagerUpdate(void) {
             // Read the menu's desired next screen (set by button callbacks)
             nextScreen = GetMainGameScreen();
             break;
+        case SCREEN_SETTINGS:
+            UpdateSettingsScreen();
+            nextScreen = GetSettingsScreen();
+            break;
         case SCREEN_MAIN_GAME:
             UpdateGameScreen();
             nextScreen = GetMenuScreen();
@@ -55,6 +59,9 @@ void ScreenManagerDraw(void) {
         case SCREEN_MENU:
             DrawMenuScreen();
             break;
+        case SCREEN_SETTINGS:
+            DrawSettingsScreen();
+            break;
         case SCREEN_MAIN_GAME:
             DrawGameScreen();
             break;
@@ -74,6 +81,9 @@ void UnloadCurrent(void) {
         case SCREEN_MENU:
             UnloadMenuScreen();
             break;
+        case SCREEN_SETTINGS:
+            UnloadSettingsScreen();
+            break;
         case SCREEN_MAIN_GAME:
             UnloadGameScreen();
             break;
@@ -88,6 +98,9 @@ void NextScreenToInit(void) {
             break;
         case SCREEN_MENU:
             InitMenuScreen();
+            break;
+        case SCREEN_SETTINGS:
+            InitSettingsScreen();
             break;
         case SCREEN_MAIN_GAME:
             InitGameScreen();
