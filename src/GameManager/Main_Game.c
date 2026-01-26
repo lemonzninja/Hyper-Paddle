@@ -39,6 +39,7 @@ typedef enum { WINNER_NONE, WINNER_PLAYER, WINNER_AI } Winner;
 
 static bool gameOver = false;
 static Winner winner = WINNER_NONE;
+static bool gamePaused = false;
 
 static UIButton restartButton;
 static UIButton menuButton;
@@ -83,6 +84,7 @@ void ResetMainGame(void) {
   // Reset game state
   gameOver = false;
   winner = WINNER_NONE;
+  gamePaused = false;
 }
 
 void UnloadMainGame(void) {
@@ -95,6 +97,19 @@ static void ResetBallAfterScore(Ball *ball, const bool launchTowardsLeft) {
 }
 
 static void GameOverDisplay(void) {
+  UpdateUiButton(&restartButton);
+  UpdateUiButton(&menuButton);
+
+  if (IsUiButtonClicked(&restartButton)) {
+    ResetMainGame();
+  }
+
+  if (IsUiButtonClicked(&menuButton)) {
+    nextScreen = SCREEN_MENU;
+  }
+}
+
+static void PauseMenuDisplay(void) {
   UpdateUiButton(&restartButton);
   UpdateUiButton(&menuButton);
 
@@ -146,9 +161,18 @@ static void HandleScore(int goal, Counter *scoreText, Ball *ball, bool resetDire
 }
 
 void UpdateMainGame(void) {
+  if (!gameOver && IsKeyPressed(KEY_P)) {
+    gamePaused = !gamePaused;
+  }
+
   // If game over, pause gameplay and wait for user input
   if (gameOver) {
     GameOverDisplay();
+    return;
+  }
+
+  if (gamePaused) {
+    PauseMenuDisplay();
     return;
   }
 
@@ -215,6 +239,23 @@ void drawMainGame(void) {
 
     DrawUiButton(&restartButton, "Restart", 20);
     DrawUiButton(&menuButton, "Exit", 20);
+  } else if (gamePaused) {
+    const Color menuBackgroundColor = DARKBLUE;
+    const Rectangle menuBackground = {SCREEN_WIDTH_F / 2.0f - 200.0f, SCREEN_HEIGHT_F / 2.0f - 50.0f, 400.0f, 150.0f};
+
+    DrawRectangle((int) menuBackground.x, (int) menuBackground.y, (int) menuBackground.width,
+                  (int) menuBackground.height, menuBackgroundColor);
+
+    const char *pausedText = "PAUSED";
+    const int pausedFontSize = 40;
+    int textWidth = MeasureText(pausedText, pausedFontSize);
+
+    DrawText(pausedText,
+             menuBackground.x + (menuBackground.width - (float) textWidth) / 2,
+             (int) menuBackground.y - 20, pausedFontSize, WHITE);
+
+    DrawUiButton(&restartButton, "Restart", 20);
+    DrawUiButton(&menuButton, "Menu", 20);
   }
 }
 

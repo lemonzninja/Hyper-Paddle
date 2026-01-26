@@ -31,7 +31,6 @@ void UpdateUiButton(UIButton *uiButton) {
         }
     } else {
         uiButton->currentState = BUTTON_IDLE;
-
     }
 }
 
@@ -59,7 +58,7 @@ void DrawUiButton(const UIButton* uiButton, const char* text, int fontSize){
 }
 
 bool IsUiButtonClicked(const UIButton *uiButton) {
-    // Check if the mouse is on the button and the left mouse button is cliked
+    // Check if the mouse is on the button and the left mouse button is clicked
     if (CheckCollisionPointRec(GetMousePosition(), uiButton->bounds) &&
         IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         return true;
