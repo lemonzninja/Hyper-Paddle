@@ -28,7 +28,7 @@ add_executable(${PROJECT_NAME} src/main.c
         src/Screens/screens.h
         src/Screens/screen_logo.c
         src/Screens/screen_manager.c
-        src/Screens/screen_menu.c
+        src/Screens/screen_start_menu.c
         include/UI/UIButton/button.h
         src/UI/UIButton/button.c
         src/Screens/screen_main_game.c

@@ -22,22 +22,29 @@ int quitButtonY;
 int quitButtonWidth;
 int quitButtonHeight;
 
+int btnTextSize;
 int titleFontSize;
 
+int buttonHeight;
+int buttonWidth;
+
 void InitMenuScreen(void) {
-    titleFontSize = 80;
+    titleFontSize = 90;
+    btnTextSize = 30;
+    buttonHeight = 50;
+    buttonWidth = 100;
 
     // Start Button values
-    strButtonWidth = 150;
-    strButtonHeight = 60;
+    strButtonWidth = buttonWidth;
+    strButtonHeight = buttonHeight;
     strButtonX = (GetScreenWidth() - strButtonWidth) / 2;
     strButtonY = (GetScreenHeight() - strButtonHeight) / 2 + titleFontSize - 50;
 
     // Values for a quit button
-    quitButtonWidth = 150;
-    quitButtonHeight = 60;
+    quitButtonWidth = buttonWidth;
+    quitButtonHeight = buttonHeight;
     quitButtonX = (GetScreenWidth() - quitButtonWidth) / 2;
-    quitButtonY = (GetScreenHeight() - quitButtonHeight) / 2 + titleFontSize + 70;
+    quitButtonY = (GetScreenHeight() - quitButtonHeight) / 2 + titleFontSize + 120;
 
     nextScreen = SCREEN_MENU;
 
@@ -45,7 +52,7 @@ void InitMenuScreen(void) {
     InitUiButton(&startButton, (float)strButtonX,
                  (float)strButtonY, (float)strButtonWidth,
                  (float)strButtonHeight, BLUE, DARKBLUE,
-                 SKYBLUE, BLACK);
+                 SKYBLUE, LIGHTGRAY);
     //Quit Button
     InitUiButton(&quitButton, (float)quitButtonX, (float)quitButtonY,
         (float)quitButtonWidth, (float)quitButtonHeight,
@@ -81,8 +88,8 @@ void DrawMenuScreen(void) {
     //********************************************************
 
     // Draw the Start Button.
-    DrawUiButton(&startButton, "Start", 40);
-    DrawUiButton(&quitButton, "Quit", 40);
+    DrawUiButton(&startButton, "Start", btnTextSize);
+    DrawUiButton(&quitButton, "Quit", btnTextSize);
 }
 
 void UnloadMenuScreen(void) {
