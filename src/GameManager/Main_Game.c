@@ -57,11 +57,9 @@ void InitMainGame(void) {
 
   // Initialize UI buttons (one-time setup)
   InitUiButton(&restartButton, SCREEN_WIDTH_F / 2.0f - 150.0f,
-               SCREEN_HEIGHT_F / 2.0f, 100, 50, LIGHTGRAY, WHITE, GRAY,
-               BLACK);
+               SCREEN_HEIGHT_F / 2.0f, 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
   InitUiButton(&menuButton, SCREEN_WIDTH_F / 2.0f + 50.0f,
-               SCREEN_HEIGHT_F / 2.0f, 100, 50, LIGHTGRAY, WHITE, GRAY,
-               BLACK);
+               SCREEN_HEIGHT_F / 2.0f, 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
 
   // Reset game state
   ResetMainGame();
@@ -69,8 +67,8 @@ void InitMainGame(void) {
 
 void ResetMainGame(void) {
   // Reset scores
-  InitScore(&playerScoreText, 0, SCREEN_WIDTH_F / 2.0f - 70.0f, 30.0f,
-            WHITE, SCORE_SIZE);
+  InitScore(&playerScoreText, 0, SCREEN_WIDTH_F / 2.0f - 70.0f, 30.0f, WHITE,
+            SCORE_SIZE);
   InitScore(&aiScoreText, 0, SCREEN_WIDTH_F / 2.0f + 50.0f, 30.0f, WHITE,
             SCORE_SIZE);
 
@@ -87,9 +85,7 @@ void ResetMainGame(void) {
   gamePaused = false;
 }
 
-void UnloadMainGame(void) {
-    UnloadBall(&ball);
-}
+void UnloadMainGame(void) { UnloadBall(&ball); }
 
 static void ResetBallAfterScore(Ball *ball, const bool launchTowardsLeft) {
   const float direction = launchTowardsLeft ? -1.0f : 1.0f;
@@ -122,7 +118,8 @@ static void PauseMenuDisplay(void) {
   }
 }
 
-static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, const bool isRightPaddle) {
+static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle,
+                                      const bool isRightPaddle) {
   if (CheckCollisionRecs(ball->Shape, paddle->Shape)) {
     // Safety check: prevent division by zero if paddle height is invalid
     if (paddle->Shape.height < 1.0f) {
@@ -138,26 +135,32 @@ static void HandleBallPaddleCollision(Ball *ball, const Paddle *paddle, const bo
 
     const float paddleCenter = paddle->Shape.y + paddle->Shape.height * 0.5f;
     const float ballCenter = ball->Shape.y + ball->Shape.height * 0.5f;
-    const float relative = (ballCenter - paddleCenter) / (paddle->Shape.height * 0.5f);
-    const float speedX = fminf(BALL_MAX_SPEED, fabsf(ball->Velocity.x) + BALL_SPEED_INCREMENT);
+    const float relative =
+        (ballCenter - paddleCenter) / (paddle->Shape.height * 0.5f);
+    const float speedX =
+        fminf(BALL_MAX_SPEED, fabsf(ball->Velocity.x) + BALL_SPEED_INCREMENT);
     const float newSign = isRightPaddle ? -1.0f : 1.0f;
 
     ball->Velocity.x = newSign * speedX;
-    ball->Velocity.y = ClampFloat(relative * BALL_MAX_VERTICAL_SPEED, -BALL_MAX_VERTICAL_SPEED, BALL_MAX_VERTICAL_SPEED) * BALL_VERTICAL_SPIN;
+    ball->Velocity.y =
+        ClampFloat(relative * BALL_MAX_VERTICAL_SPEED, -BALL_MAX_VERTICAL_SPEED,
+                   BALL_MAX_VERTICAL_SPEED) *
+        BALL_VERTICAL_SPIN;
     ResetBallInterpolation(ball);
   }
 }
 
-static void HandleScore(int goal, Counter *scoreText, Ball *ball, bool resetDirection,
-                        bool *gameOver, Winner *winner, Winner winnerValue) {
-    if (goal == (resetDirection ? BALL_GOAL_RIGHT : BALL_GOAL_LEFT)) {
-        scoreText->score += 1;
-        ResetBallAfterScore(ball, resetDirection);
-        if (scoreText->score >= WIN_SCORE) {
-            *gameOver = true;
-            *winner = winnerValue;
-        }
+static void HandleScore(int goal, Counter *scoreText, Ball *ball,
+                        bool resetDirection, bool *gameOver, Winner *winner,
+                        Winner winnerValue) {
+  if (goal == (resetDirection ? BALL_GOAL_RIGHT : BALL_GOAL_LEFT)) {
+    scoreText->score += 1;
+    ResetBallAfterScore(ball, resetDirection);
+    if (scoreText->score >= WIN_SCORE) {
+      *gameOver = true;
+      *winner = winnerValue;
     }
+  }
 }
 
 void UpdateMainGame(void) {
@@ -183,29 +186,32 @@ void UpdateMainGame(void) {
   UpdateBall(&ball);
 
   // The Ball Paddle Collisions
-  HandleBallPaddleCollision(&ball, &playerPaddle, false); // The player collision.
+  HandleBallPaddleCollision(&ball, &playerPaddle,
+                            false);                  // The player collision.
   HandleBallPaddleCollision(&ball, &aiPaddle, true); // The AI collision.
 
   HandleVerticalBounds(&ball);
-    const BallGoal goal = DetectBallGoal(&ball);
+  const BallGoal goal = DetectBallGoal(&ball);
 
-    HandleScore(goal, &aiScoreText, &ball, false, &gameOver, &winner, WINNER_AI);
-    HandleScore(goal, &playerScoreText, &ball, true, &gameOver, &winner, WINNER_PLAYER);
+  HandleScore(goal, &aiScoreText, &ball, false, &gameOver, &winner, WINNER_AI);
+  HandleScore(goal, &playerScoreText, &ball, true, &gameOver, &winner,
+              WINNER_PLAYER);
 }
 
 void drawMainGame(void) {
-    ClearBackground(BLACK);
+  ClearBackground(BLACK);
 
-    DrawScore(&playerScoreText);
-    DrawScore(&aiScoreText);
+  DrawScore(&playerScoreText);
+  DrawScore(&aiScoreText);
 
-// Draw a dotted line down the middle of the screen in between the players like pong.
-    const float centerX = SCREEN_WIDTH_F / 2.0f;
-    const float dashHeight = 15.0f;
-    const float dashGap = 10.0f;
-    for ( float y = 0; y < SCREEN_HEIGHT_F; y += dashGap + dashHeight) {
-      DrawRectangle((int) (centerX - 2.0f), (int) y, 4, (int) dashHeight, WHITE);
-    }
+  // Draw a dotted line down the middle of the screen in between the players
+  // like pong.
+  const float centerX = SCREEN_WIDTH_F / 2.0f;
+  const float dashHeight = 15.0f;
+  const float dashGap = 10.0f;
+  for (float y = 0; y < SCREEN_HEIGHT_F; y += dashGap + dashHeight) {
+    DrawRectangle((int)(centerX - 2.0f), (int)y, 4, (int)dashHeight, WHITE);
+  }
 
   DrawPaddle(&playerPaddle);
   DrawPaddle(&aiPaddle);
@@ -215,10 +221,13 @@ void drawMainGame(void) {
   // Draw overlay if the game is over.
   if (gameOver) {
     const Color menuBackgroundColor = DARKBLUE;
-    const Rectangle menuBackground = {SCREEN_WIDTH_F / 2.0f - 200.0f, SCREEN_HEIGHT_F / 2.0f - 50.0f, 400.0f, 150.0f};
+    const Rectangle menuBackground = {SCREEN_WIDTH_F / 2.0f - 200.0f,
+                                      SCREEN_HEIGHT_F / 2.0f - 50.0f, 400.0f,
+                                      150.0f};
 
-      DrawRectangle((int) menuBackground.x, (int) menuBackground.y, (int) menuBackground.width,
-                    (int) menuBackground.height, menuBackgroundColor);
+    DrawRectangle((int)menuBackground.x, (int)menuBackground.y,
+                  (int)menuBackground.width, (int)menuBackground.height,
+                  menuBackgroundColor);
 
     // Draw "GAME OVER" text
     const char *gameOverText = "GAME OVER";
@@ -226,33 +235,37 @@ void drawMainGame(void) {
     int textWidth = MeasureText(gameOverText, gameOverFontSize);
 
     DrawText(gameOverText,
-             menuBackground.x + (menuBackground.width - (float) textWidth) / 2,
-             (int) menuBackground.y - 20, gameOverFontSize, WHITE);
+             menuBackground.x + (menuBackground.width - (float)textWidth) / 2,
+             (int)menuBackground.y - 20, gameOverFontSize, WHITE);
 
     // Draw winner announcement
-    const char *winnerText = winner == WINNER_PLAYER ? "Player Wins!" : "AI Wins!";
+    const char *winnerText =
+        winner == WINNER_PLAYER ? "Player Wins!" : "AI Wins!";
     const int winnerFontSize = 30;
     textWidth = MeasureText(winnerText, winnerFontSize);
     DrawText(winnerText,
-             menuBackground.x + (menuBackground.width - (float) textWidth) / 2,
-             (int) menuBackground.y - 60, winnerFontSize, WHITE);
+             menuBackground.x + (menuBackground.width - (float)textWidth) / 2,
+             (int)menuBackground.y - 60, winnerFontSize, WHITE);
 
     DrawUiButton(&restartButton, "Restart", 20);
     DrawUiButton(&menuButton, "Exit", 20);
   } else if (gamePaused) {
     const Color menuBackgroundColor = DARKBLUE;
-    const Rectangle menuBackground = {SCREEN_WIDTH_F / 2.0f - 200.0f, SCREEN_HEIGHT_F / 2.0f - 50.0f, 400.0f, 150.0f};
+    const Rectangle menuBackground = {SCREEN_WIDTH_F / 2.0f - 200.0f,
+                                      SCREEN_HEIGHT_F / 2.0f - 50.0f, 400.0f,
+                                      150.0f};
 
-    DrawRectangle((int) menuBackground.x, (int) menuBackground.y, (int) menuBackground.width,
-                  (int) menuBackground.height, menuBackgroundColor);
+    DrawRectangle((int)menuBackground.x, (int)menuBackground.y,
+                  (int)menuBackground.width, (int)menuBackground.height,
+                  menuBackgroundColor);
 
     const char *pausedText = "PAUSED";
     const int pausedFontSize = 40;
     int textWidth = MeasureText(pausedText, pausedFontSize);
 
     DrawText(pausedText,
-             menuBackground.x + (menuBackground.width - (float) textWidth) / 2,
-             (int) menuBackground.y - 20, pausedFontSize, WHITE);
+             menuBackground.x + (menuBackground.width - (float)textWidth) / 2,
+             (int)menuBackground.y - 20, pausedFontSize, WHITE);
 
     DrawUiButton(&restartButton, "Restart", 20);
     DrawUiButton(&menuButton, "Menu", 20);
