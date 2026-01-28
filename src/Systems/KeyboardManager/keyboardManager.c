@@ -4,11 +4,22 @@
  *  Created by Squid on 10/29/2025
  ****************************************************************/
 #include "Systems/KeyboardManager/keyboardManager.h"
+#include "Screens/screens.h"
 
-bool IsUpPressed(void) { return IsKeyDown(KEY_W) || IsKeyDown(KEY_UP); }
+bool IsUpPressed(void) {
+  if (GetSelectedGameMode() == GAME_MODE_TWO_PLAYER) {
+    return IsKeyDown(KEY_W);
+  }
+  return IsKeyDown(KEY_W) || IsKeyDown(KEY_UP);
+}
 
-bool IsDownPressed(void) { return IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN); }
+bool IsDownPressed(void) {
+  if (GetSelectedGameMode() == GAME_MODE_TWO_PLAYER) {
+    return IsKeyDown(KEY_S);
+  }
+  return IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN);
+}
 
-bool IsPlayer2UpPressed(void) { return IsKeyDown(KEY_I);}
+bool IsPlayer2UpPressed(void) { return IsKeyDown(KEY_UP); }
 
-bool IsPlayer2DownPressed(void) { return IsKeyDown(KEY_K); }
+bool IsPlayer2DownPressed(void) { return IsKeyDown(KEY_DOWN); }

@@ -52,8 +52,8 @@ add_executable(${PROJECT_NAME} src/main.c
 
         src/Systems/ScoreManager/ScoreManager.c
 )
-# Ensure project headers under include/ are discoverable
-target_include_directories(${PROJECT_NAME} PRIVATE include)
+# Ensure project headers under include/ and src/ are discoverable
+target_include_directories(${PROJECT_NAME} PRIVATE include src)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 
