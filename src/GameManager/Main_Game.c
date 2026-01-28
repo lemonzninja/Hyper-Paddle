@@ -273,7 +273,7 @@ void drawMainGame(void) {
 
     const char *pausedText = "PAUSED";
     const int pausedFontSize = 40;
-    int textWidth = MeasureText(pausedText, pausedFontSize);
+    const int textWidth = MeasureText(pausedText, pausedFontSize);
 
     DrawText(pausedText,
              menuBackground.x + (menuBackground.width - (float)textWidth) / 2,
