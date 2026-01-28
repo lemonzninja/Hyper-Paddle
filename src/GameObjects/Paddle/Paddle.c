@@ -95,6 +95,22 @@ void UpdatePlayerPaddle(Paddle *paddle, const float Speed) {
   UpdatePaddlePhysics(paddle, Speed, PlayerUpdateStrategy, NULL);
 }
 
+static void Player2UpdateStrategy(Paddle *paddle, float fixedStep, float speed,
+                                  void *context) {
+  // Move up
+  if (IsPlayer2UpPressed()) {
+    paddle->Shape.y -= speed * fixedStep;
+  }
+  // move Down
+  if (IsPlayer2DownPressed()) {
+    paddle->Shape.y += speed * fixedStep;
+  }
+}
+
+void UpdatePlayer2Paddle(Paddle *paddle, const float speed) {
+  UpdatePaddlePhysics(paddle, speed, Player2UpdateStrategy, NULL);
+}
+
 // Decide the AI vertical step based on offset and dead zone
 float AiVerticalStep(const float offset_y, const float speed, const float dt,
                      const float dead_zone) {

@@ -35,7 +35,7 @@ static float ballResetY;
 static Paddle playerPaddle;
 static Paddle aiPaddle;
 
-typedef enum { WINNER_NONE, WINNER_PLAYER, WINNER_AI } Winner;
+typedef enum { WINNER_NONE, WINNER_PLAYER, WINNER_AI, WINNER_PLAYER2 } Winner;
 
 static bool gameOver = false;
 static Winner winner = WINNER_NONE;
@@ -181,7 +181,13 @@ void UpdateMainGame(void) {
 
   // Move Paddles
   UpdatePlayerPaddle(&playerPaddle, PLAYER_PADDLE_SPEED);
-  UpdateAIPaddle(&aiPaddle, AI_PADDLE_SPEED, &ball);
+
+  // Use AI or Player 2 based on game mode
+  if (GetSelectedGameMode() == GAME_MODE_TWO_PLAYER) {
+    UpdatePlayer2Paddle(&aiPaddle, AI_PADDLE_SPEED);
+  } else {
+    UpdateAIPaddle(&aiPaddle, AI_PADDLE_SPEED, &ball);
+  }
   // Move Ball
   UpdateBall(&ball);
 
@@ -239,8 +245,14 @@ void drawMainGame(void) {
              (int)menuBackground.y - 20, gameOverFontSize, WHITE);
 
     // Draw winner announcement
-    const char *winnerText =
-        winner == WINNER_PLAYER ? "Player Wins!" : "AI Wins!";
+    const char *winnerText;
+    if (winner == WINNER_PLAYER) {
+      winnerText = "Player 1 Wins!";
+    } else if (GetSelectedGameMode() == GAME_MODE_TWO_PLAYER) {
+      winnerText = "Player 2 Wins!";
+    } else {
+      winnerText = "AI Wins!";
+    }
     const int winnerFontSize = 30;
     textWidth = MeasureText(winnerText, winnerFontSize);
     DrawText(winnerText,

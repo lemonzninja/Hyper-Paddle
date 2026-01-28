@@ -30,6 +30,7 @@ add_executable(${PROJECT_NAME} src/main.c
         src/Screens/screen_manager.c
         src/Screens/screen_start_screen.c
         src/Screens/screen_settings_menu.c
+        src/Screens/screen_level_select.c
         include/UI/UIButton/button.h
         src/UI/UIButton/button.c
         src/Screens/screen_main_game.c
