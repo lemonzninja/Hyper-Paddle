@@ -38,8 +38,8 @@ static int titleFontSize;
 void InitSettingsScreen(void) {
   titleFontSize = 70;
   btnTextSize = 28;
-  backButtonWidth = 140;
-  backButtonHeight = 50;
+  backButtonWidth = 220;
+  backButtonHeight = 52;
   soundToggleSize = 28;
 
   // Volume slider dimensions
@@ -53,8 +53,11 @@ void InitSettingsScreen(void) {
   nextScreen = SCREEN_SETTINGS;
 
   InitUiButton(&backButton, (float)backButtonX, (float)backButtonY,
-               (float)backButtonWidth, (float)backButtonHeight, DARKGREEN,
-               GREEN, SKYBLUE, BLACK);
+               (float)backButtonWidth, (float)backButtonHeight,
+               (Color){83, 196, 253, 255},
+               (Color){112, 214, 255, 255},
+               (Color){56, 162, 219, 255},
+               (Color){22, 44, 54, 255});
 
   const char *soundLabel = "Sound";
   const int soundLabelWidth = MeasureText(soundLabel, btnTextSize);
@@ -186,7 +189,7 @@ void DrawSettingsScreen(void) {
   int volumeTextY = volumeLabelY;
   DrawText(volumeText, volumeTextX, volumeTextY, btnTextSize, DARKGRAY);
 
-  DrawUiButton(&backButton, "Back", btnTextSize);
+  DrawUiButton(&backButton, "BACK", btnTextSize);
 }
 
 void UnloadSettingsScreen(void) {

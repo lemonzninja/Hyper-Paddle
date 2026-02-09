@@ -56,10 +56,18 @@ void InitMainGame(void) {
            BALL_START_SPEED, WHITE);
 
   // Initialize UI buttons (one-time setup)
-  InitUiButton(&restartButton, SCREEN_WIDTH_F / 2.0f - 150.0f,
-               SCREEN_HEIGHT_F / 2.0f, 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
-  InitUiButton(&menuButton, SCREEN_WIDTH_F / 2.0f + 50.0f,
-               SCREEN_HEIGHT_F / 2.0f, 100, 50, LIGHTGRAY, WHITE, GRAY, BLACK);
+  InitUiButton(&restartButton, SCREEN_WIDTH_F / 2.0f - 170.0f,
+               SCREEN_HEIGHT_F / 2.0f, 150, 52,
+               (Color){100, 211, 20, 255},
+               (Color){134, 235, 44, 255},
+               (Color){73, 166, 13, 255},
+               (Color){21, 38, 40, 255});
+  InitUiButton(&menuButton, SCREEN_WIDTH_F / 2.0f + 20.0f,
+               SCREEN_HEIGHT_F / 2.0f, 150, 52,
+               (Color){253, 196, 35, 255},
+               (Color){255, 214, 71, 255},
+               (Color){214, 148, 16, 255},
+               (Color){33, 39, 39, 255});
 
   // Reset game state
   ResetMainGame();
@@ -259,8 +267,8 @@ void drawMainGame(void) {
              menuBackground.x + (menuBackground.width - (float)textWidth) / 2,
              (int)menuBackground.y - 60, winnerFontSize, WHITE);
 
-    DrawUiButton(&restartButton, "Restart", 20);
-    DrawUiButton(&menuButton, "Exit", 20);
+    DrawUiButton(&restartButton, "RESTART", 20);
+    DrawUiButton(&menuButton, "EXIT", 20);
   } else if (gamePaused) {
     const Color menuBackgroundColor = DARKBLUE;
     const Rectangle menuBackground = {SCREEN_WIDTH_F / 2.0f - 200.0f,
@@ -279,8 +287,8 @@ void drawMainGame(void) {
              menuBackground.x + (menuBackground.width - (float)textWidth) / 2,
              (int)menuBackground.y - 20, pausedFontSize, WHITE);
 
-    DrawUiButton(&restartButton, "Restart", 20);
-    DrawUiButton(&menuButton, "Menu", 20);
+    DrawUiButton(&restartButton, "RESTART", 20);
+    DrawUiButton(&menuButton, "MENU", 20);
   }
 }
 

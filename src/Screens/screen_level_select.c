@@ -26,9 +26,9 @@ static int btnTextSize;
 void InitLevelSelectScreen(void) {
   titleFontSize = 60;
   btnTextSize = 24;
-  buttonHeight = 50;
-  buttonWidth = 150;
-  buttonSpacing = 70;
+  buttonHeight = 52;
+  buttonWidth = 220;
+  buttonSpacing = 74;
 
   nextScreen = SCREEN_LEVEL_SELECT;
   selectedGameMode = GAME_MODE_SINGLE_PLAYER;
@@ -38,22 +38,33 @@ void InitLevelSelectScreen(void) {
 
   // Single Player Button
   int btn1X = centerX - buttonWidth / 2;
-  int btn1Y = centerY - 30;
+  int btn1Y = centerY - 40;
   InitUiButton(&singlePlayerButton, (float)btn1X, (float)btn1Y,
-               (float)buttonWidth, (float)buttonHeight, BLUE, DARKBLUE, SKYBLUE,
-               WHITE);
+               (float)buttonWidth, (float)buttonHeight,
+               (Color){83, 196, 253, 255},
+               (Color){112, 214, 255, 255},
+               (Color){56, 162, 219, 255},
+               (Color){22, 44, 54, 255});
 
   // Two Player Button
   int btn2X = centerX - buttonWidth / 2;
   int btn2Y = btn1Y + buttonSpacing;
   InitUiButton(&twoPlayerButton, (float)btn2X, (float)btn2Y, (float)buttonWidth,
-               (float)buttonHeight, GREEN, DARKGREEN, LIME, WHITE);
+               (float)buttonHeight,
+               (Color){100, 211, 20, 255},
+               (Color){134, 235, 44, 255},
+               (Color){73, 166, 13, 255},
+               (Color){21, 38, 40, 255});
 
   // Back Button
   int backX = centerX - buttonWidth / 2;
   int backY = btn2Y + buttonSpacing;
   InitUiButton(&backButton, (float)backX, (float)backY, (float)buttonWidth,
-               (float)buttonHeight, GRAY, DARKGRAY, LIGHTGRAY, WHITE);
+               (float)buttonHeight,
+               (Color){83, 196, 253, 255},
+               (Color){112, 214, 255, 255},
+               (Color){56, 162, 219, 255},
+               (Color){22, 44, 54, 255});
 }
 
 void UpdateLevelSelectScreen(void) {
@@ -88,9 +99,9 @@ void DrawLevelSelectScreen(void) {
            GetScreenHeight() / 2 - 150, titleFontSize, DARKGRAY);
 
   // Draw buttons
-  DrawUiButton(&singlePlayerButton, "1 Player", btnTextSize);
-  DrawUiButton(&twoPlayerButton, "2 Players", btnTextSize);
-  DrawUiButton(&backButton, "Back", btnTextSize);
+  DrawUiButton(&singlePlayerButton, "1 PLAYER", btnTextSize);
+  DrawUiButton(&twoPlayerButton, "2 PLAYERS", btnTextSize);
+  DrawUiButton(&backButton, "BACK", btnTextSize);
 }
 
 void UnloadLevelSelectScreen(void) {
