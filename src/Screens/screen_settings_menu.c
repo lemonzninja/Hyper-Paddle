@@ -37,7 +37,7 @@ static int titleFontSize;
 
 void InitSettingsScreen(void) {
   titleFontSize = 70;
-  btnTextSize = 28;
+  btnTextSize = 24;
   backButtonWidth = 220;
   backButtonHeight = 52;
   soundToggleSize = 28;

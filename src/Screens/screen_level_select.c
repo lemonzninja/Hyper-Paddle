@@ -25,7 +25,7 @@ static int btnTextSize;
 
 void InitLevelSelectScreen(void) {
   titleFontSize = 60;
-  btnTextSize = 24;
+  btnTextSize = 22;
   buttonHeight = 52;
   buttonWidth = 220;
   buttonSpacing = 74;

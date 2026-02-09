@@ -43,7 +43,7 @@ void InitMenuScreen(void) {
     titleFontSize = 90;
     titleWidth = titleFontSize;
     titleHeight = titleFontSize;
-    btnTextSize = 30;
+    btnTextSize = 28;
     buttonHeight = 52;
     buttonWidth = 220;
     buttonSpacing = 74;

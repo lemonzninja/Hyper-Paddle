@@ -27,6 +27,14 @@ static Color BrightenColor(const Color color, const float factor) {
     return adjusted;
 }
 
+static Color DarkenColor(const Color color, const float factor) {
+    Color adjusted = color;
+    adjusted.r = (unsigned char) ((float) adjusted.r * (1.0f - factor));
+    adjusted.g = (unsigned char) ((float) adjusted.g * (1.0f - factor));
+    adjusted.b = (unsigned char) ((float) adjusted.b * (1.0f - factor));
+    return adjusted;
+}
+
 void InitUiButton(UIButton *uiButton, const float x, const float y, const float width, const float height,
     const Color idleColor, const Color hoverColor,
     const Color clickedColor, const Color textColor) {
@@ -57,43 +65,62 @@ void UpdateUiButton(UIButton *uiButton) {
 void DrawUiButton(const UIButton* uiButton, const char* text, int fontSize){
     const Rectangle bounds = uiButton->bounds;
     const Color baseColor = SelectButtonColor(uiButton);
-    const Color borderColor = (Color) {15, 26, 35, 255};
-    const Color innerOutlineColor = (Color) {255, 255, 255, 120};
-    const Color highlightColor = BrightenColor(baseColor, 0.35f);
+    const Color borderColor = (Color) {16, 22, 28, 255};
+    const Color outerFillColor = DarkenColor(baseColor, 0.33f);
+    const Color highlightColor = BrightenColor(baseColor, 0.22f);
+    const Color shadowColor = DarkenColor(baseColor, 0.26f);
+    const Color shineLineColor = (Color) {255, 255, 255, 95};
 
     Rectangle fillRect = bounds;
     int textOffsetY = 0;
     if (uiButton->currentState == BUTTON_CLICKED) {
-        fillRect.y += 2.0f;
-        textOffsetY = 2;
+        fillRect.y += 1.0f;
+        textOffsetY = 1;
     }
 
-    DrawRectangleRounded(fillRect, 1.0f, 12, borderColor);
+    DrawRectangleRounded(fillRect, 1.0f, 8, borderColor);
+
+    Rectangle outerRect = {
+            fillRect.x + 2.0f,
+            fillRect.y + 2.0f,
+            fillRect.width - 4.0f,
+            fillRect.height - 4.0f
+    };
+    DrawRectangleRounded(outerRect, 1.0f, 8, outerFillColor);
 
     Rectangle innerRect = {
-            fillRect.x + 3.0f,
-            fillRect.y + 3.0f,
-            fillRect.width - 6.0f,
-            fillRect.height - 6.0f
+            outerRect.x + 2.0f,
+            outerRect.y + 2.0f,
+            outerRect.width - 4.0f,
+            outerRect.height - 4.0f
     };
-    DrawRectangleRounded(innerRect, 1.0f, 12, baseColor);
-    DrawRectangleRoundedLinesEx(innerRect, 1.0f, 12, 1.0f, innerOutlineColor);
+    DrawRectangleRounded(innerRect, 1.0f, 8, baseColor);
+    DrawRectangleRoundedLinesEx(innerRect, 1.0f, 8, 1.0f, shineLineColor);
 
-    Rectangle highlightClip = {
+    Rectangle highlightClip = {innerRect.x, innerRect.y, innerRect.width, innerRect.height * 0.35f};
+    Rectangle shadowClip = {
             innerRect.x,
-            innerRect.y,
+            innerRect.y + innerRect.height * 0.60f,
             innerRect.width,
-            innerRect.height * 0.45f
+            innerRect.height * 0.40f
     };
 
     BeginScissorMode((int) highlightClip.x, (int) highlightClip.y,
                      (int) highlightClip.width, (int) highlightClip.height);
-    DrawRectangleRounded(innerRect, 1.0f, 12, highlightColor);
+    DrawRectangleRounded(innerRect, 1.0f, 8, highlightColor);
+    EndScissorMode();
+
+    BeginScissorMode((int) shadowClip.x, (int) shadowClip.y,
+                     (int) shadowClip.width, (int) shadowClip.height);
+    DrawRectangleRounded(innerRect, 1.0f, 8, shadowColor);
     EndScissorMode();
 
     const int textWidth = MeasureText(text, fontSize);
     const int textX = (int) (fillRect.x + (fillRect.width - (float) textWidth) / 2.0f);
     const int textY = (int) (fillRect.y + (fillRect.height - (float) fontSize) / 2.0f) + textOffsetY;
+    Color textShadow = DarkenColor(uiButton->textColor, 0.70f);
+    textShadow.a = 200;
+    DrawText(text, textX + 1, textY + 1, fontSize, textShadow);
     DrawText(text, textX, textY, fontSize, uiButton->textColor);
 }
 
